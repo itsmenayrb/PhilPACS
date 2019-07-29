@@ -1,0 +1,121 @@
+.hidden {
+	display: none;
+}
+
+.disabled {
+	cursor: not-allowed;
+}
+
+.avatar-upload {
+	position: relative;
+	max-width: 150px;
+}
+
+.avatar-upload .avatar-edit {
+	position: absolute;
+	right: 12px;
+    z-index: 1;
+    top: 10px;
+}
+
+.avatar-upload .avatar-edit input{
+	display: none;
+}
+
+.avatar-upload .avatar-edit label{
+	display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 10%;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+
+}
+
+.avatar-upload .avatar-edit label i{
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+    text-align: center;
+}
+
+.avatar-upload .avatar-edit label i:hover{
+    color: #757575;
+}
+
+
+.avatar-upload .avatar-edit label:hover{
+	background: #f1f1f1;
+    border-color: #d6d6d6;
+}
+
+.avatar-upload .avatar-edit label:after{
+    font-family: 'FontAwesome';
+    color: #757575;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.avatar-upload .avatar-preview {
+	width: 150px;
+    height: 150px;
+    position: relative;
+    border-radius: 10%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-upload .avatar-preview div{
+	width: 100%;
+    height: 100%;
+    border-radius: 10%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#hiddenEmployeeIDContainer {
+    display: none;
+}
+
+.displayPicture {
+    position: relative;
+    border: 3px solid #EEEEEE;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5%;
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.header-design {
+    line-height: 36px;
+    font-size: 32px;
+    color: #F7B205;
+    margin-right: 5px;
+}
+
+.modal-header {
+    cursor: move;
+}
+
+
+.image-parallax {
+    background: url(../../assets/photos/tom-barrett-318952-1500.jpg);
+    height: 20vh;
+    background-size: cover;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
