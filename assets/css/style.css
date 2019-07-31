@@ -118,4 +118,15 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+input[type="file"] {
+    display: none;
+    border-bottom: 12px;
 
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+     background-color: yellow;
+}
