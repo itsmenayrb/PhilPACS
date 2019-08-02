@@ -109,13 +109,17 @@
                     </script>
                </div>
 
-               <div class="col-xs-12 col-sm-3">
-                 
+               <div class="col-xs-12 col-sm-7">
+                <div class="card">
+                  <div class="card-body">
+                    <div id="dashboard_calendar"></div>
+                    <div class="text-center mt-3">
+                      <a href="./event.php" class="btn btn-green" role="button">Add more events</a>
+                    </div>
+                  </div>
+                </div>
                </div>
 
-               <div class="col-xs-12 col-sm-4">
-                 
-               </div>
              </div>
 
           </div>
@@ -125,7 +129,7 @@
       </div>
       <!-- flex-fill -->
     </div>
-
     <?php include '../includes/footer.php'; ?>
+    <script type="text/javascript" src="../ajax/ajax.dashboard.js"></script>
   </body>
 </html>

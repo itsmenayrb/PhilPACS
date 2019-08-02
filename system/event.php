@@ -51,91 +51,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- <div class="row">
-                    <div class="col-md-12 text-center">
-                      <button class="btn btn-green" type="button"><i class="fe fe-calendar"></i> Create Event</button>
-                    </div>
-                  </div>
-
-                  <hr>
-
-                  <div class="row">
-                    <div class="col-sm-6 col-lg-3">
-                      <div class="card">
-                        <div class="card-status bg-green"></div>
-                        <div class="card-body text-center">
-                          <div class="card-category">August 28, 2019</div>
-                          <div class="display-3 my-4">Seminar</div>
-                          <ul class="list-unstyled leading-loose">
-                            <li><strong>3</strong> Employee/s</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> AI</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Development</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Security</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Ionic</li>
-                          </ul>
-                          <div class="text-center mt-6">
-                            <a href="#" class="btn btn-green btn-block">Pending</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                      <div class="card">
-                        <div class="card-body text-center">
-                          <div class="card-category">August 28, 2019</div>
-                          <div class="display-3 my-4">Seminar</div>
-                          <ul class="list-unstyled leading-loose">
-                            <li><strong>3</strong> Employee/s</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> AI</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Development</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Security</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Ionic</li>
-                          </ul>
-                          <div class="text-center mt-6">
-                            <a href="#" class="btn btn-secondary btn-block disabled">Done</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                      <div class="card">
-                        <div class="card-body text-center">
-                          <div class="card-category">August 28, 2019</div>
-                          <div class="display-3 my-4">Seminar</div>
-                          <ul class="list-unstyled leading-loose">
-                            <li><strong>3</strong> Employee/s</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> AI</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Development</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Security</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Ionic</li>
-                          </ul>
-                          <div class="text-center mt-6">
-                            <a href="#" class="btn btn-secondary btn-block disabled">Done</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                      <div class="card">
-                        <div class="card-body text-center">
-                          <div class="card-category">August 28, 2019</div>
-                          <div class="display-3 my-4">Seminar</div>
-                          <ul class="list-unstyled leading-loose">
-                            <li><strong>3</strong> Employee/s</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> AI</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Development</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Security</li>
-                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Ionic</li>
-                          </ul>
-                          <div class="text-center mt-6">
-                            <a href="#" class="btn btn-secondary btn-block disabled">Done</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- /row row-cards -->
                       
               </div>
               <!-- /container -->
@@ -146,6 +61,7 @@
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
         <?php include '../includes/event/modal.add.event.php'; ?>
+        <?php include '../includes/event/modal.edit.event.php'; ?>
 
     <script type="text/javascript" src="../ajax/ajax.event.js"></script>
     <script type="text/javascript">

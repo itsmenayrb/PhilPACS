@@ -371,3 +371,7 @@
     background: lightblue;
     cursor: pointer;
 }
+
+.fc-past {
+    background: lightgray;
+}
