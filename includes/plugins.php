@@ -7,7 +7,10 @@
 <link href="../assets/plugins/sweetalert/sweetalert.min.css" rel="stylesheet" />
 <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet" />
 <link href="../assets/plugins/animate/animate.min.css" rel="stylesheet" />
+<link href="../assets/plugins/fullcalendar/plugin.css" rel="stylesheet" />
+<link href="../assets/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <script src="../assets/js/dashboard.js"></script>
+<link href="../assets/plugins/timepicker/timepicker.min.css" rel="stylesheet" />
 <!-- c3.js Charts Plugin -->
 <script src="../assets/plugins/charts-c3/plugin.js"></script>
 <!-- Google Maps Plugin -->
@@ -19,6 +22,9 @@
 <script src="../assets/plugins/bootstrap-datepicker/dist/plugin.js"></script>
 <script src="../assets/plugins/sweetalert/plugin.js"></script>
 <script src="../assets/plugins/dropzone/plugin.js"></script>
+<script src="../assets/plugins/fullcalendar/plugin.js"></script>
+<script src="../assets/plugins/datetimepicker/plugin.js"></script>
+<!-- <script src="../assets/plugins/timepicker/plugin.js"></script> -->
 <script>
   requirejs.config({
       baseUrl: '.'

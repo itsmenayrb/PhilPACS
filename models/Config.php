@@ -55,8 +55,9 @@ class Config extends Database {
 	public function isnot_loggedin() {
 		if (!isset($_SESSION['username'])) {
 			$this->redirect("../index.php");
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public function end_session() {

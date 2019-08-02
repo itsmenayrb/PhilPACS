@@ -1,6 +1,9 @@
 <?php
     require_once './models/Config.php';
     $config = new Config();
+    if (isset($_SESSION['username'])) {
+      $config->redirect('./system/');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

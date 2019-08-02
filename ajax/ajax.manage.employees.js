@@ -1092,11 +1092,7 @@
 					},
 					dataType: 'json',
 					success: function(response) {
-						$('#loader').addClass('loader');
-            $('#dimmer-content').addClass('dimmer-content');
-            setTimeout(function() {
-              $('#loader').removeClass('loader');
-              $('#dimmer-content').removeClass('dimmer-content');
+						
 
 							if (response.empty_password){
 								Swal.fire({
@@ -1131,7 +1127,6 @@
 								  }
 								});
 							}
-						}, 2000);
 					}
 				});
 			}

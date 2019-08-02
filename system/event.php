@@ -35,28 +35,18 @@
                   
                   <div class="clearfix"></div>
 
-                  <div class="row">
-                    <div class="col-md-4 col-sm-3 col-xs-12">
-
+                    <div class="col-md-12">
                       <div class="card text-white bg-lime mb-1">
                         <div class="card-body p-3">
                            <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
                         </div>
                       </div>
-
-                      <div class="card">
-                        <div class="card-body">
-                          
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
                       <div class="card">
                         <div class="card-header">
                           <h3 class="card-title"><i class="fe fe-calendar"></i> Calendar</h3>
                         </div>
                         <div class="card-body">
+                          <div id="calendar"></div>
                         </div>
                       </div>
                     </div>
@@ -155,6 +145,7 @@
           <!-- flex-fill -->
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
+        <?php include '../includes/event/modal.add.event.php'; ?>
 
     <script type="text/javascript" src="../ajax/ajax.event.js"></script>
     <script type="text/javascript">
