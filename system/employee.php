@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
     <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
-    
+
   </head>
   <body class="">
     
@@ -27,7 +27,7 @@
 
             <div class="my-3 my-md-5">
               <div class="container">
-                
+
                 <?php if (!isset($_GET['id']) && !isset($_GET['edit'])) : ?>
                   <div class="page-header">
                     <h1 class="page-title">
@@ -44,7 +44,7 @@
                     </div>
                   </div>
                   <!-- /page-header -->
-                  
+
                   <div class="float-right">
                     <div class="input-group mb-3">
                       <div class="input-group-append">
@@ -62,7 +62,7 @@
                             $('#importEmployeeDataLink').on('click', function(e) {
                               e.preventDefault();
                               $('#uploadFile:hidden').trigger('click');
-                            });    
+                            });
                           });
                         </script>
                       </div>
@@ -82,7 +82,7 @@
                         </script>
                     </div>
                   </div>
-                  
+
 
                   <div class="clearfix"></div>
 
@@ -170,7 +170,7 @@
                             });
                           </script>
                         </div>
-                          
+
                     </div>
                     <!-- /lg-8 -->
 
@@ -179,14 +179,14 @@
                 <?php endif ?>
 
                 <?php if (isset($_GET['id'])) : ?>
-            
+
                   <?php include '../includes/employee/employee.data.php'; ?>
 
                 <?php endif ?>
 
-                
+
                 <?php if (isset($_GET['edit'])) : ?>
-            
+
                   <?php include '../includes/employee/employee.edit.php'; ?>
 
                 <?php endif ?>

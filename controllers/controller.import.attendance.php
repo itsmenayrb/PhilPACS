@@ -20,6 +20,7 @@ if (!empty($_FILES['file']['name'])) {
 		$importAttendance = new Attendance();
 		$importAttendance->deleteAttendance();
 
+<<<<<<< HEAD
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
@@ -27,6 +28,14 @@ if (!empty($_FILES['file']['name'])) {
 		while ($column = fgetcsv($file_data)) {
 
 			// $rangeOfCompensationFromBelow = explode('Below', $column[0])[0];
+=======
+		fgetcsv($file_data);
+		fgetcsv($file_data);
+		fgetcsv($file_data);
+
+		while ($column = fgetcsv($file_data)) {
+
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 			$lastName = $config->checkInput($column[0]);
 			$firstName = $config->checkInput($column[1]);
 			$Edate = $config->checkInput($column[2]);
@@ -34,10 +43,15 @@ if (!empty($_FILES['file']['name'])) {
 			$EMTimeout = $config->checkInput($column[4]);
 			$EATimein = $config->checkInput($column[5]);
 			$EATimeout = $config->checkInput($column[6]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 			// if ($rangeOfCompensationFromBelow == 'Below') {
 			// 	$rangeOfCompensationFrom = 0;
 			// }
 
+<<<<<<< HEAD
 			$lastName = str_replace(',', '', $lastName);
 			$firstName = str_replace(',', '', $firstName);
 			$Edate = str_replace(',', '', $Edate);
@@ -47,6 +61,9 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimeout = str_replace(',', '', $EATimeout);
 
 			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+=======
+			$importSSS->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 			// print_r($rangeOfCompensationFrom . "<br>");
 		}
 		// $output = 'File uploaded successfully!';

@@ -166,7 +166,15 @@ class Pagibig extends Imports {
 			echo "Connection Error: " . $e->getMessage();
 		}
 	}
+}
+class Attendance extends Imports {
 
+	public function importAttendance($firstName, $lastName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout) {
+
+		try {
+
+
+<<<<<<< HEAD
 }
 
 class Tax extends Imports {
@@ -219,14 +227,28 @@ class Attendance extends Imports {
 										  ) VALUES (
 											:lastName,
 											:firstName,
+=======
+			$stmt = $this->conn->runQuery("INSERT INTO attendancetbl (
+											firstName, lastName,
+											Edate, EMTimein, EMTimeout,
+											EATimein, EATimeout
+										  ) VALUES (
+											:firstName,
+											:lastName,
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 											:Edate,
 											:EMTimein,
 											:EMTimeout,
 											:EATimein,
 											:EATimeout
 										)");
+<<<<<<< HEAD
 			$stmt->bindparam(':lastName', $lastName);
 			$stmt->bindparam(':firstName', $firstName);
+=======
+			$stmt->bindparam(':firstName', $firstName);
+			$stmt->bindparam(':lastName', $lastName);
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 			$stmt->bindparam(':Edate', $Edate);
 			$stmt->bindparam(':EMTimein', $EMTimein);
 			$stmt->bindparam(':EMTimeout', $EMTimeout);
@@ -237,9 +259,13 @@ class Attendance extends Imports {
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();
 		}
+<<<<<<< HEAD
 
 	}
 
+=======
+	}
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 	public function deleteAttendance() {
 		try {
 			$stmt = $this->conn->runQuery("TRUNCATE TABLE attendancetbl");

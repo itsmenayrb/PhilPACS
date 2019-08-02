@@ -6,7 +6,7 @@
         PhilPaCS
       </a>
       <div class="d-flex order-lg-2 ml-auto">
-        
+
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar"></span>
@@ -63,8 +63,35 @@
                 nhour -= 12;
               }
 
+<<<<<<< HEAD
               if(nmin <= 9) nmin = "0" + nmin;
               if(nsec <= 9) nsec = "0" + nsec;
+=======
+          GetClock();
+          setInterval(GetClock,1000);
+        </script>
+      </div>
+      <div class="col-lg order-lg-first">
+        <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+          <li class="nav-item">
+            <a href="./index.php" class="nav-link"><i class="fe fe-home"></i> Dashboard</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Human Resources</a>
+            <div class="dropdown-menu dropdown-menu-arrow">
+              <a href="./employee.php" class="dropdown-item ">Employee Management</a>
+              <a href="./attendance.php" class="dropdown-item ">Attendance Management</a>
+              <a href="./Requisition.php" class="dropdown-item ">Requisition Management</a>
+              <a href="./event.php" class="dropdown-item ">Event Management</a>
+              <a href="javascript:void(0)" class="dropdown-item" data-toggle="dropdown">Contribution Management</a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                  <a href="./contribution.sss.php" class="dropdown-item ">SSS Contribution Matrix</a>
+                  <a href="./contribution.philhealth.php" class="dropdown-item ">PhilHealth Contribution Matrix</a>
+                  <a href="./contribution.pagibig.php" class="dropdown-item ">Pag-ibig Contribution Matrix</a>
+                  <a href="./contribution.tax.php" class="dropdown-item ">Tax Contribution Matrix</a>
+                </div>
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
 
               var clocktext = "" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + "<br>" + nhour + ":" + nmin +":" + nsec + ap + "";
               document.getElementById('clockbox').innerHTML = clocktext;
