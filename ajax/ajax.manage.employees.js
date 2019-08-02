@@ -8,6 +8,10 @@
 		 	previewImageUpload(this);
 		 });
 
+		 $('#edit_profilePicture').on('change', function() {
+		 	previewUpdateImageUpload(this);
+		 });
+
 
 		 /**
 		 * Auto populate salary everytime user change the position
@@ -64,6 +68,349 @@
 		 	endDate: 'today'
 		 });
 
+
+		 //check email
+		 $('#email').on('blur', function() {
+		 	var email = $('#email').val();
+
+		 	$.ajax({
+				method: 'post',
+				url: '../controllers/controller.employee.php',
+				data: {
+					email: email,
+					checkEmail: 1
+				},
+				dataType: 'json',
+				success: function(response) {
+					if (response.error) {
+						$('#email_error').text(response);
+					} else {
+						$('#email_error').text("");
+					}
+				}
+			});
+		 });
+
+		 ///////////////////////////////////////
+		 
+		 $('.updateEmployeePasswordBtn').on('click', function() {
+		 	var link = $(this).data('href');
+		 	$('#hiddenHref').val(link);
+		 });
+
+		$('#passwordActionBtn').on('click', function(e) {
+			e.preventDefault();
+
+			var password_error = "";
+
+			var reactivateAccountID = $('#hiddenReactivateAccountID').val();
+			var deactivateAccountID = $('#hiddenDeactivateAccountID').val();
+			var editEmployeeID = $('#hiddenEditEmployeeID2').val();
+			var addEmployeeID = $('#hiddenAddEmployeeID').val();
+			var removeEmployeeID = $('#hiddenRemoveID').val();
+			var archiveID = $('#hiddenArchiveID').val();
+
+			var id = $('#hiddenIDSession').val();
+			var password = $('#passwordAction').val();
+
+			if (password == "") {
+				password_error = "Password is required.";
+				$("#passwordAction_error").text(password_error);
+				$('#passwordAction').addClass('is-invalid');
+
+			} else {
+
+				var form = $('#passwordForm');
+				var formData = false;
+
+				if (window.FormData) {
+					formData = new FormData(form[0]);
+				}
+
+				$.ajax({
+					type: 'post',
+					url: '../controllers/controller.session.php',
+					data: formData ? formData : form.serialize(),
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(response) {
+						$('#passwordAction').attr('disabled', 'disabled');
+						$('#passwordActionBtn').addClass('btn-loading');
+						setTimeout(function() {
+							$('#passwordAction').removeAttr('disabled');
+							$('#passwordActionBtn').removeClass('btn-loading');
+
+							if (response == 'incorrect') {
+								password_error = "Incorrect password.";
+								$("#passwordAction_error").text(password_error);
+								$('#passwordAction').addClass('is-invalid');
+								$('#passwordAction').val("");
+							}
+
+							if (response == 'success') {
+								// console.log(reactivateAccountID);
+								// console.log(deactivateAccountID);
+								// console.log(editEmployeeID);
+								// console.log(addEmployeeID);
+								// console.log(removeEmployeeID);
+
+								//add employee
+								if (addEmployeeID != "" && editEmployeeID == "" && removeEmployeeID == "" && deactivateAccountID == "" && reactivateAccountID == "" && archiveID == "") {
+									var form = $('#addEmployeeForm');
+									var formData = false;
+
+									if (window.FormData) {
+										formData = new FormData(form[0]);
+									}
+
+									$.ajax({
+										type: 'post',
+										url: '../controllers/controller.employee.php',
+										data: formData ? formData : form.serialize(),
+										cache: false,
+										contentType: false,
+										processData: false,
+										success: function(response) {
+											var err = response;
+											if (err == "employee_exist") {
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Employee already listed"
+													});
+												});
+											}
+
+											if (err == "email_exist") {
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Email is already use"
+													});
+												});
+											}
+
+											if (err == "invalid_firstname"){
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Invalid First Name"
+													});
+												});
+											}
+
+											if (err == "invalid_middlename") {
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Invalid Middle Name"
+													});
+												});
+											}
+
+											if (err == "invalid_lastname") {
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Invalid Last Name"
+													});
+												});
+											}
+
+											if (err == "invalid_image") {
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'error',
+													  title: "Invalid Image"
+													});
+												});
+											}
+
+
+											if (err == "success"){
+												require(['sweetalert'], function(Swal) {
+													Swal.fire({
+													  type: 'success',
+													  title: "Employee Added Successfully!",
+													  confirmButtonColor: '#3085d6',
+													  confirmButtonText: 'OK'
+													}).then((result) => {
+													  if (result.value) {
+													  	location.reload();
+													  }
+													});
+												});
+											}
+										}
+									}); // edit employee
+								} else if (addEmployeeID == "" && editEmployeeID != "" && removeEmployeeID == "" && deactivateAccountID == "" && reactivateAccountID == ""  && archiveID == "") {
+									var form = $('#editEmployeeForm');
+									var formData = false;
+
+									if (window.FormData) {
+										formData = new FormData(form[0]);
+									}
+
+									$.ajax({
+										type: 'post',
+										url: '../controllers/controller.employee.php',
+										data: formData ? formData : form.serialize(),
+										cache: false,
+										contentType: false,
+										processData: false,
+										success: function(response) {
+											var err = JSON.parse(response);
+											if (err.invalid_firstname){
+												Swal.fire({
+												  type: 'error',
+												  title: err.invalid_firstname
+												});
+											}
+
+											if (err.invalid_middlename) {
+												Swal.fire({
+												  type: 'error',
+												  title: err.invalid_middlename
+												});
+											}
+
+											if (err.invalid_lastname) {
+												Swal.fire({
+												  type: 'error',
+												  title: err.invalid_lastname
+												});
+											}
+
+											if (err.invalid_image) {
+												Swal.fire({
+												  type: 'error',
+												  title: err.invalid_image
+												});
+											}
+
+											if (err.success){
+												Swal.fire({
+												  type: 'success',
+												  title: err.success,
+												  confirmButtonColor: '#3085d6',
+												  confirmButtonText: 'Great'
+												}).then((result) => {
+												  if (result.value) {
+												  	window.location = './employee.php?id=' + editEmployeeID;
+												  }
+												});
+											}
+										}	
+										
+									});	//remove employee
+								} else if (addEmployeeID == "" && editEmployeeID == "" && removeEmployeeID != "" && deactivateAccountID == "" && reactivateAccountID == ""  && archiveID == "") {
+									$.ajax({
+			                            type: 'post',
+			                            url: '../controllers/controller.employee.php',
+			                            data: {
+			                              id: removeEmployeeID,
+			                              removeEmployee: 1
+			                            },
+			                            success: function(response) {
+			                            	$('#passwordModal').modal('hide');
+			                                Swal.fire({
+			                                  type: 'success',
+			                                  title: 'Removed!',
+			                                  text: 'Employee has been removed.',
+			                                  confirmButtonColor: '#3085d6',
+			                                  confirmButtonText: 'OK'
+			                                }).then((result) => {
+			                                  if (result.value) {
+			                                    window.location = "./employee.php";
+			                                  }
+			                                });
+			                            }
+		                            }); //deactivate account
+								} else if (addEmployeeID == "" && editEmployeeID == "" && removeEmployeeID == "" && deactivateAccountID != "" && reactivateAccountID == ""  && archiveID == "") {
+									$.ajax({
+								    	type: 'post',
+										url: '../controllers/controller.employee.php',
+										data: {
+											id: deactivateAccountID,
+											deactivateAccount: 1
+										},
+										success: function(response) {
+												Swal.fire({
+												  type: 'success',
+												  title: 'Deactivated!',
+												  text: 'Account has been deactivated.',
+												  confirmButtonColor: '#3085d6',
+												  confirmButtonText: 'OK'
+												}).then((result) => {
+												  if (result.value) {
+												  	location.reload();
+												  }
+												});
+										}
+								    }); //reactivate account
+								} else if (addEmployeeID == "" && editEmployeeID == "" && removeEmployeeID == "" && deactivateAccountID == "" && reactivateAccountID != ""  && archiveID == "") {
+									$.ajax({
+	                                    type: 'post',
+	                                    url: '../controllers/controller.employee.php',
+	                                    data: {
+	                                      id: reactivateAccountID,
+	                                      reactivateAccount: 1
+	                                    },
+	                                    success: function(response) {
+	                                        Swal.fire({
+	                                          type: 'success',
+	                                          title: 'Re-activated!',
+	                                          text: 'Account has been re-activated.',
+	                                          confirmButtonColor: '#3085d6',
+	                                          confirmButtonText: 'OK'
+	                                        }).then((result) => {
+	                                          if (result.value) {
+	                                            location.reload();
+	                                          }
+	                                        });
+	                                    }
+	                                  }); // restoring archived
+								} else if (addEmployeeID == "" && editEmployeeID == "" && removeEmployeeID == "" && deactivateAccountID == "" && reactivateAccountID == ""  && archiveID != "") {
+									$.ajax({
+	                                    type: 'post',
+	                                    url: '../controllers/controller.archives.php',
+	                                    data: {
+	                                      id: archiveID,
+	                                      restoreEmployee: 1
+	                                    },
+	                                    success: function(response) {
+	                                        Swal.fire({
+	                                          type: 'success',
+	                                          title: 'Restored!',
+	                                          text: 'Employee has been restore.',
+	                                          confirmButtonColor: '#3085d6',
+	                                          confirmButtonText: 'OK'
+	                                        }).then((result) => {
+	                                          if (result.value) {
+	                                            location.reload();
+	                                          }
+	                                        });
+	                                    }
+	                                });
+								}
+							} //success
+
+						}, 2000);
+
+					}
+				});	
+			}
+			return false;
+		});
+
+		// $('.updateEmployeePasswordBtn').on('click', function(e) {
+		// 	e.preventDefault();
+
+
+		// });
+
+
 		/**
 		 * Javascript file for employee management
 		 * Perform client-side validation before send to the/**
@@ -102,6 +449,8 @@
 			var city = $('#city').val();
 			var country = $('#country').val();
 			var zipcode = $('#zipcode').val();
+
+
 
 			//firstname validation
 			if ($.trim(firstname) == 0) {
@@ -241,9 +590,17 @@
 					$("#address_error").text(address_error);
 					$('#zipcode').addClass('is-invalid');
 				} else {
-					address_error = "";
-					$("#address_error").text(address_error);
-					$('#zipcode').removeClass('is-invalid');	
+
+					if (zipcode.length < 4) {
+						address_error = "Address should be complete. Input n/a if not applicable.";
+						$("#address_error").text(address_error);
+						$('#zipcode').addClass('is-invalid');
+					} else {
+
+						address_error = "";
+						$("#address_error").text(address_error);
+						$('#zipcode').removeClass('is-invalid');	
+					}
 				}
 			}
 			
@@ -273,22 +630,22 @@
 		});
 
 		//Button for previous button at Employment Details Section
-	$('#employmentDetailsBtnPrevious').on('click', function() {
-		$('#personalDetailsTab').addClass('active in');
-		$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
-		$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
-		$('#navPersonalDetailsTab').removeClass('disabled');
-		$('#navPersonalDetailsTab').addClass('active');
-		$('#first').addClass('text-success');
-		
+		$('#employmentDetailsBtnPrevious').on('click', function() {
+			$('#personalDetailsTab').addClass('active in');
+			$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
+			$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
+			$('#navPersonalDetailsTab').removeClass('disabled');
+			$('#navPersonalDetailsTab').addClass('active');
+			$('#first').addClass('text-success');
+			
 
-		$('#navEmploymentDetailsTab').removeClass('active');
-		$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
-		$('#navEmploymentDetailsTab').addClass('disabled');
-		$('#employmentDetailsTab').removeClass('active');
-		$('#second').removeClass('text-success');
+			$('#navEmploymentDetailsTab').removeClass('active');
+			$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
+			$('#navEmploymentDetailsTab').addClass('disabled');
+			$('#employmentDetailsTab').removeClass('active');
+			$('#second').removeClass('text-success');
 
-	});
+		});
 
 	//Button for next button at employment details section
 		$('#employmentDetailsBtnNext').on('click', function(e) {
@@ -387,123 +744,16 @@
 		 */
 		$('#addEmployeeBtn').on('click', function(e) {
 			e.preventDefault();
+			var id = 1;
+			$('#loader').addClass('loader');
+			$('#dimmer-content').addClass('dimmer-content');
+			setTimeout(function() {
+				$('#loader').removeClass('loader');
+				$('#dimmer-content').removeClass('dimmer-content');
+				$('#passwordModal').modal('show');
+				$('#hiddenAddEmployeeID').val(id);
 
-			var form = $('#addEmployeeForm');
-			var formData = false;
-
-			if (window.FormData) {
-				formData = new FormData(form[0]);
-			}
-
-			$.ajax({
-				type: 'post',
-				url: '../controllers/controller.employee.php',
-				data: formData ? formData : form.serialize(),
-				cache: false,
-				contentType: false,
-				processData: false,
-				success: function(response) {
-					$('#loader').addClass('loader');
-			          $('#dimmer-content').addClass('dimmer-content');
-			          setTimeout(function() {
-			            $('#loader').removeClass('loader');
-			            $('#dimmer-content').removeClass('dimmer-content');
-						var err = JSON.parse(response);
-						if (err.employee_exist) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.employee_exist
-								});
-							});
-						}
-
-						if (err.email_exist) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.email_exist
-								});
-							});
-						}
-
-						if (err.invalid_firstname){
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_firstname
-								});
-							});
-						}
-
-						if (err.invalid_middlename) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_middlename
-								});
-							});
-						}
-
-						if (err.invalid_lastname) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_lastname
-								});
-							});
-						}
-
-						if (err.invalid_image) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_image
-								});
-							});
-						}
-
-
-						if (err.success){
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'success',
-								  title: err.success,
-								  confirmButtonColor: '#3085d6',
-								  confirmButtonText: 'Yes',
-								  showCancelButton: true,
-								  cancelButtonColor: '#d33'
-								}).then((result) => {
-								  if (result.value) {
-								  	$('#imagePreview').css('background-image', 'url(../assets/img/image_placeholder.png)');
-								  	$('#addEmployeeForm')[0].reset();
-								  	$('#personalDetailsTab').addClass('active in');
-									$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
-									$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
-									$('#navPersonalDetailsTab').removeClass('disabled');
-									$('#navPersonalDetailsTab').addClass('active');
-									$('#first').addClass('text-success');
-
-									$('#navEmploymentDetailsTab').removeClass('active');
-									$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
-									$('#navEmploymentDetailsTab').addClass('disabled');
-									$('#employmentDetailsTab').removeClass('active');
-									$('#second').removeClass('text-success');
-
-									$('#navOtherInfoTab').removeClass('active');
-									$('#navOtherInfoTab').removeAttr('href', 'data-toggle');
-									$('#navOtherInfoTab').addClass('disabled');
-									$('#otherInfoTab').removeClass('active');
-									$('#third').removeClass('text-success');
-								  } else if (result.dismiss === Swal.DismissReason.cancel) {
-								  	location.reload();
-								  }
-								});
-							});
-						}
-					}, 2000);
-				}
-			});	
+			}, 2000) 
 		});
 
 		//Updating of employee information
@@ -562,12 +812,14 @@
 				firstname_error = "First Name is required.";
 				$("#edit_firstname_error").text(firstname_error);
 				$('#edit_firstname').addClass('is-invalid');
+				$('#edit_firstname').focus();
 
 			} else {
 				if (validateName(firstname) == false) {
 					firstname_error = "Invalid First Name.";
 					$("#edit_firstname_error").text(firstname_error);
 					$('#edit_firstname').addClass('is-invalid');
+					$('#edit_firstname').focus();
 				} else {
 					firstname_error = "";
 					$("#edit_firstname_error").text(firstname_error);
@@ -580,6 +832,7 @@
 				middlename_error = "Invalid Middle Name.";
 				$("#edit_middlename_error").text(middlename_error);
 				$('#edit_middlename').addClass('is-invalid');
+				$('#edit_middlename').focus();
 			} else {
 				middlename_error = "";
 				$("#edit_middlename_error").text(middlename_error);
@@ -591,11 +844,13 @@
 				lastname_error = "Last Name is required.";
 				$("#edit_lastname_error").text(lastname_error);
 				$('#edit_lastname').addClass('is-invalid');
+				$('#edit_lastname').focus();
 			} else {
 				if (validateName(lastname) == false) {
 					lastname_error = "Invalid Last Name.";
 					$("#edit_lastname_error").text(lastname_error);
 					$('#edit_lastname').addClass('is-invalid');
+					$('#edit_lastname').focus();
 				} else {
 					lastname_error = "";
 					$("#edit_lastname_error").text(lastname_error);
@@ -608,11 +863,13 @@
 				contact_number_error = "Contact Number is required.";
 				$("#edit_contact_number_error").text(contact_number_error);
 				$('#edit_contact_number').addClass('is-invalid');
+				$('#edit_contact_number').focus();
 			} else {
 				if (validateContactNumber(contact_number) == false) {
 					contact_number_error = "Invalid Contact Number.";
 					$("#edit_contact_number_error").text(contact_number_error);
 					$('#edit_contact_number').addClass('is-invalid');
+					$('#edit_contact_number').focus();
 				} else {
 					contact_number_error = "";
 					$("#edit_contact_number_error").text(contact_number_error);
@@ -625,11 +882,13 @@
 				email_error = "Email is required.";
 				$("#edit_email_error").text(email_error);
 				$('#edit_email').addClass('is-invalid');
+				$('#edit_email').focus();
 			} else {
 				if (validateEmail(email) == false) {
 					email_error = "Invalid Email.";
 					$("#edit_email_error").text(email_error);
 					$('#edit_email').addClass('is-invalid');
+					$('#edit_email').focus();
 				} else {
 					email_error = "";
 					$("#edit_email_error").text(email_error);
@@ -642,6 +901,7 @@
 				birthday_error = "Birthday is required.";
 				$("#edit_birthday_error").text(birthday_error);
 				$('#edit_birthday').addClass('is-invalid');
+				$('#edit_birthday').focus();
 			} else {
 				birthday_error = "";
 				$("#edit_birthday_error").text(birthday_error);
@@ -654,6 +914,7 @@
 				address_error = "Address should be complete. Input n/a if not applicable.";
 				$("#edit_address_error").text(address_error);
 				$('#edit_barangay').addClass('is-invalid');
+				$('#edit_barangay').focus();
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
@@ -664,6 +925,7 @@
 				address_error = "Address should be complete. Input n/a if not applicable.";
 				$("#edit_address_error").text(address_error);
 				$('#edit_province').addClass('is-invalid');
+				$('#edit_province').focus();
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
@@ -674,6 +936,7 @@
 				address_error = "Address should be complete. Input n/a if not applicable.";
 				$("#edit_address_error").text(address_error);
 				$('#edit_city').addClass('is-invalid');
+				$('#edit_city').focus();
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
@@ -684,6 +947,7 @@
 				address_error = "Address should be complete. Input n/a if not applicable.";
 				$("#edit_address_error").text(address_error);
 				$('#edit_country').addClass('is-invalid');
+				$('#edit_country').focus();
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
@@ -695,6 +959,7 @@
 					address_error = "Address should be complete. Input n/a if not applicable.";
 					$("#edit_address_error").text(address_error);
 					$('#edit_zipcode').addClass('is-invalid');
+					$('#edit_zipcode').focus();
 				} else {
 					address_error = "";
 					$("#edit_address_error").text(address_error);
@@ -708,6 +973,7 @@
 				date_hired_error = "Date Hired is required.";
 				$("#edit_date_hired_error").text(date_hired_error);
 				$('#edit_date_hired').addClass('is-invalid');
+				$('#edit_date_hired').focus();
 			} else {
 				date_hired_error = "";
 				$("#edit_date_hired_error").text(date_hired_error);
@@ -718,6 +984,7 @@
 				position_error = "Position is required.";
 				$("#edit_position_error").text(position_error);
 				$('#edit_position').addClass('is-invalid');
+				$('#edit_position').focus();
 			} else {
 				position_error = "";
 				$("#edit_position_error").text(position_error);
@@ -725,71 +992,13 @@
 			}
 
 			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && email_error == "" && address_error == "" && date_hired_error == "" && position_error == "") {
-				var form = $('#editEmployeeForm');
-				var formData = false;
+				
+				var id = $('#hiddenEditEmployeeID').val();
 
-				if (window.FormData) {
-					formData = new FormData(form[0]);
+					$('#passwordModal').modal('show');
+					$('#hiddenEditEmployeeID2').val(id);
+
 				}
-
-				$.ajax({
-					type: 'post',
-					url: '../controllers/controller.employee.php',
-					data: formData ? formData : form.serialize(),
-					cache: false,
-					contentType: false,
-					processData: false,
-					success: function(response) {
-						$('#loader').addClass('loader');
-            $('#dimmer-content').addClass('dimmer-content');
-            setTimeout(function() {
-              $('#loader').removeClass('loader');
-              $('#dimmer-content').removeClass('dimmer-content');
-							var err = JSON.parse(response);
-							if (err.invalid_firstname){
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_firstname
-								});
-							}
-
-							if (err.invalid_middlename) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_middlename
-								});
-							}
-
-							if (err.invalid_lastname) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_lastname
-								});
-							}
-
-							if (err.invalid_image) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_image
-								});
-							}
-
-							if (err.success){
-								Swal.fire({
-								  type: 'success',
-								  title: err.success,
-								  confirmButtonColor: '#3085d6',
-								  confirmButtonText: 'Great'
-								}).then((result) => {
-								  if (result.value) {
-								  	window.location = './employee.php?id=' + id;
-								  }
-								});
-							}
-						}, 2000);
-					}
-				});
-			}
 
 			return false;
 			
@@ -799,7 +1008,7 @@
  		$('.createAccountLinkModal').on('click', function(){
 	      var id = $(this).data('id');
 	      $('#hiddenPersonalIDAccount').val(id);
-	      console.log(id);
+	      // console.log(id);
 	     });
 
  		$('#createAccountBtn').on('click', function(e){
@@ -830,9 +1039,15 @@
 				$("#password_error").text(password_error);
 				$('#password').addClass('is-invalid');
 			} else {
-				pasword_error = "";
-				$("#password_error").text(password_error);
-				$('#password').removeClass('is-invalid');	
+				if (validatePassword(password) == false) {
+					password_error = "Password must be at least 6 characters and composed of alphanumeric characters.";
+					$("#password_error").text(password_error);
+					$('#password').addClass('is-invalid');
+				} else {
+					pasword_error = "";
+					$("#password_error").text(password_error);
+					$('#password').removeClass('is-invalid');
+				}
 			}
 
 			if (rpassword == "") {
@@ -1059,33 +1274,10 @@
 			  confirmButtonText: 'Yes, deactivate!'
 			}).then((result) => {
 			  if (result.value) {
-			    $.ajax({
-			    	type: 'post',
-					url: '../controllers/controller.employee.php',
-					data: {
-						id: id,
-						deactivateAccount: 1
-					},
-					success: function(response) {
-						$('#loader').addClass('loader');
-			            $('#dimmer-content').addClass('dimmer-content');
-			            setTimeout(function() {
-			              $('#loader').removeClass('loader');
-			              $('#dimmer-content').removeClass('dimmer-content');
-							Swal.fire({
-							  type: 'success',
-							  title: 'Deactivated!',
-							  text: 'Account has been deactivated.',
-							  confirmButtonColor: '#3085d6',
-							  confirmButtonText: 'OK'
-							}).then((result) => {
-							  if (result.value) {
-							  	location.reload();
-							  }
-							});
-						}, 2000);
-					}
-			    });
+			  	$('#hiddenDeactivateAccountID').val(id);
+			  	$('#resetPasswordModal').modal('hide');
+                $('#passwordModal').modal('show');
+			    
 			  }
 			});
 
@@ -1109,6 +1301,14 @@
 	    }
 
 	    /**
+	     * Function for name validation
+	     */
+	    function validatePassword(password) {
+	    	var re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+	    	return re.test(password);
+	    }
+
+	    /**
 	     * Function for contact number validation
 	     */
 	    function validateContactNumber(number) {
@@ -1125,15 +1325,79 @@
 	     * Function for Image preview
 	     */
 	    function previewImageUpload(image) {
-	    	if (image.files && image.files[0]) {
-		        var reader = new FileReader();
-		        reader.onload = function(e) {
-		            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-		            $('#imagePreview').hide();
-		            $('#imagePreview').fadeIn(650);
-		        }
-		        reader.readAsDataURL(image.files[0]);
-		    }
+
+	    	if (validateImage(image) == true) {
+
+		    	if (image.files && image.files[0]) {
+
+			        var reader = new FileReader();
+			        reader.onload = function(e) {
+			            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+			            $('#imagePreview').hide();
+			            $('#imagePreview').fadeIn(650);
+			        }
+			        reader.readAsDataURL(image.files[0]);
+			    }
+
+	    	} else {
+	    		Swal.fire({
+				  type: 'error',
+				  title: 'Invalid Image!',
+				  confirmButtonColor: '#3085d6',
+				  confirmButtonText: 'OK'
+				})
+	    	}
+
+	    }
+
+	    function previewUpdateImageUpload(image) {
+
+	    	if (validateImage(image) == true) {
+
+		    	if (image.files && image.files[0]) {
+
+			        var reader = new FileReader();
+			        reader.onload = function(e) {
+			            $('#edit_imagePreview').css('background-image', 'url('+e.target.result +')');
+			            $('#edit_imagePreview').hide();
+			            $('#edit_imagePreview').fadeIn(650);
+			        }
+			        reader.readAsDataURL(image.files[0]);
+			    }
+
+	    	} else {
+	    		Swal.fire({
+				  type: 'error',
+				  title: 'Invalid Image!',
+				  confirmButtonColor: '#3085d6',
+				  confirmButtonText: 'OK'
+				})
+	    	}
+
+	    }
+
+	    function validateImage(image) {
+	    	var _validateFileExtensions = [".jpg", ".jpeg", ".JPG", ".JPEG", ".png", ".PNG"];
+
+	    	if (image.type == 'file'){
+	    		var filename =  image.value;
+	    		if (filename.length > 0) {
+	    			var valid = false;
+	    			for (var j=0; j<_validateFileExtensions.length; j++) {
+	    				var sCurExtension = _validateFileExtensions[j];
+	    				if (filename.substr(filename.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+	    					valid = true;
+	    					break;
+	    				}
+	    			}
+	    			if (!valid) {
+	    				
+	    				image.value = "";
+	    				return false;
+	    			}
+	    		}
+	    	}
+	    	return true;
 	    }
 
     });

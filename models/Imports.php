@@ -168,3 +168,37 @@ class Pagibig extends Imports {
 	}
 
 }
+
+class Tax extends Imports {
+
+	public function importTax($compensationLevel, $minimumWithholdingTax) {
+
+		try {
+			$stmt = $this->conn->runQuery("INSERT INTO taxmatrixtbl (
+											compensationLevel,
+											minimumWithholdingTax
+										  ) VALUES (
+											:compensationLevel,
+											:minimumWithholdingTax
+										)");
+			$stmt->bindparam(':compensationLevel', $compensationLevel);
+			$stmt->bindparam(':minimumWithholdingTax', $minimumWithholdingTax);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}
+
+	public function deleteTaxMatrix() {
+		try {
+			$stmt = $this->conn->runQuery("TRUNCATE TABLE taxmatrixtbl");
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
+}

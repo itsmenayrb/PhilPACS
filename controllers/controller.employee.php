@@ -89,46 +89,49 @@ if (isset($_POST['firstname'])) {
 
 	if (checkName($firstname) == false) {
 		$error = true;
-		echo json_encode(array("invalid_firstname" => "Invalid First Name"));
+		echo "invalid_firstname";
 	}
 
 	if ($middlename != "") {
 		if (checkName($middlename) == false) {
 			$error = true;
-			echo json_encode(array("invalid_middlename" => "Invalid Middle Name"));
+			echo "invalid_middlename";
 		}
 	}
 
 	if (checkName($lastname) == false) {
 		$error = true;
-		echo json_encode(array("invalid_lastname" => "Invalid Last Name"));
+		echo "invalid_lastname";
 	}
 
-	$check = getimagesize($_FILES['profilePicture']['tmp_name']);
-	if ($check !== false) {
-		$valid_extensions = array('jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG');
-        $path = '../uploads/';
+	
+	if (!empty($_FILES['profilePicture']['name'])) {
+		$check = getimagesize($_FILES['profilePicture']['tmp_name']);
+		if ($check !== false) {
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG');
+	        $path = '../uploads/';
 
-        $img = $_FILES['profilePicture']['name'];
-        $temporary = $_FILES['profilePicture']['tmp_name'];
+	        $img = $_FILES['profilePicture']['name'];
+	        $temporary = $_FILES['profilePicture']['tmp_name'];
 
-        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
-        $final_image = rand(1000, 1000000) . $img;
+	        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+	        $final_image = rand(1000, 1000000) . $img;
 
-        if (in_array($ext, $valid_extensions))
-        {
-            $path = $path.strtolower($final_image);
+	        if (in_array($ext, $valid_extensions))
+	        {
+	            $path = $path.strtolower($final_image);
 
-            if(move_uploaded_file($temporary, $path)) {
-            	$error = false;
-            }
+	            if(move_uploaded_file($temporary, $path)) {
+	            	$error = false;
+	            }
 
-        } else {
-        	$error = true;
-            echo json_encode(array("invalid_image" => 'Invalid Image File.'));
-        }
-	} else {
-		$path = "";
+	        } else {
+	        	$error = true;
+	            echo json_encode(array("invalid_image" => 'Invalid Image File.'));
+	        }
+		} else {
+			$path = "";
+		}
 	}
 
 	if ($error == false){
@@ -138,7 +141,7 @@ if (isset($_POST['firstname'])) {
 				if($addEmployee->addEmploymentInfo($date_hired, $position, $status)) {
 					if($addEmployee->addBenefitNumber($sss, $philhealth_number, $pagibig_number, $tin)){
 						if($addEmployee->addBankAccount($bank_account)){
-							echo json_encode(array("success" => "Employee Added Successfully!\n Do you want to add more?"));
+							echo "success";
 							return true;
 						}
 					} else {
@@ -383,31 +386,33 @@ if (isset($_POST['edit_firstname'])) {
 
 	$date_hired = date('Y-m-d', strtotime($date_hired));
 
-	$check = getimagesize($_FILES['edit_profilePicture']['tmp_name']);
-	if ($check !== false) {
-		$valid_extensions = array('jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG');
-        $path = '../uploads/';
+	if (!empty($_FILES['edit_profilePicture']['name'])) {
+		$check = getimagesize($_FILES['edit_profilePicture']['tmp_name']);
+		if ($check !== false) {
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'JPEG', 'JPG', 'PNG');
+	        $path = '../uploads/';
 
-        $img = $_FILES['edit_profilePicture']['name'];
-        $temporary = $_FILES['edit_profilePicture']['tmp_name'];
+	        $img = $_FILES['edit_profilePicture']['name'];
+	        $temporary = $_FILES['edit_profilePicture']['tmp_name'];
 
-        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
-        $final_image = rand(1000, 1000000) . $img;
+	        $ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+	        $final_image = rand(1000, 1000000) . $img;
 
-        if (in_array($ext, $valid_extensions))
-        {
-            $path = $path.strtolower($final_image);
+	        if (in_array($ext, $valid_extensions))
+	        {
+	            $path = $path.strtolower($final_image);
 
-            if(move_uploaded_file($temporary, $path)) {
-            	$error = false;
-            }
+	            if(move_uploaded_file($temporary, $path)) {
+	            	$error = false;
+	            }
 
-        } else {
-        	$error = true;
-            echo json_encode(array("invalid_image" => 'Invalid Image File.'));
-        }
-	} else {
-		$path = "";
+	        } else {
+	        	$error = true;
+	            echo json_encode(array("invalid_image" => 'Invalid Image File.'));
+	        }
+		} else {
+			$path = "";
+		}
 	}
 
 	if ($error == false){

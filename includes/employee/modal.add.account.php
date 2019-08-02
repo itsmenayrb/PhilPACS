@@ -1,4 +1,3 @@
-
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="createAccountModalTitle" id="createAccountModal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
@@ -6,7 +5,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearForm();">
               <span aria-hidden="true"><i class="fe fe-times"></i></span>
             </button>
-            <h6 class="form-text text-muted"><span class="text-danger">*</span> required fields.</h6>
+            <h6 class="form-text text-muted float-right mr-2"><span class="text-danger">*</span> required fields.</h6>
             <div class="card text-white bg-lime mb-1">
               <div class="card-body p-3">
                  <h6 class="card-title"><i class="fe fe-user"></i> Create an account</h6>

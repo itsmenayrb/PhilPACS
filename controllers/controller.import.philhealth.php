@@ -10,13 +10,13 @@ require_once '../models/Imports.php';
 $config = new Config();
 
 
-if (!empty($_FILES['philhealthUploadMatrix']['name'])) {
+if (!empty($_FILES['file']['name'])) {
 	$output = 0;
 	$allowed_ext = array('csv');
-	$tmp = explode(".", $_FILES['philhealthUploadMatrix']['name']);
+	$tmp = explode(".", $_FILES['file']['name']);
 	$extension = end($tmp);
 	if (in_array($extension, $allowed_ext)) {
-		$file_data = fopen($_FILES['philhealthUploadMatrix']['tmp_name'], 'r');
+		$file_data = fopen($_FILES['file']['tmp_name'], 'r');
 
 		$importPhilhealth = new Philhealth();
 		$importPhilhealth->deletePhilhealthMatrix();

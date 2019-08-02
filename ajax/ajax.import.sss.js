@@ -29,7 +29,7 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
               });
             });
 
-            var form = $('#uploadSSSFrom');
+            var form = $('#uploadSSSForm');
 			var formData = false;
 
 			if (window.FormData) {
