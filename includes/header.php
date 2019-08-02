@@ -6,7 +6,7 @@
         PhilPaCS
       </a>
       <div class="d-flex order-lg-2 ml-auto">
-        
+
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar"></span>
@@ -77,12 +77,13 @@
           <li class="nav-item">
             <a href="./index.php" class="nav-link"><i class="fe fe-home"></i> Dashboard</a>
           </li>
-          
+
           <li class="nav-item dropdown">
             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Human Resources</a>
             <div class="dropdown-menu dropdown-menu-arrow">
               <a href="./employee.php" class="dropdown-item ">Employee Management</a>
               <a href="./attendance.php" class="dropdown-item ">Attendance Management</a>
+              <a href="./Requisition.php" class="dropdown-item ">Requisition Management</a>
               <a href="./event.php" class="dropdown-item ">Event Management</a>
               <a href="javascript:void(0)" class="dropdown-item" data-toggle="dropdown">Contribution Management</a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">

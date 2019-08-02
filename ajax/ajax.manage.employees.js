@@ -190,7 +190,7 @@
 			} else {
 				birthday_error = "";
 				$("#birthday_error").text(birthday_error);
-				$('#birthday').removeClass('is-invalid');	
+				$('#birthday').removeClass('is-invalid');
 			}
 
 			//Address validation
@@ -202,7 +202,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#barangay').removeClass('is-invalid');	
+				$('#barangay').removeClass('is-invalid');
 			}
 
 			if (province == "") {
@@ -212,7 +212,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#province').removeClass('is-invalid');	
+				$('#province').removeClass('is-invalid');
 			}
 
 			if (city == "") {
@@ -222,7 +222,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#city').removeClass('is-invalid');	
+				$('#city').removeClass('is-invalid');
 			}
 
 			if (country == "") {
@@ -232,7 +232,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#country').removeClass('is-invalid');	
+				$('#country').removeClass('is-invalid');
 			}
 
 			if (zipcode != ""){
@@ -243,10 +243,10 @@
 				} else {
 					address_error = "";
 					$("#address_error").text(address_error);
-					$('#zipcode').removeClass('is-invalid');	
+					$('#zipcode').removeClass('is-invalid');
 				}
 			}
-			
+
 			//End of address validation
 
 
@@ -257,7 +257,7 @@
 				$('#navPersonalDetailsTab').removeClass('active');
 				$('#navPersonalDetailsTab').addClass('disabled');
 				$('#first').removeClass('text-success');
-				
+
 
 				$('#navEmploymentDetailsTab').removeClass('disabled');
 				$('#navEmploymentDetailsTab').addClass('active');
@@ -280,7 +280,7 @@
 		$('#navPersonalDetailsTab').removeClass('disabled');
 		$('#navPersonalDetailsTab').addClass('active');
 		$('#first').addClass('text-success');
-		
+
 
 		$('#navEmploymentDetailsTab').removeClass('active');
 		$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
@@ -379,7 +379,7 @@
 			$('#navOtherInfoTab').addClass('disabled');
 			$('#otherInfoTab').removeClass('active');
 			$('#third').removeClass('text-success');
-		}); 
+		});
 
 		/**
 		 * Adding of employee
@@ -503,7 +503,7 @@
 						}
 					}, 2000);
 				}
-			});	
+			});
 		});
 
 		//Updating of employee information
@@ -521,7 +521,7 @@
 			var position_error = "";
 
 
-			var id = $('#hiddenEditEmployeeID').val();			
+			var id = $('#hiddenEditEmployeeID').val();
 			var firstname = $('#edit_firstname').val();
 			var middlename = $('#edit_middlename').val();
 			var lastname = $('#edit_lastname').val();
@@ -645,7 +645,7 @@
 			} else {
 				birthday_error = "";
 				$("#edit_birthday_error").text(birthday_error);
-				$('#edit_birthday').removeClass('is-invalid');	
+				$('#edit_birthday').removeClass('is-invalid');
 			}
 
 			//Address validation
@@ -657,7 +657,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_barangay').removeClass('is-invalid');	
+				$('#edit_barangay').removeClass('is-invalid');
 			}
 
 			if (province == "") {
@@ -667,7 +667,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_province').removeClass('is-invalid');	
+				$('#edit_province').removeClass('is-invalid');
 			}
 
 			if (city == "") {
@@ -677,7 +677,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_city').removeClass('is-invalid');	
+				$('#edit_city').removeClass('is-invalid');
 			}
 
 			if (country == "") {
@@ -687,7 +687,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_country').removeClass('is-invalid');	
+				$('#edit_country').removeClass('is-invalid');
 			}
 
 			if (zipcode != ""){
@@ -698,12 +698,12 @@
 				} else {
 					address_error = "";
 					$("#edit_address_error").text(address_error);
-					$('#edit_zipcode').removeClass('is-invalid');	
+					$('#edit_zipcode').removeClass('is-invalid');
 				}
 			}
-			
+
 			//End of address validation
-			
+
 			if (date_hired == "") {
 				date_hired_error = "Date Hired is required.";
 				$("#edit_date_hired_error").text(date_hired_error);
@@ -792,7 +792,7 @@
 			}
 
 			return false;
-			
+
 		});
 
  		//creating of account
@@ -822,7 +822,7 @@
 			} else {
 				username_error = "";
 				$("#username_error").text(username_error);
-				$('#username').removeClass('is-invalid');	
+				$('#username').removeClass('is-invalid');
 			}
 
 			if (password == "") {
@@ -832,7 +832,7 @@
 			} else {
 				pasword_error = "";
 				$("#password_error").text(password_error);
-				$('#password').removeClass('is-invalid');	
+				$('#password').removeClass('is-invalid');
 			}
 
 			if (rpassword == "") {
@@ -855,7 +855,7 @@
 			}
 
 			if (username_error == "" && password_error == "" && rpassword_error == "") {
-			
+
 
 				// var form = $('#createAccountForm');
 				// var formData = false;
@@ -944,7 +944,7 @@
 			} else {
 				pasword_error = "";
 				$("#reset_password_error").text(password_error);
-				$('#reset_password').removeClass('is-invalid');	
+				$('#reset_password').removeClass('is-invalid');
 			}
 
 			if (rpassword == "") {
@@ -1048,7 +1048,7 @@
  		$('#deactivateAccountBtn').on('click', function(e) {
 		 	e.preventDefault();
 
-		 	var id = $('#hiddenPersonalIDResetPassword').val();		 	
+		 	var id = $('#hiddenPersonalIDResetPassword').val();
 		 	Swal.fire({
 			  title: 'Are you sure?',
 			  text: 'Deactivate this account?',

@@ -86,31 +86,24 @@
 
                     <div class="col-lg-12">
                       <div class="card">
+                        <center>
                         <div class="table-responsive">
 
                           <table class="table card-table table-vcenter text-nowrap datatable" id="attendanceviewTable">
                             <thead>
                               <tr>
-                                <th>Frist name</th>
-                                <th>Last name</th>
                                 <th>Date From</th>
                                 <th>Date To</th>
-                                <th>Total hours</th>
                                 <th></th>
                               </tr>
-                          </thead>
-                                    <?php
-                                      $config->viewEmployeeDetails();
-                                     ?>
+                              </thead>
+                                  <?php
+                                    $config->viewAllAttendance();
+                                    ?>
                           </table>
                           <script type="text/javascript">
                             require(['datatables', 'jquery'], function(datatable, $) {
                               $('.datatable').DataTable();
-                            });
-                          </script>
-                          <script type="text/javascript">
-                            require(['datatables', 'jquery'], function(datatable, $) {
-                              $('.datatable1').DataTable();
                             });
                           </script>
                         </div>
@@ -128,30 +121,20 @@
           </div>
           <!-- flex-fill -->
         </div> <!-- /page -->
-        <div class="modal fade" id="viewAllAttendance" tabindex="-1" role="dialog" aria-labelledby="displayrequestForm"  data-backdrop="static" data-keyboard="false">
-              <div class="modal-dialog modal-lg mw-100 w-75" role="document" >
-                <center>
-                <div class="modal-content" style="width: 100%!important">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="">View Form</h4>
-                    <button class="btn btn-danger float-right" type="button" data-dismiss="modal">
-                          <i class="fa fa-times"></i> Cancel
-                      </button>
-                      <!-- <div class="clearfix"></div> -->
-                  </div>
-                  <div class="modal-body" id="attendanceview">
-                  </div>
-                </div><!-- /.modal-content -->
-              </div> <!-- /.modal-dialog -->
-            </div>
-
+        
 
         <!--modal of generateAll-->
+        <?php include '../includes/attendance/modal.generateall.php' ?>
         <?php include '../includes/footer.php'; ?>
       </div>
     </div>
 
-    <script type="text/javascript" src="../ajax/ajax.view.attendance.js"></script>
+
     <script type="text/javascript" src="../ajax/ajax.manage.employees.js"></script>
+    <script type="text/javascript">
+      function reload() {
+        location.reload();
+      }
+    </script>
   </body>
 </html>

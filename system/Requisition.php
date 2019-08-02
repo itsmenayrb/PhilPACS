@@ -1,11 +1,32 @@
 <?php
-    require_once '../models/attendance.inc.php';
-    $config = new attendance();
+require '../models/requisition.inc.php';
 
-    if (isset($_POST['submit'])) {
-     $config->import($_FILES['file']['tmp_name']);
- }
+$requestt = new Request();
+$result = $requestt->viewRequestForm();
+
+if (isset($_POST['SubmitRequest'])) {
+$RequestType = $_POST['RequestType'];
+$lastName = $_POST['lastName'];
+$Request = $_POST['Request'];
+$DateFrom = $_POST['DateFrom'];
+$DateTo = $_POST['DateTo'];
+$Reason = $_POST['Reason'];
+
+$requestt->RequestFrom($RequestType, $lastName, $Request, $DateFrom, $DateTo, $Reason);
+}
+
 ?>
+<?php
+$requestt = new Request();
+if (isset($_POST['Approved'])) {
+  $requestID = $_POST['requestID'];
+  $requestt->ApprovedList($requestID);
+}
+if (isset($_POST['Declined'])) {
+  $requestID = $_POST['requestID'];
+  $requestt->DeclinedList($requestID);
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -14,7 +35,7 @@
     <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" /> -->
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
-    <title>Human Resources :: Attendanca View Management</title>
+    <title>Human Resources :: Requistion Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
     <?php include '../includes/plugins.php'; ?>
@@ -32,23 +53,27 @@
 
             <div class="my-3 my-md-5">
               <div class="container">
-
-
                   <div class="page-header">
                     <h1 class="page-title">
-                      Attendance Management
+                      Requisition Management
                     </h1>
                     <div class="page-subtitle">
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="./attendance.php">Attendance</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="./attendanceview.php">View total hours</a></li>
-                        <li class="breadcrumb-item"><a href="./viewAllattendance.php">History of attendance</a></li>
-                      </ol>
-                    </div>
 
+                    </div>
                   </div>
+
                   <!-- /page-header -->
+
+                  <div class="float-right">
+                    <div class="input-group mb-3">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-lime"  data-toggle="modal" data-target="#addRequestModal"><i class="fe fe-user-plus mr-2"></i>Add Request Form</button>
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <?php include '../includes/Requisition/requisition.php'; ?>
 
 
                   <div class="clearfix"></div>
@@ -84,51 +109,36 @@
                     </div> -->
                     <!-- /lg-4 -->
 
-                    <div class="col-lg-12">
-                      <div class="card">
-                        <div class="table-responsive">
 
-                          <table class="table card-table table-vcenter text-nowrap datatable" id="attendanceviewTable">
-                            <thead>
-                              <tr>
-                                <th>Frist name</th>
-                                <th>Last name</th>
-                                <th>Date From</th>
-                                <th>Date To</th>
-                                <th>Total hours</th>
-                                <th></th>
-                              </tr>
-                          </thead>
-                                    <?php
-                                      $config->viewEmployeeDetails();
-                                     ?>
-                          </table>
-                          <script type="text/javascript">
-                            require(['datatables', 'jquery'], function(datatable, $) {
-                              $('.datatable').DataTable();
-                            });
-                          </script>
+
+
+
+                                    <script type="text/javascript">
+                                      require(['datatables', 'jquery'], function(datatable, $) {
+                                      $('.datatable').DataTable();
+                                      });
+                                    </script>
                           <script type="text/javascript">
                             require(['datatables', 'jquery'], function(datatable, $) {
                               $('.datatable1').DataTable();
                             });
                           </script>
-                        </div>
-
-                    </div>
-                    <!-- /lg-8 -->
-
-                  </div>
+                          <script type="text/javascript">
+                            require(['datatables', 'jquery'], function(datatable, $) {
+                              $('.datatable2').DataTable();
+                            });
+                          </script>
                   <!-- /row row-cards -->
-
               </div>
               <!-- /container -->
             </div>
             <!-- my-3 -->
           </div>
+
+
           <!-- flex-fill -->
         </div> <!-- /page -->
-        <div class="modal fade" id="viewAllAttendance" tabindex="-1" role="dialog" aria-labelledby="displayrequestForm"  data-backdrop="static" data-keyboard="false">
+        <div class="modal fade" id="viewRequestForm" tabindex="-1" role="dialog" aria-labelledby="displayrequestForm"  data-backdrop="static" data-keyboard="false">
               <div class="modal-dialog modal-lg mw-100 w-75" role="document" >
                 <center>
                 <div class="modal-content" style="width: 100%!important">
@@ -139,19 +149,21 @@
                       </button>
                       <!-- <div class="clearfix"></div> -->
                   </div>
-                  <div class="modal-body" id="attendanceview">
+                  <div class="modal-body" id= "displayRequestForm">
                   </div>
                 </div><!-- /.modal-content -->
               </div> <!-- /.modal-dialog -->
             </div>
 
-
-        <!--modal of generateAll-->
-        <?php include '../includes/footer.php'; ?>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <?php include '../includes/footer.php'; ?>
+        </div>
       </div>
     </div>
-
-    <script type="text/javascript" src="../ajax/ajax.view.attendance.js"></script>
-    <script type="text/javascript" src="../ajax/ajax.manage.employees.js"></script>
+    <?php include '../includes/Requisition/modal.requisition.php'; ?>
+    <script type="text/javascript" src="../ajax/ajax.requestFrom.js"></script>
+    </script>
   </body>
 </html>

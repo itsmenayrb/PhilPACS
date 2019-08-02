@@ -66,17 +66,18 @@
               if ($numRows > 0) {
 
                  while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $lastName = $rows['lastName'];
+                   $lastName = $rows['lastName'];
+                    $totalhoursID = $rows['totalhoursID'];
               echo "
                     <tr>
 
                       <td>". $rows['firstName'] ."</td>
-                      <td>". $rows['lastName'] ."</td>
+                      <td>". $lastName ."</td>
                       <td>". $rows['dateFrom'] ."</td>
                       <td>". $rows['dateTo'] ."</td>
                       <td>". hoursandmins($rows['totalHours'], '%02d Hours, %02d Minutes') ."</td>
                       <td>
-                      <button type= 'button' class ='btn btn-primary viewEmployeeModalBtn' data-lastName='<?=$lastName ?>' data-toggle ='modal' data-target='#viewEmployeeDetail'>
+                      <button type='button' class ='btn btn-primary view_attendance' data-id='". $totalhoursID ."' data-toggle='modal' data-target='#viewAllAttendance'>
                       <i class ='fa fa-eye'></i></button>
                           </td>
                       ";
@@ -105,35 +106,20 @@
                     return sprintf($format, $hours, $minutes);
                 }
 
-            $sql = "SELECT * FROM attendancetbl";
+            $sql = "SELECT dateFrom, dateTo FROM totalhourstbl GROUP BY dateFrom";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
             echo "<tbody>";
             if ($numRows > 0) {
                while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-                 $data[] = $rows;
-                 $starttime1 = $rows['EMTimein'];
-                  $stoptime1 = $rows['EMTimeout'];
-                  $diff1 = (strtotime($stoptime1) - strtotime($starttime1));
-                  $total1 = $diff1/60;
-
-                  $starttime2 = $rows['EATimein'];
-                   $stoptime2 = $rows['EATimeout'];
-                   $diff2 = (strtotime($stoptime2) - strtotime($starttime2));
-                   $total2 = $diff2/60;
-                   $totalhours = ($total2/60) + $total1/60;
-                   $totalminutes = ($total2%60) + $total1%60;
-
+                        $dateFrom = $rows['dateFrom'];
+                        $dateTo = $rows['dateTo'];
                   echo "
                         <tr>
-                            <td>". $rows['firstName'] ."</td>
-                            <td>". $rows['lastName'] ."</td>
-                            <td>". $rows['Edate'] ."</td>
-                            <td>". $rows['EMTimein'] ."</td>
-                            <td>". $rows['EMTimeout'] ."</td>
-                            <td>". $rows['EATimein'] ."</td>
-                            <td>". $rows['EATimeout'] ."</td>
-                            <td>". hoursandmins($rows['totalMinutes'], '%02d Hours, %02d Minutes') ."</td>
+                            <td>". $dateFrom ."</td>
+                            <td>". $dateTo ."</td>
+                            <td><button type= 'button' class ='btn btn-primary viewEmployeeModalBtn' data-id='<?=$dateFrom?>' data-toggle ='modal' data-target='#viewEmployeeDetail'>
+                            <i class ='fa fa-eye'></i></button></td>
                             ";
                         }
                     }
@@ -280,4 +266,71 @@
                   echo "Connection Error: " . $e->getMessage();
                 }
               }
+              public function viewattendance($lastName){
+                      try {
+                          $sql = "SELECT * FROM totalhourstbl WHERE totalhoursID = '$lastName'";
+                          $result = $this->conn->runQuery($sql);
+                          $numRows = $result->execute();
+                          $rows1 = $result->fetch(PDO::FETCH_ASSOC);
+
+                          $lastName1 = $rows1['lastName'];
+                          $dateFrom1 = $rows1['dateFrom'];
+                          $dateTo1 = $rows1['dateTo'];
+
+                          $sql1 = "SELECT * FROM attendancetbl WHERE lastName = '$lastName1' AND Edate BETWEEN '$dateFrom1' AND '$dateTo1'";
+                          $result1 = $this->conn->runQuery($sql1);
+                          $result1->execute();
+
+                          echo "
+                          <div class='card'>
+                              <div class='card-body'>
+                              <table class='table card-table table-vcenter text-nowrap datatable1' id='attendanceviewTable'>
+                                <thead>
+                                  <tr>
+                                    <th>Frist name</th>
+                                    <th>Last name</th>
+                                    <th>Date</th>
+                                    <th>Time in</th>
+                                    <th>Time out</th>
+                                    <th>Time in</th>
+                                    <th>Time out</th>
+                                  </tr>
+                              </thead>
+                                  <tbody>
+                          ";
+                          while($rows = $result1->fetch(PDO::FETCH_ASSOC)){
+
+                            $lastName1 = $rows['lastName'];
+                            $firstName = $rows['firstName'];
+                            $Date = $rows['Edate'];
+                            $EMTimein = $rows['EMTimein'];
+                            $EMTimeout = $rows['EMTimeout'];
+                            $EATimein = $rows['EATimein'];
+                            $EATimeout = $rows['EATimeout'];
+
+                            echo "
+
+                                      <tr>
+                                          <td>". $lastName1 ."</td>
+                                          <td>". $firstName ."</td>
+                                          <td>". $Date ."</td>
+                                          <td>". $EMTimein ."</td>
+                                          <td>". $EMTimeout ."</td>
+                                          <td>". $EATimein ."</td>
+                                          <td>". $EATimeout ."</td>
+
+                                      </tr>
+
+                            ";
+                          }
+                          echo "
+                          </tbody>
+                      </table>
+                    </div>
+                          ";
+                      } catch (PDOException $e) {
+                       echo "Connection Error: " . $e->getMessage();
+                     }
+                    }
+
 }

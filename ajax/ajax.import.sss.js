@@ -83,9 +83,9 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 		// $('#uploadSSSBtn').on('click', function(e) {
 		// 	e.preventDefault();
 
-			
+
 		// });
-		
+
 
 	});
 });

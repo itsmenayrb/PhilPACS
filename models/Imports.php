@@ -23,7 +23,7 @@ class SSS extends Imports {
 
 		try {
 
-			
+
 			$stmt = $this->conn->runQuery("INSERT INTO sssmatrixtbl (
 											rangeOfCompensationFrom,
 											rangeOfCompensationTo,
@@ -160,6 +160,49 @@ class Pagibig extends Imports {
 	public function deletePagibigMatrix() {
 		try {
 			$stmt = $this->conn->runQuery("TRUNCATE TABLE pagibigmatrixtbl");
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+}
+class Attendance extends Imports {
+
+	public function importAttendance($firstName, $lastName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout) {
+
+		try {
+
+
+			$stmt = $this->conn->runQuery("INSERT INTO attendancetbl (
+											firstName, lastName,
+											Edate, EMTimein, EMTimeout,
+											EATimein, EATimeout
+										  ) VALUES (
+											:firstName,
+											:lastName,
+											:Edate,
+											:EMTimein,
+											:EMTimeout,
+											:EATimein,
+											:EATimeout
+										)");
+			$stmt->bindparam(':firstName', $firstName);
+			$stmt->bindparam(':lastName', $lastName);
+			$stmt->bindparam(':Edate', $Edate);
+			$stmt->bindparam(':EMTimein', $EMTimein);
+			$stmt->bindparam(':EMTimeout', $EMTimeout);
+			$stmt->bindparam(':EATimein', $EATimein);
+			$stmt->bindparam(':EATimeout', $EATimeout);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+	public function deleteAttendance() {
+		try {
+			$stmt = $this->conn->runQuery("TRUNCATE TABLE attendancetbl");
 			$stmt->execute();
 			return $stmt;
 		} catch (PDOException $e) {
