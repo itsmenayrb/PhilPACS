@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once 'Database.php';
 
 class Config extends Database {
@@ -49,6 +50,20 @@ class Config extends Database {
 
 		header("Location: $url");
 
+	}
+
+	public function isnot_loggedin() {
+		if (!isset($_SESSION['username'])) {
+			$this->redirect("../index.php");
+			return true;
+		}
+		return false;
+	}
+
+	public function end_session() {
+	    unset($_SESSION['username']);
+		session_destroy();
+	    return true;
 	}
 
 }

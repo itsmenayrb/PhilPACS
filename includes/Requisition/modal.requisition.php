@@ -1,3 +1,4 @@
+<!-- Modal of Requisition -->
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="addRequestModal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-xl" role="document" style="overflow-y: initial !important">
     <div class="modal-content">
@@ -35,80 +36,61 @@
                                                   <div class="row">
                                                     <div class="col-md-6 col-xs-12">
                                                         <div class="form-group">
-                                                             <label class="form-control-label" for="firstname">Request Type<span class="text-danger">*</span></label>
+                                                             <label class="form-control-label" for="RequestType">Request Type<span class="text-danger" required>*</span></label>
                                                              <select class="required form-control" name="RequestType">
                                                                <option selected disabled>Request Type</option>
                                                                     <option value="Absent Request">Absent Request</option>
                                                                     <option value="OverTime Request">OverTime Request</option>
                                                              </select>
-
                                                              <span id="requesttype_error"></span>
                                                         </div>
                                                     </div>
                                                       <div class="col-md-6 col-xs-12">
                                                           <div class="form-group">
-                                                               <label class="form-control-label" for="lastName">Last Name<span class="text-danger">*</span></label>
-                                                               <select class="required form-control" name="lastName">
-                                                                 <option selected disabled>Last Name</option>
+                                                               <label class="form-control-label" for="lastName">Last Name<span class="text-danger"/>*</span></label>
+                                                               <select class="required form-control" name="lastName" placeholder="Last Name" required />
+                                                                 <option selected disable>Last Name</option>
                                                                  <?php $requestt->employeelastName(); ?>
                                                                </select>
                                                                <span id="firstname_error"></span>
                                                           </div>
                                                       </div>
                                                   </div>
+
                                                   <div class="row">
-                                                      <div class="col-md-2 col-xs-12">
-                                                          <label class="form-control-label">Type of Request(For Absent only)<span class="text-danger"></span></label>
-                                                          <span id="typeRequest_error"></span>
+                                                      <div class="col-md-6 col-xs-12">
+                                                        <div class="form-group">
+                                                             <label class="form-control-label" for="TypeRequest">Type of Request(For Absentsence only)<span class="text-danger" required>*</span></label>
+                                                             <select class="required form-control" name="TypeRequest">
+                                                               <option selected disabled>Request</option>
+                                                               <option value="Sick">Sick</option>
+                                                               <option value="Vacation">Vacation</option>
+                                                               <option value="Bereavement">Bereavement</option>
+                                                               <option value="Time Off Without Pay">Time Off Without Pay</option>
+                                                               <option value="Maternity/Paternity">Maternity/Paternity</option>
+                                                               </select>
+                                                             <span id="TypeRequest_error"></span>
+
+                                                        </div>
                                                       </div>
-                                                      <div class="col-md-4 col-xs-12">
-                                                          <div class="custom-control custom-radio">
-                                                              <input type="radio" class="custom-control-input" name="Request" value="Sick" id="Sick" />
-                                                              <label class="custom-control-label" value="Sick" for="Sick">Sick</label>
-                                                          </div>
-
-                                                          <div class="custom-control custom-radio">
-                                                              <input type="radio" class="custom-control-input" name="Request" value="Vacation" id="Vacation" />
-                                                              <label class="custom-control-label" name="Request" value="Vacation" for="Vacation">Vacation</label>
-                                                          </div>
-                                                          <div class="custom-control custom-radio">
-                                                              <input type="radio" class="custom-control-input" name= "Request" value= "Bereavement" id="Bereavement" />
-                                                              <label class="custom-control-label" name="Request" value= "Bereavement" for="Bereavement">Bereavement</label>
-                                                          </div>
-                                                          <div class="custom-control custom-radio">
-                                                              <input type="radio" class="custom-control-input" name="Request" value="Time Off Without Pay" id="Time Off Without Pay" />
-                                                              <label class="custom-control-label" name="Request" value="Time Off Without Pay" for="Time Off Without Pay">Time Off Without Pay</label>
-                                                          </div>
-
-                                                          <div class="custom-control custom-radio">
-                                                              <input type="radio" class="custom-control-input" name="Request" value="Maternity/Paternity" id="Maternity/Paternity" />
-                                                              <label class="custom-control-label" name="Request" value="Maternity/Paternity" for="Maternity/Paternity">Maternity/Paternity</label>
-                                                          </div>
-                                                          <div class="custom-control custom-radio">
-
-                                                              <label class="custom-control-label" for="Other (Please Specify):">Other (Please Specify):</label>
-                                                              <input type="text" class="required form-control" name="Request" id="Other (Please Specify):" placeholder="Other"/>
-                                                          </div>
-                                                      </div>
-
                                                       <div class="col-md-3 col-xs-12">
                                                           <div class="form-group">
                                                                <label class="form-control-label" for="DataFrom">Date From<span class="text-danger">*</span></label>
-                                                               <input type="date" class="required form-control" name="DateFrom" id="DataFrom" placeholder="dd/mm/yyyy" />
+                                                               <input type="date" class="required form-control" name="DateFrom" id="DataFrom" placeholder="dd/mm/yyyy"  required/>
                                                                <span id="DataFrom_error"></span>
                                                           </div>
                                                       </div>
                                                       <div class="col-md-3 col-xs-12">
                                                           <div class="form-group">
                                                                <label class="form-control-label" for="DataTo">Date To<span class="text-danger">*</span></label>
-                                                               <input type="date" class="required form-control" name="DateTo" id="DataTo" placeholder="dd/mm/yyyy" />
+                                                               <input type="date" class="required form-control" name="DateTo" id="DataTo" placeholder="dd/mm/yyyy" required/>
                                                                <span id="DataTo_error"></span>
                                                           </div>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                        <label class="form-control-label" for="Reason">Reason<span class="text-danger">*</span></label>
-                                                       <textarea type="" class="required email form-control" name="Reason" id="Reason" placeholder="Reason for requesrt" /></textarea>
+                                                       <textarea type="" class="required email form-control" name="Reason" id="Reason" placeholder="Reason for requesrt"  required/></textarea>
                                                        <span id="email_error"></span>
                                                   </div>
 

@@ -1,6 +1,7 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
+    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

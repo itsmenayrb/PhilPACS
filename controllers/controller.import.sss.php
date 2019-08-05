@@ -20,9 +20,9 @@ if (!empty($_FILES['file']['name'])) {
 		$importSSS = new SSS();
 		$importSSS->deleteSSSMatrix();
 
-		fgetcsv($file_data);
-		fgetcsv($file_data);
-		fgetcsv($file_data);
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
 		
 		while ($column = fgetcsv($file_data)) {
 			
@@ -42,6 +42,18 @@ if (!empty($_FILES['file']['name'])) {
 			// if ($rangeOfCompensationFromBelow == 'Below') {
 			// 	$rangeOfCompensationFrom = 0;
 			// }
+			
+			$rangeOfCompensationFrom = str_replace(',', '', $rangeOfCompensationFrom);
+			$rangeOfCompensationTo = str_replace(',', '', $rangeOfCompensationTo);
+
+			$monthlySalaryCredit = str_replace(',', '', $monthlySalaryCredit);
+			$socialSecurityEmployer = str_replace(',', '', $socialSecurityEmployer);
+			$socialSecurityEmployee = str_replace(',', '', $socialSecurityEmployee);
+			$socialSecurityTotal = str_replace(',', '', $socialSecurityTotal);
+			$employeeCompensationEmployer = str_replace(',', '', $employeeCompensationEmployer);
+			$totalContributionEmployer = str_replace(',', '', $totalContributionEmployer);
+			$totalContributionEmployee = str_replace(',', '', $totalContributionEmployee);
+			$totalContributions = str_replace(',', '', $totalContributions);
 
 			$importSSS->importSSS($rangeOfCompensationFrom, $rangeOfCompensationTo, $monthlySalaryCredit, $socialSecurityEmployer, $socialSecurityEmployee, $socialSecurityTotal, $employeeCompensationEmployer, $totalContributionEmployer, $totalContributionEmployee, $totalContributions);
 			// print_r($rangeOfCompensationFrom . "<br>");

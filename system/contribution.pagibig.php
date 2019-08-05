@@ -1,6 +1,7 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
+    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -29,20 +30,35 @@
                     <h1 class="page-title">
                       Pag-ibig Contribution Matrix
                     </h1>
+                    <span class="align-self-center ml-3" data-toggle="tooltip" data-placement="top" title="Help">
+                      <span class="form-help bg-green text-white" data-toggle="popover" data-placement="bottom" data-content="<p>Download the SSS Matrix Format Excel Sheet.<p>
+                        <p><a class='btn-link' href='../downloads/Format - SSS Contribution.xlsx' download='SSS_Contribution_Sheet'>SSS Matrix Format Excel Sheet</p>">?</span>
+                    </span>
                   </div>
                   <!-- /page-header -->
                   
                   <div class="clearfix"></div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="card p-3 px-4 border-success">
-                        <div class="dimmer active">
-                          <div id="loader"></div>
-                          <div id="dimmer-content">
-                            <div class="py-5 m-0 text-center h6 text-gray" style="opacity: 0.5">
-                              <i class="fe fe-upload"></i>
-                              Click or Drop CSV file here to import
+                  <div class="dimmer active">
+                    <div id="loader"></div>
+                    <div id="dimmer-content">
+                      <div class="card" style="height: 30vh; border-radius: 15px;">
+                        <div class="card-body">
+                          <div class="wrapper">
+                            <div class="drop">
+                              <div class="cont text-center">
+                                <i class="fe fe-upload-cloud"></i>
+                                <div class="tit">
+                                  Drag and Drop CSV File
+                                </div>
+                                <div class="desc">or</div>
+                                <div class="browse">
+                                  Click here to Import
+                                </div>
+                              </div>
+                              <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadPagibigForm">
+                                <input type="file" id="file" name="file" accept=".csv" />
+                              </form>
                             </div>
                           </div>
                         </div>

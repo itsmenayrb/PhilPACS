@@ -44,11 +44,11 @@ class Employee extends Config {
 			
 			if ($row['firstName'] == $firstname && $row['lastName'] == $lastname) {
 				$error = "There's already a record for $firstname $lastname";
-				echo json_encode(array("employee_exist" => $error));
+				echo "employee_exist";
 			} else {
 				if ($row['email'] == $email) {
 					$error = "Email is already use.";
-					echo json_encode(array("email_exist" => $error));
+					echo "email_exist";
 				} else {
 					$stmt = $this->conn->runQuery("INSERT INTO personaldetailstbl (
 											firstName,

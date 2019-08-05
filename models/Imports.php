@@ -166,29 +166,67 @@ class Pagibig extends Imports {
 			echo "Connection Error: " . $e->getMessage();
 		}
 	}
+
+}
+
+class Tax extends Imports {
+
+	public function importTax($compensationLevel, $minimumWithholdingTax) {
+
+		try {
+			$stmt = $this->conn->runQuery("INSERT INTO taxmatrixtbl (
+											compensationLevel,
+											minimumWithholdingTax
+										  ) VALUES (
+											:compensationLevel,
+											:minimumWithholdingTax
+										)");
+			$stmt->bindparam(':compensationLevel', $compensationLevel);
+			$stmt->bindparam(':minimumWithholdingTax', $minimumWithholdingTax);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}
+
+	public function deleteTaxMatrix() {
+		try {
+			$stmt = $this->conn->runQuery("TRUNCATE TABLE taxmatrixtbl");
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
 }
 class Attendance extends Imports {
 
-	public function importAttendance($firstName, $lastName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout) {
+	public function importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout) {
 
 		try {
 
-
 			$stmt = $this->conn->runQuery("INSERT INTO attendancetbl (
-											firstName, lastName,
-											Edate, EMTimein, EMTimeout,
-											EATimein, EATimeout
+											firstName,
+											lastName,
+											Edate,
+											EMTimein,
+											EMTimeout,
+											EATimein,
+											EATimeout
 										  ) VALUES (
-											:firstName,
 											:lastName,
+											:firstName,
 											:Edate,
 											:EMTimein,
 											:EMTimeout,
 											:EATimein,
 											:EATimeout
 										)");
-			$stmt->bindparam(':firstName', $firstName);
 			$stmt->bindparam(':lastName', $lastName);
+			$stmt->bindparam(':firstName', $firstName);
 			$stmt->bindparam(':Edate', $Edate);
 			$stmt->bindparam(':EMTimein', $EMTimein);
 			$stmt->bindparam(':EMTimeout', $EMTimeout);
@@ -199,7 +237,9 @@ class Attendance extends Imports {
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();
 		}
+
 	}
+
 	public function deleteAttendance() {
 		try {
 			$stmt = $this->conn->runQuery("TRUNCATE TABLE attendancetbl");

@@ -1,6 +1,7 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
+    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -13,86 +14,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
     <style type="text/css">
-      input:focus,
-      select:focus,
-      textarea:focus,
-      button:focus {
-        outline: none;
-      }
-
-      .wrapper {
-        width: 100%;
-        height: 100%;
-      }
-
-      .drop {
-        width: 100%;
-        height: 100%;
-        border: 3px dashed #DADFE3;
-        border-radius: 15px;
-        overflow: hidden;
-        text-align: center;
-        background: white;
-        -webkit-transition: all 0.5s ease-out;
-        -moz-transition: all 0.5s ease-out;
-        transition: all 0.5s ease-out;
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-      }
-      .drop:hover {
-        cursor: pointer
-        background: #f5f5f5 
-      }
-      .drop .cont {
-        width: 500px;
-        height: 170px;
-        color: #8E99A5;
-        -webkit-transition: all 0.5s ease-out;
-        -moz-transition: all 0.5s ease-out;
-        transition: all 0.5s ease-out;
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-      }
-      .drop .cont i {
-        font-size: 300%;
-        color: #8E99A5;
-        position: relative;
-      }
-      .drop .cont .tit {
-        font-size: 200%;
-        text-transform: uppercase;
-      }
-      .drop .cont .desc {
-        color: #A4AEBB;
-      }
-      .drop .cont .browse {
-        margin: 10px 25%;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 5px;
-        background: #09f;
-      }
-      .drop input {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        background: red;
-        opacity: 0;
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-      }
+      
+      
     </style>   
         <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" /> 
@@ -122,7 +45,7 @@
                   <div class="dimmer active">
                     <div id="loader"></div>
                     <div id="dimmer-content">
-                      <div class="card" style="height: 30vh; border-radius: 1%;">
+                      <div class="card" style="height: 30vh; border-radius: 15px;">
                         <div class="card-body">
                           <div class="wrapper">
                             <div class="drop">
@@ -136,7 +59,7 @@
                                   Click here to Import
                                 </div>
                               </div>
-                              <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadSSSFrom">
+                              <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadSSSForm">
                                 <input type="file" id="file" name="file" accept=".csv" />
                               </form>
                             </div>

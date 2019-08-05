@@ -28,14 +28,12 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
                 "color": "#8E99A5"
               });
             });
-
-            var form = $('#uploadAttendanceFrom');
+            var form = $('#uploadAttendanceForm');
 			var formData = false;
 
 			if (window.FormData) {
 				formData = new FormData(form[0]);
 			}
-
 			$.ajax({
 				type: 'post',
 				url: '../controllers/controller.import.attendance.php',
@@ -77,15 +75,12 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 
 			return false;
 
-
 		}
 
 		// $('#uploadSSSBtn').on('click', function(e) {
 		// 	e.preventDefault();
 
-
 		// });
-
 
 	});
 });

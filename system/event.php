@@ -1,6 +1,7 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
+    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -34,7 +35,24 @@
                   
                   <div class="clearfix"></div>
 
-                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card text-white bg-lime mb-1">
+                        <div class="card-body p-3">
+                           <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title"><i class="fe fe-calendar"></i> Calendar</h3>
+                        </div>
+                        <div class="card-body">
+                          <div id="calendar"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="row">
                     <div class="col-md-12 text-center">
                       <button class="btn btn-green" type="button"><i class="fe fe-calendar"></i> Create Event</button>
                     </div>
@@ -116,7 +134,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- /row row-cards -->
                       
               </div>
@@ -127,6 +145,7 @@
           <!-- flex-fill -->
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
+        <?php include '../includes/event/modal.add.event.php'; ?>
 
     <script type="text/javascript" src="../ajax/ajax.event.js"></script>
     <script type="text/javascript">

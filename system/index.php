@@ -1,6 +1,7 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
+    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -34,7 +35,88 @@
               </div>
               <!-- /page-header -->
               
-             
+             <div class="row">
+               <div class="col-xs-12 col-sm-5">
+                 <div class="card">
+                      <div class="card-body">
+                        <div class="card-value float-right text-yellow">13%</div>
+                        <h3 class="mb-1">233</h3>
+                        <div class="text-muted">Total Employees since 2017</div>
+                      </div>
+                      <div class="card-chart-bg">
+                        <div id="chart-bg-revenue" style="height: 100%"></div>
+                      </div>
+                    </div>
+                    <script>
+                      require(['c3', 'jquery'], function (c3, $) {
+                        $(document).ready(function() {
+                          var chart = c3.generate({
+                            bindto: '#chart-bg-revenue',
+                            padding: {
+                              bottom: -10,
+                              left: -1,
+                              right: -1
+                            },
+                            data: {
+                              names: {
+                                data1: 'Users online'
+                              },
+                              columns: [
+                                ['data1', 30, 40, 10, 40, 12, 22, 40]
+                              ],
+                              type: 'area'
+                            },
+                            legend: {
+                              show: false
+                            },
+                            transition: {
+                              duration: 0
+                            },
+                            point: {
+                              show: false
+                            },
+                            tooltip: {
+                              format: {
+                                title: function (x) {
+                                  return '';
+                                }
+                              }
+                            },
+                            axis: {
+                              y: {
+                                padding: {
+                                  bottom: 0,
+                                },
+                                show: false,
+                                tick: {
+                                  outer: false
+                                }
+                              },
+                              x: {
+                                padding: {
+                                  left: 0,
+                                  right: 0
+                                },
+                                show: false
+                              }
+                            },
+                            color: {
+                              pattern: ['#f1c40f']
+                            }
+                          });
+                        });
+                      });
+                    </script>
+               </div>
+
+               <div class="col-xs-12 col-sm-3">
+                 
+               </div>
+
+               <div class="col-xs-12 col-sm-4">
+                 
+               </div>
+             </div>
 
           </div>
           <!-- /container -->
