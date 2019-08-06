@@ -48,9 +48,8 @@
                                                       <div class="col-md-6 col-xs-12">
                                                           <div class="form-group">
                                                                <label class="form-control-label" for="lastName">Last Name<span class="text-danger">*</span></label>
-                                                               <select class="required form-control" name="lastName">
-                                                                 <option selected disabled>Last Name</option>
-                                                                 <?php $requestt->employeelastName(); ?>
+                                                               <select class="required form-control" name="lastName" placeholder = "last Name">
+                                                                <?php $requestt->employeelastName(); ?>
                                                                </select>
                                                                <span id="firstname_error"></span>
                                                           </div>
