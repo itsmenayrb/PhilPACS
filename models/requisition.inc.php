@@ -10,7 +10,11 @@
 
    }
 
+<<<<<<< HEAD
    public function RequestFrom($RequestType, $lastName, $Request, $DateFrom, $DateTo, $Reason){
+=======
+   public function RequestFrom($RequestType, $lastName, $TypeRequest, $DateFrom, $DateTo, $Reason){
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
      try {
 
@@ -18,7 +22,11 @@
        if ($RequestType == 'OverTime Request') {
          $Request = 'None';
        }
+<<<<<<< HEAD
        $sql = "SELECT firstName, lastName FROM totalhourstbl WHERE lastName = '$lastName'";
+=======
+       $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
        $result = $this->conn->runQuery($sql);
        $numRows = $result->execute();
        $rows = $result->fetch(PDO::FETCH_ASSOC);
@@ -28,12 +36,20 @@
       $DateRequest = date("Y-m-d h:i:s");
        $status = 'pending';
        $stmt = $this->conn->runQuery("INSERT INTO requestformtbl(RequestType, firstName, lastName, Request, DateFrom, DateTo, Reason, DateRequest, status)
+<<<<<<< HEAD
        VALUES (:RequestType, :firstName, :lastName, :Request, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
+=======
+       VALUES (:RequestType, :firstName, :lastName, :TypeRequest, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
        $stmt->bindparam(":RequestType", $RequestType);
        $stmt->bindparam(":firstName", $firstName);
        $stmt->bindparam(":lastName", $lastName);
+<<<<<<< HEAD
        $stmt->bindparam(":Request", $Request);
+=======
+       $stmt->bindparam(":TypeRequest", $TypeRequest);
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
        $stmt->bindparam(":DateFrom", $DateFrom);
        $stmt->bindparam(":DateTo", $DateTo);
        $stmt->bindparam(":Reason", $Reason);
@@ -107,7 +123,11 @@
         try {
 
             $sql = "SELECT RequestType, firstName, lastName, Request,
+<<<<<<< HEAD
              DateFrom, DateTo, Reason, requestID
+=======
+             DateFrom, DateTo, Reason, requestID, status
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
              FROM requestformtbl WHERE requestID = '$requestID'";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
@@ -187,10 +207,22 @@
 
 
                                       <div class='text-right'>
+<<<<<<< HEAD
 
                                       <button class='btn btn-primary' type='submit' name='Approved'>Approved</button>
                                       <button class='btn btn-danger' type='submit' name='Declined'>Declined</button>
 
+=======
+                                      ";
+                                      ?>
+                                      <?php if ($rows['status'] == 'pending'): ?>
+                                        <button class='btn btn-primary' type='submit' name='Approved'>Approved</button>
+                                        <button class='btn btn-danger' type='submit' name='Declined'>Declined</button>
+
+                                      <?php endif; ?>
+                                      <?php
+                                      echo "
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                                       </div>
 
                                   </div>
@@ -209,6 +241,7 @@
 
         try {
 
+<<<<<<< HEAD
             $sql = "SELECT * FROM requestformtbl WHERE status = 'approved'";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
@@ -225,6 +258,41 @@
                             <td>". $rows['DateTo'] ."</td>
                             <td>". $rows['Reason'] ."</td>
                             ";
+=======
+          $status ='approved';
+           $sql = "SELECT personaldetailstbl.photo AS profilePicture,
+                                       personaldetailstbl.lastName, requestformtbl.lastName,
+                                       requestformtbl.firstName, requestformtbl.Request,
+                                       requestformtbl.DateRequest, requestformtbl.RequestType,
+                                       requestformtbl.DateFrom, requestformtbl.DateTo, requestformtbl.Reason,
+                                       requestformtbl.requestID
+                                        FROM personaldetailstbl INNER JOIN requestformtbl
+                                        ON requestformtbl.lastName = personaldetailstbl.lastName
+                                      WHERE requestformtbl.status=:status";
+           $result = $this->conn->runQuery($sql);
+           $numRows = $result->execute(array(":status" => $status));
+           echo "<tbody>";
+           if ($numRows > 0) {
+              while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
+                $profilePicture = $rows['profilePicture'];
+                $requestID = $rows['requestID'];
+                       ?>
+                       <tr class="employee-link" data-toggle="modal" data-target="#viewRequestModal" data-id="<?=$requestID;?>">
+                       <td>
+                             <span class="avatar d-block rounded" style="background-image: url(<?php if ($profilePicture !== "") { ?>'<?=$profilePicture?>' <?php ; } else { ?> ../assets/logo/image_placeholder.png <?php } ?>)"></span>
+                      </td>
+                      <?php
+                      echo "
+
+                           <td>". $rows['RequestType'] ."</td>
+                           <td>". $rows['lastName'] ."</td>
+                           <td>". $rows['Request'] ."</td>
+                           <td>". $rows['DateRequest'] ."</td>
+                           <td>". $rows['DateFrom'] ."</td>
+                           <td>". $rows['DateTo'] ."</td>
+                           <td>". $rows['Reason'] ."</td>
+                           ";
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                         }
                     }
                  echo "
@@ -237,6 +305,7 @@
          public function viewDeclinedForm(){
 
            try {
+<<<<<<< HEAD
 
                $sql = "SELECT * FROM requestformtbl WHERE status = 'declined'";
                $result = $this->conn->runQuery($sql);
@@ -250,6 +319,40 @@
                                <td>". $rows['lastName'] ."</td>
                                <td>". $rows['Request'] ."</td>
                                <td>". $rows['DateRequest'] ."</td>
+=======
+              $status ='declined';
+               $sql = "SELECT personaldetailstbl.photo AS profilePicture,
+                                           personaldetailstbl.lastName, requestformtbl.lastName,
+                                           requestformtbl.firstName, requestformtbl.Request,
+                                           requestformtbl.DateRequest, requestformtbl.RequestType,
+                                           requestformtbl.DateFrom, requestformtbl.DateTo, requestformtbl.Reason,
+                                           requestformtbl.requestID
+                                            FROM personaldetailstbl INNER JOIN requestformtbl
+                                            ON requestformtbl.lastName = personaldetailstbl.lastName
+                                          WHERE requestformtbl.status=:status";
+               $result = $this->conn->runQuery($sql);
+               $numRows = $result->execute(array(":status" => $status));
+               echo "<tbody>";
+               if ($numRows > 0) {
+                  while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $profilePicture = $rows['profilePicture'];
+                    $requestID = $rows['requestID'];
+                    $DateRequest =  date('Y-m-d h:i A', strtotime($rows['DateRequest']));
+
+
+                           ?>
+                           <tr class="employee-link" data-toggle="modal" data-target="#viewRequestModal" data-id="<?=$requestID;?>">
+                           <td>
+                               <span class="avatar d-block rounded" style="background-image: url(<?php if ($profilePicture !== "") { ?>'<?=$profilePicture?>' <?php ; } else { ?> ../assets/logo/image_placeholder.png <?php } ?>)"></span>
+                          <?php
+                          echo "
+                           </td>
+
+                               <td>". $rows['RequestType'] ."</td>
+                               <td>". $rows['lastName'] ."</td>
+                               <td>". $rows['Request'] ."</td>
+                               <td>". $DateRequest ."</td>
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                                <td>". $rows['DateFrom'] ."</td>
                                <td>". $rows['DateTo'] ."</td>
                                <td>". $rows['Reason'] ."</td>
@@ -266,6 +369,7 @@
             public function employeelastName(){
               try
               {
+<<<<<<< HEAD
                 $sql = "SELECT lastName FROM totalhourstbl";
                 $result = $this->conn->runQuery($sql);
                 $numRows = $result->execute();
@@ -281,6 +385,17 @@
 
 
 
+=======
+                $sql = "SELECT lastName FROM personaldetailstbl";
+                $result = $this->conn->runQuery($sql);
+                $numRows = $result->execute();
+                  while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
+
+                    echo "
+                           <option value='". $rows['lastName'] ."'>". $rows['lastName']."</option>
+                    ";
+                  }
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
               } catch (PDOException $e) {
                echo "Connection Error: " . $e->getMessage();
              }

@@ -6,7 +6,7 @@
         PhilPaCS
       </a>
       <div class="d-flex order-lg-2 ml-auto">
-        
+
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar"></span>
@@ -79,6 +79,7 @@
             <li class="nav-item">
               <a href="./index.php" class="nav-link"><i class="fe fe-home"></i> Dashboard</a>
             </li>
+<<<<<<< HEAD
             
             <li class="nav-item dropdown">
               <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Human Resources</a>
@@ -94,6 +95,24 @@
                     <a href="./contribution.tax.php" class="dropdown-item ">Tax Contribution Matrix</a>
                   </div>
 
+=======
+
+            <li class="nav-item dropdown">
+              <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Human Resources</a>
+              <div class="dropdown-menu dropdown-menu-arrow">
+                <a href="./employee.php" class="dropdown-item ">Employee Management</a>
+                <a href="./attendance.php" class="dropdown-item ">Attendance Management</a>
+                <a href="./Requisition.php" class="dropdown-item ">Requisition Management</a>
+                <a href="./event.php" class="dropdown-item ">Event Management</a>
+                <a href="javascript:void(0)" class="dropdown-item" data-toggle="dropdown">Contribution Management</a>
+                  <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                    <a href="./contribution.sss.php" class="dropdown-item ">SSS Contribution Matrix</a>
+                    <a href="./contribution.philhealth.php" class="dropdown-item ">PhilHealth Contribution Matrix</a>
+                    <a href="./contribution.pagibig.php" class="dropdown-item ">Pag-ibig Contribution Matrix</a>
+                    <a href="./contribution.tax.php" class="dropdown-item ">Tax Contribution Matrix</a>
+                  </div>
+
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                 <a href="./department.php" class="dropdown-item ">Department</a>
                 <a href="./position.php" class="dropdown-item ">Position</a>
                 <a href="./archives.php" class="dropdown-item ">Archives</a>

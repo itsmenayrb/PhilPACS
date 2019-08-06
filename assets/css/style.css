@@ -370,8 +370,11 @@
 .fc-day:hover{
     background: lightblue;
     cursor: pointer;
+<<<<<<< HEAD
 }
 
 .fc-past {
     background: lightgray;
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 }

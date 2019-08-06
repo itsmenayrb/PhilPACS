@@ -24,7 +24,7 @@ class SSS extends Imports {
 
 		try {
 
-			
+
 			$stmt = $this->conn->runQuery("INSERT INTO sssmatrixtbl (
 											rangeOfCompensationFrom,
 											rangeOfCompensationTo,
@@ -172,7 +172,10 @@ class Pagibig extends Imports {
 
 }
 
+<<<<<<< HEAD
 //Tax
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 class Tax extends Imports {
 
 	public function importTax($compensationLevel, $minimumWithholdingTax) {
@@ -206,6 +209,7 @@ class Tax extends Imports {
 	}
 
 }
+<<<<<<< HEAD
 
 //Attendance
 class Attendance extends Imports {
@@ -213,6 +217,14 @@ class Attendance extends Imports {
 	public function importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile) {
 		$status = 0;
 		try {
+=======
+class Attendance extends Imports {
+
+	public function importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout) {
+
+		try {
+
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$stmt = $this->conn->runQuery("INSERT INTO attendancetbl (
 											firstName,
 											lastName,
@@ -220,6 +232,7 @@ class Attendance extends Imports {
 											EMTimein,
 											EMTimeout,
 											EATimein,
+<<<<<<< HEAD
 											EATimeout,
 											totalMinutes,
 											status,
@@ -227,10 +240,17 @@ class Attendance extends Imports {
 										  ) VALUES (
 											:firstName,
 											:lastName,
+=======
+											EATimeout
+										  ) VALUES (
+											:lastName,
+											:firstName,
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 											:Edate,
 											:EMTimein,
 											:EMTimeout,
 											:EATimein,
+<<<<<<< HEAD
 											:EATimeout,
 											:totalMinutes,
 											:status,
@@ -238,14 +258,23 @@ class Attendance extends Imports {
 										)");
 			$stmt->bindparam(':firstName', $firstName);
 			$stmt->bindparam(':lastName', $lastName);
+=======
+											:EATimeout
+										)");
+			$stmt->bindparam(':lastName', $lastName);
+			$stmt->bindparam(':firstName', $firstName);
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$stmt->bindparam(':Edate', $Edate);
 			$stmt->bindparam(':EMTimein', $EMTimein);
 			$stmt->bindparam(':EMTimeout', $EMTimeout);
 			$stmt->bindparam(':EATimein', $EATimein);
 			$stmt->bindparam(':EATimeout', $EATimeout);
+<<<<<<< HEAD
 			$stmt->bindparam(':totalMinutes', $totalMinutes);
 			$stmt->bindparam(':status', $status);
 			$stmt->bindparam(':hashedFile', $hashedFile);
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$stmt->execute();
 			return $stmt;
 		} catch (PDOException $e) {
@@ -254,5 +283,19 @@ class Attendance extends Imports {
 
 	}
 
+<<<<<<< HEAD
 
 }
+=======
+	public function deleteAttendance() {
+		try {
+			$stmt = $this->conn->runQuery("TRUNCATE TABLE attendancetbl");
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
+}
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7

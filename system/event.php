@@ -36,6 +36,32 @@
                   <div class="clearfix"></div>
 
                     <div class="col-md-12">
+<<<<<<< HEAD
+=======
+                      <div class="card text-white bg-lime mb-1">
+                        <div class="card-body p-3">
+                           <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title"><i class="fe fe-calendar"></i> Calendar</h3>
+                        </div>
+                        <div class="card-body">
+                          <div id="calendar"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="row">
+                    <div class="col-md-12 text-center">
+                      <button class="btn btn-green" type="button"><i class="fe fe-calendar"></i> Create Event</button>
+                    </div>
+                  </div>
+
+                  <hr>
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
                       <div class="card text-white bg-lime mb-1">
                         <div class="card-body p-3">
@@ -73,7 +99,12 @@
                         </div>
                       </div>
                     </div>
+<<<<<<< HEAD
                   </div>
+=======
+                  </div> -->
+                  <!-- /row row-cards -->
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                       
               </div>
               <!-- /container -->
@@ -84,7 +115,10 @@
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
         <?php include '../includes/event/modal.add.event.php'; ?>
+<<<<<<< HEAD
         <?php include '../includes/event/modal.edit.event.php'; ?>
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
     <script type="text/javascript" src="../ajax/ajax.event.js"></script>
     <script type="text/javascript">

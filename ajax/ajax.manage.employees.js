@@ -538,7 +538,7 @@
 			} else {
 				birthday_error = "";
 				$("#birthday_error").text(birthday_error);
-				$('#birthday').removeClass('is-invalid');	
+				$('#birthday').removeClass('is-invalid');
 			}
 
 			//Address validation
@@ -550,7 +550,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#barangay').removeClass('is-invalid');	
+				$('#barangay').removeClass('is-invalid');
 			}
 
 			if (province == "") {
@@ -560,7 +560,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#province').removeClass('is-invalid');	
+				$('#province').removeClass('is-invalid');
 			}
 
 			if (city == "") {
@@ -570,7 +570,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#city').removeClass('is-invalid');	
+				$('#city').removeClass('is-invalid');
 			}
 
 			if (country == "") {
@@ -580,7 +580,7 @@
 			} else {
 				address_error = "";
 				$("#address_error").text(address_error);
-				$('#country').removeClass('is-invalid');	
+				$('#country').removeClass('is-invalid');
 			}
 
 			if (zipcode != ""){
@@ -589,6 +589,7 @@
 					$("#address_error").text(address_error);
 					$('#zipcode').addClass('is-invalid');
 				} else {
+<<<<<<< HEAD
 
 					if (zipcode.length < 4) {
 						address_error = "Address should be complete. Input n/a if not applicable.";
@@ -600,14 +601,29 @@
 						$("#address_error").text(address_error);
 						$('#zipcode').removeClass('is-invalid');	
 					}
+=======
+					address_error = "";
+					$("#address_error").text(address_error);
+					$('#zipcode').removeClass('is-invalid');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 				}
 			}
-			
+
 			//End of address validation
 
 
 			//proceed to next step if no error encountered
+<<<<<<< HEAD
 			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && address_error == "") {
+=======
+			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && email_error == "" && address_error == "") {
+				$('#personalDetailsTab').removeClass('active');
+				$('#navPersonalDetailsTab').removeAttr('href data-toggle');
+				$('#navPersonalDetailsTab').removeClass('active');
+				$('#navPersonalDetailsTab').addClass('disabled');
+				$('#first').removeClass('text-success');
+
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
 				$.ajax({
 					method: 'post',
@@ -650,6 +666,7 @@
 		});
 
 		//Button for previous button at Employment Details Section
+<<<<<<< HEAD
 		$('#employmentDetailsBtnPrevious').on('click', function() {
 			$('#personalDetailsTab').addClass('active in');
 			$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
@@ -666,6 +683,24 @@
 			$('#second').removeClass('text-success');
 
 		});
+=======
+	$('#employmentDetailsBtnPrevious').on('click', function() {
+		$('#personalDetailsTab').addClass('active in');
+		$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
+		$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
+		$('#navPersonalDetailsTab').removeClass('disabled');
+		$('#navPersonalDetailsTab').addClass('active');
+		$('#first').addClass('text-success');
+
+
+		$('#navEmploymentDetailsTab').removeClass('active');
+		$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
+		$('#navEmploymentDetailsTab').addClass('disabled');
+		$('#employmentDetailsTab').removeClass('active');
+		$('#second').removeClass('text-success');
+
+	});
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
 	//Button for next button at employment details section
 		$('#employmentDetailsBtnNext').on('click', function(e) {
@@ -756,7 +791,7 @@
 			$('#navOtherInfoTab').addClass('disabled');
 			$('#otherInfoTab').removeClass('active');
 			$('#third').removeClass('text-success');
-		}); 
+		});
 
 		/**
 		 * Adding of employee
@@ -764,6 +799,7 @@
 		 */
 		$('#addEmployeeBtn').on('click', function(e) {
 			e.preventDefault();
+<<<<<<< HEAD
 			var id = 1;
 			$('#loader').addClass('loader');
 			$('#dimmer-content').addClass('dimmer-content');
@@ -774,6 +810,125 @@
 				$('#hiddenAddEmployeeID').val(id);
 
 			}, 2000) 
+=======
+
+			var form = $('#addEmployeeForm');
+			var formData = false;
+
+			if (window.FormData) {
+				formData = new FormData(form[0]);
+			}
+
+			$.ajax({
+				type: 'post',
+				url: '../controllers/controller.employee.php',
+				data: formData ? formData : form.serialize(),
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					$('#loader').addClass('loader');
+			          $('#dimmer-content').addClass('dimmer-content');
+			          setTimeout(function() {
+			            $('#loader').removeClass('loader');
+			            $('#dimmer-content').removeClass('dimmer-content');
+						var err = JSON.parse(response);
+						if (err.employee_exist) {
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.employee_exist
+								});
+							});
+						}
+
+						if (err.email_exist) {
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.email_exist
+								});
+							});
+						}
+
+						if (err.invalid_firstname){
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.invalid_firstname
+								});
+							});
+						}
+
+						if (err.invalid_middlename) {
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.invalid_middlename
+								});
+							});
+						}
+
+						if (err.invalid_lastname) {
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.invalid_lastname
+								});
+							});
+						}
+
+						if (err.invalid_image) {
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'error',
+								  title: err.invalid_image
+								});
+							});
+						}
+
+
+						if (err.success){
+							require(['sweetalert'], function(Swal) {
+								Swal.fire({
+								  type: 'success',
+								  title: err.success,
+								  confirmButtonColor: '#3085d6',
+								  confirmButtonText: 'Yes',
+								  showCancelButton: true,
+								  cancelButtonColor: '#d33'
+								}).then((result) => {
+								  if (result.value) {
+								  	$('#imagePreview').css('background-image', 'url(../assets/img/image_placeholder.png)');
+								  	$('#addEmployeeForm')[0].reset();
+								  	$('#personalDetailsTab').addClass('active in');
+									$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
+									$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
+									$('#navPersonalDetailsTab').removeClass('disabled');
+									$('#navPersonalDetailsTab').addClass('active');
+									$('#first').addClass('text-success');
+
+									$('#navEmploymentDetailsTab').removeClass('active');
+									$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
+									$('#navEmploymentDetailsTab').addClass('disabled');
+									$('#employmentDetailsTab').removeClass('active');
+									$('#second').removeClass('text-success');
+
+									$('#navOtherInfoTab').removeClass('active');
+									$('#navOtherInfoTab').removeAttr('href', 'data-toggle');
+									$('#navOtherInfoTab').addClass('disabled');
+									$('#otherInfoTab').removeClass('active');
+									$('#third').removeClass('text-success');
+								  } else if (result.dismiss === Swal.DismissReason.cancel) {
+								  	location.reload();
+								  }
+								});
+							});
+						}
+					}, 2000);
+				}
+			});
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 		});
 
 		//Updating of employee information
@@ -791,7 +946,7 @@
 			var position_error = "";
 
 
-			var id = $('#hiddenEditEmployeeID').val();			
+			var id = $('#hiddenEditEmployeeID').val();
 			var firstname = $('#edit_firstname').val();
 			var middlename = $('#edit_middlename').val();
 			var lastname = $('#edit_lastname').val();
@@ -925,7 +1080,7 @@
 			} else {
 				birthday_error = "";
 				$("#edit_birthday_error").text(birthday_error);
-				$('#edit_birthday').removeClass('is-invalid');	
+				$('#edit_birthday').removeClass('is-invalid');
 			}
 
 			//Address validation
@@ -938,7 +1093,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_barangay').removeClass('is-invalid');	
+				$('#edit_barangay').removeClass('is-invalid');
 			}
 
 			if (province == "") {
@@ -949,7 +1104,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_province').removeClass('is-invalid');	
+				$('#edit_province').removeClass('is-invalid');
 			}
 
 			if (city == "") {
@@ -960,7 +1115,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_city').removeClass('is-invalid');	
+				$('#edit_city').removeClass('is-invalid');
 			}
 
 			if (country == "") {
@@ -971,7 +1126,7 @@
 			} else {
 				address_error = "";
 				$("#edit_address_error").text(address_error);
-				$('#edit_country').removeClass('is-invalid');	
+				$('#edit_country').removeClass('is-invalid');
 			}
 
 			if (zipcode != ""){
@@ -983,12 +1138,12 @@
 				} else {
 					address_error = "";
 					$("#edit_address_error").text(address_error);
-					$('#edit_zipcode').removeClass('is-invalid');	
+					$('#edit_zipcode').removeClass('is-invalid');
 				}
 			}
-			
+
 			//End of address validation
-			
+
 			if (date_hired == "") {
 				date_hired_error = "Date Hired is required.";
 				$("#edit_date_hired_error").text(date_hired_error);
@@ -1021,7 +1176,7 @@
 				}
 
 			return false;
-			
+
 		});
 
  		//creating of account
@@ -1051,7 +1206,7 @@
 			} else {
 				username_error = "";
 				$("#username_error").text(username_error);
-				$('#username').removeClass('is-invalid');	
+				$('#username').removeClass('is-invalid');
 			}
 
 			if (password == "") {
@@ -1059,6 +1214,7 @@
 				$("#password_error").text(password_error);
 				$('#password').addClass('is-invalid');
 			} else {
+<<<<<<< HEAD
 				if (validatePassword(password) == false) {
 					password_error = "Password must be at least 6 characters and composed of alphanumeric characters.";
 					$("#password_error").text(password_error);
@@ -1068,6 +1224,11 @@
 					$("#password_error").text(password_error);
 					$('#password').removeClass('is-invalid');
 				}
+=======
+				pasword_error = "";
+				$("#password_error").text(password_error);
+				$('#password').removeClass('is-invalid');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			}
 
 			if (rpassword == "") {
@@ -1090,7 +1251,7 @@
 			}
 
 			if (username_error == "" && password_error == "" && rpassword_error == "") {
-			
+
 
 				// var form = $('#createAccountForm');
 				// var formData = false;
@@ -1174,7 +1335,7 @@
 			} else {
 				pasword_error = "";
 				$("#reset_password_error").text(password_error);
-				$('#reset_password').removeClass('is-invalid');	
+				$('#reset_password').removeClass('is-invalid');
 			}
 
 			if (rpassword == "") {
@@ -1278,7 +1439,7 @@
  		$('#deactivateAccountBtn').on('click', function(e) {
 		 	e.preventDefault();
 
-		 	var id = $('#hiddenPersonalIDResetPassword').val();		 	
+		 	var id = $('#hiddenPersonalIDResetPassword').val();
 		 	Swal.fire({
 			  title: 'Are you sure?',
 			  text: 'Deactivate this account?',
