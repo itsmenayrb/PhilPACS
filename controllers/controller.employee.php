@@ -436,6 +436,12 @@ if (isset($_POST['removeEmployee'])) {
 	$removeEmployee->removeEmployee($personalID);	
 }
 
+//
+if (isset($_POST['checkEmail'])) {
+	$email = $config->checkInput($_POST['email']);
+	$checkEmail = new Employee();
+	$checkEmail->checkEmail($email);
+}
 
 function checkName($name) {
 	if(preg_match("/^[a-zA-z\s]+$/", $name)) {

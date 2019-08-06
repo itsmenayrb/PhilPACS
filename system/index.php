@@ -107,6 +107,50 @@
                         });
                       });
                     </script>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="card">
+                          <div class="card-header">
+                            Events List
+                          </div>
+                          <table class="table card-table">
+                              <thead>
+                                <tr>
+                                  <th>Title</th>
+                                  <th>Description</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                                  $eventStatus = 1;
+                                  $queryDays = $config->runQuery("SELECT * FROM eventstbl WHERE status=:status ORDER BY startDate");
+                                  $queryDays->execute(array(":status" => $eventStatus));
+                                  while ($rowCheck = $queryDays->fetch(PDO::FETCH_ASSOC)) {
+                                    $from = strtotime($rowCheck['startDate']);
+                                    $dateToday = time();
+                                    $remainingDays = $from - $dateToday;
+                                    $remainingDays = floor($remainingDays/86400) + 1;
+                                    $title = $rowCheck['title'];
+                                    $description = $rowCheck['description'];
+
+                                    ?>
+                                      <tr>
+                                        <td><?=$title;?></td>
+                                        <td><?=$description;?></td>
+                                        <td><?=$remainingDays;?> days to go</td>
+                                      </tr>
+                                    <?php
+                                  }
+                                ?>
+                              </tbody>
+                          </table>
+                        </div>  
+                      </div>
+                        
+                    </div>
+
                </div>
 
                <div class="col-xs-12 col-sm-7">
@@ -129,6 +173,17 @@
       </div>
       <!-- flex-fill -->
     </div>
+
+    <?php if ($remainingDays == 6) : ?>
+
+      <script type="text/javascript">
+          require(['notify', 'jquery'], function(notify, $) {
+            $.notify('Hello', 'info');
+          }
+      </script>
+
+    <?php endif ?>
+
     <?php include '../includes/footer.php'; ?>
     <script type="text/javascript" src="../ajax/ajax.dashboard.js"></script>
   </body>

@@ -95,4 +95,45 @@ class Event extends Config {
 		}
 	}
 
+	public function fetchListOfEvents() {
+		$stmt = $config->runQuery("SELECT *, IF(status = 1, 'Pending', 'Finished') AS status FROM eventstbl ORDER BY startDate");
+		$stmt->execute(array(":status" => $status));
+		
+		while ($row = $stmt->fetchAll()) {
+			?>
+			<?php if ($row['status'] == 'Pending') : ?>
+				<div class="card">
+                  <div class="card-status bg-green"></div>
+                  <div class="card-body text-center">
+                    <div class="card-category"><?=$row['startDate'];?></div>
+                    <div class="display-3 my-4"><?=$row['title'];?></div>
+                    <p class="lead">
+                    	<?=$row['description'];?>
+                    </p>
+                    <div class="text-center mt-6">
+                      <a href="#" class="btn btn-green btn-block"><?=$row['status'];?></a>
+                    </div>
+                  </div>
+                </div>
+           	<?php endif ?>
+
+           	<?php if ($row['status'] == 'Finished') : ?>
+				<div class="card">
+                  <div class="card-body text-center">
+                    <div class="card-category"><?=$row['startDate'];?></div>
+                    <div class="display-3 my-4"><?=$row['title'];?></div>
+                    <p class="lead">
+                    	<?=$row['description'];?>
+                    </p>
+                    <div class="text-center mt-6">
+                      <a href="#" class="btn btn-secondary btn-block"><?=$row['status'];?></a>
+                    </div>
+                  </div>
+                </div>
+           	<?php endif ?>
+			<?php
+		}
+
+	}
+
 }

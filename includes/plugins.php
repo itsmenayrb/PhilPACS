@@ -24,6 +24,7 @@
 <script src="../assets/plugins/dropzone/plugin.js"></script>
 <script src="../assets/plugins/fullcalendar/plugin.js"></script>
 <script src="../assets/plugins/datetimepicker/plugin.js"></script>
+<script src="../assets/plugins/notification/plugin.js"></script>
 <!-- <script src="../assets/plugins/timepicker/plugin.js"></script> -->
 <script>
   requirejs.config({

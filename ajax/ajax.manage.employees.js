@@ -70,26 +70,25 @@
 
 
 		 //check email
-		 $('#email').on('blur', function() {
-		 	var email = $('#email').val();
+		 // $('#email').on('blur change', function() {
+		 // 	var email = $('#email').val();
 
-		 	$.ajax({
-				method: 'post',
-				url: '../controllers/controller.employee.php',
-				data: {
-					email: email,
-					checkEmail: 1
-				},
-				dataType: 'json',
-				success: function(response) {
-					if (response.error) {
-						$('#email_error').text(response);
-					} else {
-						$('#email_error').text("");
-					}
-				}
-			});
-		 });
+		 // 	if (email == "") {
+		 // 		$('#email_error').text("Email is required.");
+			// 	$('#email').addClass('invalid-state');
+			// 	$('#email_success').text("");
+		 // 	} else {
+		 // 		if (validateEmail(email) == false) {
+			// 		$("#email_error").text(email_error);
+			// 		$('#email').addClass('invalid-state');
+			// 		$('#email_success').text("");
+			// 	} else {
+				 	
+			// 	}
+		 // 	}
+
+			// return false;
+		 // });
 
 		 ///////////////////////////////////////
 		 
@@ -608,20 +607,41 @@
 
 
 			//proceed to next step if no error encountered
-			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && email_error == "" && address_error == "") {
-				$('#personalDetailsTab').removeClass('active');
-				$('#navPersonalDetailsTab').removeAttr('href data-toggle');
-				$('#navPersonalDetailsTab').removeClass('active');
-				$('#navPersonalDetailsTab').addClass('disabled');
-				$('#first').removeClass('text-success');
-				
+			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && address_error == "") {
 
-				$('#navEmploymentDetailsTab').removeClass('disabled');
-				$('#navEmploymentDetailsTab').addClass('active');
-				$('#navEmploymentDetailsTab').attr('href', '#employmentDetailsTab');
-				$('#navEmploymentDetailsTab').attr('data-toggle', 'tab');
-				$('#employmentDetailsTab').addClass('active in');
-				$('#second').addClass('text-success');
+				$.ajax({
+					method: 'post',
+					url: '../controllers/controller.employee.php',
+					data: {
+						email: email,
+						checkEmail: 1
+					},
+					success: function(response) {
+						if (response == 'error') {
+							email_error = "Email is already use.";
+							$("#email_error").text(email_error);
+							$('#email').addClass('is-invalid');
+							$('#email').focus();
+						}
+
+						if (response == 'success') {
+							$('#personalDetailsTab').removeClass('active');
+							$('#navPersonalDetailsTab').removeAttr('href data-toggle');
+							$('#navPersonalDetailsTab').removeClass('active');
+							$('#navPersonalDetailsTab').addClass('disabled');
+							$('#first').removeClass('text-success');
+							
+
+							$('#navEmploymentDetailsTab').removeClass('disabled');
+							$('#navEmploymentDetailsTab').addClass('active');
+							$('#navEmploymentDetailsTab').attr('href', '#employmentDetailsTab');
+							$('#navEmploymentDetailsTab').attr('data-toggle', 'tab');
+							$('#employmentDetailsTab').addClass('active in');
+							$('#second').addClass('text-success');
+							
+						}
+					}
+				});
 
 
 			}

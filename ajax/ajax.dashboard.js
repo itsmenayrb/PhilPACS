@@ -1,6 +1,10 @@
 require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $) {
 	$(document).ready(function() {
 
+		$(window).on('load', function(){
+			$('.toast').toast('show');
+		});
+
 	   var calendar = $('#dashboard_calendar').fullCalendar({
 
 	    	editable:false,

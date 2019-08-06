@@ -399,4 +399,19 @@ class Employee extends Config {
 		}
 	}
 
+	public function checkEmail($email) {
+		try {
+			$stmt = $this->conn->runQuery("SELECT email FROM personaldetailstbl WHERE email=:email LIMIT 1");
+			$stmt->execute(array(":email" => $email));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($email == $row['email']) {
+				echo "error";
+			} else {
+				echo "success";
+			}
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
 }

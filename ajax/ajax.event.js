@@ -1,6 +1,10 @@
 require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $) {
 	$(document).ready(function() {
 
+		$(window).on('load', function() {
+			fetchListOfEvents();
+		});
+
 	   var calendar = $('#calendar').fullCalendar({
 
 	    	editable:true,
@@ -210,5 +214,17 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 
 	    	}
 	   }); // calendar
+
+		//list
+		function fetchListOfEvents() {
+			$.ajax({
+    			url: "../controllers/controller.event.php?fetch=events",
+		       	type: "POST",
+		       	success:function(response) {
+		       		$('#list_of_events').html(response);
+   				}
+  			});
+		}
+
 	}); // document ready
 }); // require

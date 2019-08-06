@@ -1,8 +1,7 @@
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" id="passwordModal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document" style="overflow-y: initial !important">
     <div class="modal-content">
-            
-      
+                  
       <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
         <div class="dimmer active">
           <div id="loader"></div>
@@ -44,3 +43,8 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        
+    });
+</script>

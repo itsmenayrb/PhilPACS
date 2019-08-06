@@ -36,17 +36,40 @@
                   <div class="clearfix"></div>
 
                     <div class="col-md-12">
+
                       <div class="card text-white bg-lime mb-1">
                         <div class="card-body p-3">
                            <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
                         </div>
                       </div>
+
                       <div class="card">
-                        <div class="card-header">
-                          <h3 class="card-title"><i class="fe fe-calendar"></i> Calendar</h3>
-                        </div>
-                        <div class="card-body">
-                          <div id="calendar"></div>
+                          <div class="card-header">
+                            <ul class="nav nav-pills flex-column flex-sm-row card-header-pills">
+                              <li class="nav-item pt-3">
+                                <a class="nav-link active h4 p-4" href="#pills-calendar" data-toggle="pill" role="tab" aria-controls="pills-calendar" aria-selected="true" id="pills-calendar-tab">
+                                  <i class="fe fe-calendar mr-2"></i>Calendar
+                                </a>
+                              </li>
+
+                              <li class="nav-item pt-3">
+                                <a class="nav-link h4 p-4" href="#pills-list" data-toggle="pill" role="tab" aria-controls="pills-list" aria-selected="false" id="pills-list-tab">
+                                  <i class="fe fe-list mr-2"></i> Lists
+                                </a>
+                              </li>
+
+                            </ul>
+                          </div>
+                        
+                        <div class="card-body tab-content" id="pills-event-content">
+                          <div class="tab-pane fade show active" id="pills-calendar" role="tabpanel" aria-labelledby="pills-calendar-tab">
+                            <div id="calendar"></div>
+                          </div>
+
+                          <div class="tab-pane fade" id="pills-list" role="tabpanel" aria-labelledby="pills-list-tab">
+                            <div id="list_of_events"></div>
+                          </div>
+
                         </div>
                       </div>
                     </div>

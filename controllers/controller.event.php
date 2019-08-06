@@ -53,3 +53,17 @@ if (isset($_POST['removeEvent'])) {
 	$removeEvent = new Event();
 	$removeEvent->removeEvent($id);
 }
+
+if (isset($_GET['fetch'])) {
+	$link = $config->checkInput($_GET['fetch']);
+	switch ($link) {
+		case 'events':
+			$fetchListOfEvents = new Event();
+			$fetchListOfEvents->fetchListOfEvents();
+			break;
+		
+		default:
+			# code...
+			break;
+	}
+}

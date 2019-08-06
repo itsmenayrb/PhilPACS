@@ -2,8 +2,6 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 	$(document).ready(function () {
 
 
-		// $('#sssMatrixTable').DataTable();
-
 		$('#file').on('change', function(e) {
 			e.preventDefault();
 			uploadFile();
@@ -80,11 +78,6 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 
 		}
 
-		// $('#uploadSSSBtn').on('click', function(e) {
-		// 	e.preventDefault();
-
-
-		// });
 
 
 	});

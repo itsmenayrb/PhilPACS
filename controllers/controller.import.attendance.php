@@ -16,13 +16,9 @@ if (!empty($_FILES['file']['name'])) {
 	$extension = end($tmp);
 	if (in_array($extension, $allowed_ext)) {
 		$file_data = fopen($_FILES['file']['tmp_name'], 'r');
-
+		$hashedFile = md5_file($_FILES['file']['tmp_name']);
 		$importAttendance = new Attendance();
-		$importAttendance->deleteAttendance();
-
-		fgetcsv($file_data);
-		fgetcsv($file_data);
-		fgetcsv($file_data);
+		// $importAttendance->deleteAttendance();
 
 		while ($column = fgetcsv($file_data)) {
 
@@ -34,11 +30,11 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimein = $config->checkInput($column[5]);
 			$EATimeout = $config->checkInput($column[6]);
 
-			// if ($rangeOfCompensationFromBelow == 'Below') {
-			// 	$rangeOfCompensationFrom = 0;
-			// }
+			$first = computeTotalOfMinutes($EMTimein, $EMTimeout);
+			$second = computeTotalOfMinutes($EATimein, $EATimeout);
+			$totalMinutes = $first + $second; 
 
-			$importSSS->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile);
 			// print_r($rangeOfCompensationFrom . "<br>");
 		}
 		// $output = 'File uploaded successfully!';
@@ -53,4 +49,12 @@ if (!empty($_FILES['file']['name'])) {
 	// $output = 'File should not be empty.';
 	// echo json_encode(array("error_empty" => $output));
 	echo "empty";
+}
+
+function computeTotalOfMinutes($time_in, $time_out) {
+	$time_in = strtotime($time_in);
+	$time_out = strtotime($time_out);
+
+	$total = round(abs($time_out - $time_in)/60, 2);	
+	return $total;
 }

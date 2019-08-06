@@ -17,6 +17,7 @@ class Imports extends Config {
 
 }
 
+//SSS
 class SSS extends Imports {
 
 	public function importSSS($rangeOfCompensationFrom, $rangeOfCompensationTo, $monthlySalaryCredit, $socialSecurityEmployer, $socialSecurityEmployee, $socialSecurityTotal, $employeeCompensationEmployer, $totalContributionEmployer, $totalContributionEmployee, $totalContributions) {
@@ -77,6 +78,7 @@ class SSS extends Imports {
 
 }
 
+//Philhealth
 class Philhealth extends Imports {
 
 	public function importPhilhealth($basicSalaryFrom, $basicSalaryTo, $monthlyPremiumFrom, $monthlyPremiumTo, $personalShareFrom, $personalShareTo, $employerShareFrom, $employerShareTo) {
@@ -129,6 +131,7 @@ class Philhealth extends Imports {
 
 }
 
+//Pagibig
 class Pagibig extends Imports {
 
 	public function importPagibig($monthlyCompensationFrom, $monthlyCompensationTo, $employeeShare, $employerShare) {
@@ -169,6 +172,7 @@ class Pagibig extends Imports {
 
 }
 
+//Tax
 class Tax extends Imports {
 
 	public function importTax($compensationLevel, $minimumWithholdingTax) {
@@ -200,5 +204,55 @@ class Tax extends Imports {
 			echo "Connection Error: " . $e->getMessage();
 		}
 	}
+
+}
+
+//Attendance
+class Attendance extends Imports {
+
+	public function importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile) {
+		$status = 0;
+		try {
+			$stmt = $this->conn->runQuery("INSERT INTO attendancetbl (
+											firstName,
+											lastName,
+											Edate,
+											EMTimein,
+											EMTimeout,
+											EATimein,
+											EATimeout,
+											totalMinutes,
+											status,
+											hashedFile
+										  ) VALUES (
+											:firstName,
+											:lastName,
+											:Edate,
+											:EMTimein,
+											:EMTimeout,
+											:EATimein,
+											:EATimeout,
+											:totalMinutes,
+											:status,
+											:hashedFile
+										)");
+			$stmt->bindparam(':firstName', $firstName);
+			$stmt->bindparam(':lastName', $lastName);
+			$stmt->bindparam(':Edate', $Edate);
+			$stmt->bindparam(':EMTimein', $EMTimein);
+			$stmt->bindparam(':EMTimeout', $EMTimeout);
+			$stmt->bindparam(':EATimein', $EATimein);
+			$stmt->bindparam(':EATimeout', $EATimeout);
+			$stmt->bindparam(':totalMinutes', $totalMinutes);
+			$stmt->bindparam(':status', $status);
+			$stmt->bindparam(':hashedFile', $hashedFile);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}
+
 
 }
