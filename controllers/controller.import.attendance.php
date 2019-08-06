@@ -19,6 +19,7 @@ if (!empty($_FILES['file']['name'])) {
 <<<<<<< HEAD
 		$hashedFile = md5_file($_FILES['file']['tmp_name']);
 		$importAttendance = new Attendance();
+<<<<<<< HEAD
 		// $importAttendance->deleteAttendance();
 
 		while ($column = fgetcsv($file_data)) {
@@ -28,6 +29,28 @@ if (!empty($_FILES['file']['name'])) {
 		$importAttendance = new Attendance();
 		$importAttendance->deleteAttendance();
 
+=======
+		$importAttendance->deleteAttendance();
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
+
+		while ($column = fgetcsv($file_data)) {
+
+			// $rangeOfCompensationFromBelow = explode('Below', $column[0])[0];
+=======
+		fgetcsv($file_data);
+		fgetcsv($file_data);
+		fgetcsv($file_data);
+
+		while ($column = fgetcsv($file_data)) {
+
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
@@ -44,6 +67,7 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimein = $config->checkInput($column[5]);
 			$EATimeout = $config->checkInput($column[6]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			$first = computeTotalOfMinutes($EMTimein, $EMTimeout);
 			$second = computeTotalOfMinutes($EATimein, $EATimeout);
@@ -51,10 +75,25 @@ if (!empty($_FILES['file']['name'])) {
 
 			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile);
 =======
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 			// if ($rangeOfCompensationFromBelow == 'Below') {
 			// 	$rangeOfCompensationFrom = 0;
 			// }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 			$lastName = str_replace(',', '', $lastName);
 			$firstName = str_replace(',', '', $firstName);
 			$Edate = str_replace(',', '', $Edate);
@@ -64,6 +103,14 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimeout = str_replace(',', '', $EATimeout);
 
 			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+			$importSSS->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			// print_r($rangeOfCompensationFrom . "<br>");
 		}

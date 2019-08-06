@@ -41,6 +41,11 @@
                       <div class="card text-white bg-lime mb-1">
                         <div class="card-body p-3">
                            <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                         </div>
                       </div>
                       <div class="card">
@@ -63,9 +68,30 @@
                   <hr>
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
+<<<<<<< HEAD
                       <div class="card text-white bg-lime mb-1">
                         <div class="card-body p-3">
                            <h6 class="card-title"><i class="fe fe-layers"></i> Add Event</h6>
+=======
+                  <div class="row">
+                    <div class="col-sm-6 col-lg-3">
+                      <div class="card">
+                        <div class="card-status bg-green"></div>
+                        <div class="card-body text-center">
+                          <div class="card-category">August 28, 2019</div>
+                          <div class="display-3 my-4">Seminar</div>
+                          <ul class="list-unstyled leading-loose">
+                            <li><strong>3</strong> Employee/s</li>
+                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> AI</li>
+                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Development</li>
+                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Web Security</li>
+                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Ionic</li>
+                          </ul>
+                          <div class="text-center mt-6">
+                            <a href="#" class="btn btn-green btn-block">Pending</a>
+                          </div>
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                         </div>
                       </div>
 

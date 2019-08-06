@@ -11,10 +11,14 @@
    }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    public function RequestFrom($RequestType, $lastName, $Request, $DateFrom, $DateTo, $Reason){
 =======
    public function RequestFrom($RequestType, $lastName, $TypeRequest, $DateFrom, $DateTo, $Reason){
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+   public function RequestFrom($RequestType, $lastName, $TypeRequest, $DateFrom, $DateTo, $Reason){
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
      try {
 
@@ -23,10 +27,14 @@
          $Request = 'None';
        }
 <<<<<<< HEAD
+<<<<<<< HEAD
        $sql = "SELECT firstName, lastName FROM totalhourstbl WHERE lastName = '$lastName'";
 =======
        $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+       $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
        $result = $this->conn->runQuery($sql);
        $numRows = $result->execute();
        $rows = $result->fetch(PDO::FETCH_ASSOC);
@@ -37,19 +45,27 @@
        $status = 'pending';
        $stmt = $this->conn->runQuery("INSERT INTO requestformtbl(RequestType, firstName, lastName, Request, DateFrom, DateTo, Reason, DateRequest, status)
 <<<<<<< HEAD
+<<<<<<< HEAD
        VALUES (:RequestType, :firstName, :lastName, :Request, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
 =======
        VALUES (:RequestType, :firstName, :lastName, :TypeRequest, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+       VALUES (:RequestType, :firstName, :lastName, :TypeRequest, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
        $stmt->bindparam(":RequestType", $RequestType);
        $stmt->bindparam(":firstName", $firstName);
        $stmt->bindparam(":lastName", $lastName);
 <<<<<<< HEAD
+<<<<<<< HEAD
        $stmt->bindparam(":Request", $Request);
 =======
        $stmt->bindparam(":TypeRequest", $TypeRequest);
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+       $stmt->bindparam(":TypeRequest", $TypeRequest);
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
        $stmt->bindparam(":DateFrom", $DateFrom);
        $stmt->bindparam(":DateTo", $DateTo);
        $stmt->bindparam(":Reason", $Reason);
@@ -124,10 +140,14 @@
 
             $sql = "SELECT RequestType, firstName, lastName, Request,
 <<<<<<< HEAD
+<<<<<<< HEAD
              DateFrom, DateTo, Reason, requestID
 =======
              DateFrom, DateTo, Reason, requestID, status
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+             DateFrom, DateTo, Reason, requestID, status
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
              FROM requestformtbl WHERE requestID = '$requestID'";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
@@ -208,11 +228,14 @@
 
                                       <div class='text-right'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                                       <button class='btn btn-primary' type='submit' name='Approved'>Approved</button>
                                       <button class='btn btn-danger' type='submit' name='Declined'>Declined</button>
 
 =======
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                       ";
                                       ?>
                                       <?php if ($rows['status'] == 'pending'): ?>
@@ -222,7 +245,10 @@
                                       <?php endif; ?>
                                       <?php
                                       echo "
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                       </div>
 
                                   </div>
@@ -242,6 +268,7 @@
         try {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             $sql = "SELECT * FROM requestformtbl WHERE status = 'approved'";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
@@ -259,6 +286,8 @@
                             <td>". $rows['Reason'] ."</td>
                             ";
 =======
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
           $status ='approved';
            $sql = "SELECT personaldetailstbl.photo AS profilePicture,
                                        personaldetailstbl.lastName, requestformtbl.lastName,
@@ -292,7 +321,10 @@
                            <td>". $rows['DateTo'] ."</td>
                            <td>". $rows['Reason'] ."</td>
                            ";
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                         }
                     }
                  echo "
@@ -305,6 +337,7 @@
          public function viewDeclinedForm(){
 
            try {
+<<<<<<< HEAD
 <<<<<<< HEAD
 
                $sql = "SELECT * FROM requestformtbl WHERE status = 'declined'";
@@ -320,6 +353,8 @@
                                <td>". $rows['Request'] ."</td>
                                <td>". $rows['DateRequest'] ."</td>
 =======
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
               $status ='declined';
                $sql = "SELECT personaldetailstbl.photo AS profilePicture,
                                            personaldetailstbl.lastName, requestformtbl.lastName,
@@ -352,7 +387,10 @@
                                <td>". $rows['lastName'] ."</td>
                                <td>". $rows['Request'] ."</td>
                                <td>". $DateRequest ."</td>
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                <td>". $rows['DateFrom'] ."</td>
                                <td>". $rows['DateTo'] ."</td>
                                <td>". $rows['Reason'] ."</td>
@@ -370,6 +408,7 @@
               try
               {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 $sql = "SELECT lastName FROM totalhourstbl";
                 $result = $this->conn->runQuery($sql);
                 $numRows = $result->execute();
@@ -386,6 +425,8 @@
 
 
 =======
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                 $sql = "SELECT lastName FROM personaldetailstbl";
                 $result = $this->conn->runQuery($sql);
                 $numRows = $result->execute();
@@ -395,7 +436,10 @@
                            <option value='". $rows['lastName'] ."'>". $rows['lastName']."</option>
                     ";
                   }
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
               } catch (PDOException $e) {
                echo "Connection Error: " . $e->getMessage();
              }

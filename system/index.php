@@ -154,6 +154,10 @@
 
                </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                <div class="col-xs-12 col-sm-7">
                 <div class="card">
                   <div class="card-body">
@@ -166,8 +170,11 @@
                </div>
 
 =======
+<<<<<<< HEAD
                </div>
 
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                <div class="col-xs-12 col-sm-3">
                  
                </div>

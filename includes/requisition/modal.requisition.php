@@ -47,10 +47,19 @@
                                                     </div>
                                                       <div class="col-md-6 col-xs-12">
                                                           <div class="form-group">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                                                               <label class="form-control-label" for="lastName">Last Name<span class="text-danger">*</span></label>
+                                                               <select class="required form-control" name="lastName" placeholder = "last Name">
+                                                                <?php $requestt->employeelastName(); ?>
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                                                <label class="form-control-label" for="lastName">Last Name<span class="text-danger"/>*</span></label>
                                                                <select class="required form-control" name="lastName" placeholder="Last Name" required />
                                                                  <option selected disable>Last Name</option>
                                                                  <?php $requestt->employeelastName(); ?>
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                                                                </select>
                                                                <span id="firstname_error"></span>
                                                           </div>

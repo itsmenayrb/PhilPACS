@@ -71,6 +71,7 @@ if (isset($_POST['removeEvent'])) {
 	$id = $config->checkInput($_POST['edit_id']);
 	$removeEvent = new Event();
 	$removeEvent->removeEvent($id);
+<<<<<<< HEAD
 }
 
 if (isset($_GET['fetch'])) {
@@ -85,6 +86,8 @@ if (isset($_GET['fetch'])) {
 			# code...
 			break;
 	}
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 =======
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 }

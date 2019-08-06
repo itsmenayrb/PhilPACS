@@ -27,13 +27,30 @@ CREATE TABLE `accountstbl` (
   `dateCreated` date NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`accountID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `accountstbl` */
 
 insert  into `accountstbl`(`accountID`,`personalID`,`accountType`,`username`,`password`,`dateCreated`,`status`) values 
 (1,0,9,'Admin','$2y$10$4h.ghAQaqdzRhWCCk46UnesolhddLPKEKRHG./gvi3Tj6LklQ63aC','0000-00-00',9),
+<<<<<<< HEAD
 (2,2,1,'Jordan','$2y$10$nSJLQ0MbjbiNxbYQi46QxeOuJJvpsxWFmUrcNfHf2W85tkTLKB4l.','2019-08-01',1);
+=======
+<<<<<<< HEAD
+(3,1,1,'bry','$2y$10$I1c00RgYHCJYr14OVmB.GeNYzFN6HNJhhYXtKo2V2927VJhJmjfxi','2019-08-01',1),
+(4,4,1,'adsdsd','$2y$10$M7FWN5VG.RMUOwVPX.s0heLOC6TFPEJks/sTPrmzKQ/WmvdX0Uoxq','2019-08-02',1);
+=======
+(2,2,1,'Jordan','$2y$10$nSJLQ0MbjbiNxbYQi46QxeOuJJvpsxWFmUrcNfHf2W85tkTLKB4l.','2019-08-01',1);
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `addresstbl` */
 
@@ -52,11 +69,20 @@ CREATE TABLE `addresstbl` (
   `country` varchar(50) NOT NULL DEFAULT 'Philippines',
   `zipcode` int(4) DEFAULT NULL,
   PRIMARY KEY (`addressID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `addresstbl` */
 
 insert  into `addresstbl`(`addressID`,`houseNumber`,`block`,`lot`,`street`,`subdivision`,`barangay`,`city`,`province`,`country`,`zipcode`) values 
+<<<<<<< HEAD
 (1,'','Block 8','Lot 6','','Green Square Villas','Mambog I','Bacoor','Cavite','Philippines',4102),
 (2,'House #kj3','Block hj12','Lot 8798','77987 St.','7987','7987979817237','987mnb','b','m',3123),
 (3,'House #23l','Block l1k2','Lot 98sf','f98 St.','sdf98','sd9f8sdf','sd0f98','asd98','Philippines',3123),
@@ -141,6 +167,24 @@ insert  into `attendancetbl`(`attendanceID`,`firstName`,`lastName`,`Edate`,`EMTi
 (53,'Kenn Edward','Abiertas','2019-06-13','08:12:57','12:37:46','01:09:15','05:04:28',500.04,0,'1c435f753b779b209128ae3fff9837d2'),
 (54,'Kenn Edward','Abiertas','2019-06-19','08:08:31','12:36:01','01:13:33','05:13:39',507.6,0,'1c435f753b779b209128ae3fff9837d2'),
 (55,'Kenn Edward','Abiertas','2019-06-24','08:03:10','12:01:18','01:09:09','05:05:09',474.13,0,'1c435f753b779b209128ae3fff9837d2');
+=======
+<<<<<<< HEAD
+(1,'House #k','','Lot k','k St. St. ','k','k','k','k','Philippines',3123),
+(2,'House #aks','Block aksj','Lot asdkjh','askdjh St.','askjdh','askjdh','askdjh','asjdh','Philippines',3123),
+(3,'House #j','Block j','Lot j','j St.','j','j','j','j','Philippines',0),
+(4,'','','Lot l','l St. St.','l','l','l','l','Philippines',3213),
+(5,'House #123','Block 1231','Lot 123','qweqwe St.','qweqwe','qweqwe','qweqwe','qweqwe','Philippines',1324);
+=======
+(1,'House #l','','Lot l','l St. St. ','l','l','l','l','Philippines',3123),
+(2,'House #kjh','Block kjh','Lot h','h St.','h','h','h','h','Philippines',232),
+(3,'House #l','','Lot l','l St. St.','l','l','l','d','Philippines',3123),
+(4,'House #k','Block k','Lot k','k St.','k','k','k','k','Philippines',3123),
+(5,'House #l','','Lot l','l St. St. ','l','l','l','l','Philippines',3123),
+(6,'House #l','Block l','Lot l','l St.','l','l','l','l','Philippines',3123),
+(7,'House #i','','Lot k','k St. St.','k','k','k','k','Philippines',3123),
+(8,'','Block j','Lot j','j St.','j','j','j','j','Philippines',3213);
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `bankaccounttbl` */
 
@@ -150,17 +194,44 @@ CREATE TABLE `bankaccounttbl` (
   `bankAccountID` int(11) NOT NULL AUTO_INCREMENT,
   `bankAccountNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`bankAccountID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `bankaccounttbl` */
 
 insert  into `bankaccounttbl`(`bankAccountID`,`bankAccountNumber`) values 
+<<<<<<< HEAD
 (1,''),
+=======
+<<<<<<< HEAD
+(1,'3123-2321-31'),
+=======
+(1,'8172-3871-26'),
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 (2,''),
 (3,''),
 (4,''),
+<<<<<<< HEAD
 (5,''),
 (6,'');
+=======
+<<<<<<< HEAD
+(5,'1231-2312-31');
+=======
+(5,''),
+(6,''),
+(7,'1238-2737-21'),
+(8,'');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `benefitnumberstbl` */
 
@@ -173,17 +244,44 @@ CREATE TABLE `benefitnumberstbl` (
   `pagibigNumber` varchar(50) NOT NULL,
   `taxIdentificationNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`benefitID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `benefitnumberstbl` */
 
 insert  into `benefitnumberstbl`(`benefitID`,`sssNumber`,`philhealthNumber`,`pagibigNumber`,`taxIdentificationNumber`) values 
+<<<<<<< HEAD
 (1,'','','',''),
+=======
+<<<<<<< HEAD
+(1,'','','3131-3121-3131',''),
+(2,'','','3123-1233-1312',''),
+(3,'','','',''),
+(4,'32-1321321-3','32-132132112-3','',''),
+(5,'12-3123123-1','12-312312333-3','1231-2312-3123','123-123-123-123');
+=======
+(1,'21-8371823-7','87-618723671-2','8172-6387-1638','328-173-718-223'),
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 (2,'','','',''),
 (3,'','23-244323242-3','',''),
 (4,'','','',''),
+<<<<<<< HEAD
 (5,'','','',''),
 (6,'','','','');
+=======
+(5,'21-8371823-7','87-618723671-2','8172-6387-1638','187-263-721-863'),
+(6,'','','',''),
+(7,'','','',''),
+(8,'','','','');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `departmenttbl` */
 
@@ -211,17 +309,34 @@ CREATE TABLE `employeetbl` (
   `jobStatus` tinyint(1) NOT NULL,
   `dateHired` date NOT NULL,
   PRIMARY KEY (`employeeID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `employeetbl` */
 
 insert  into `employeetbl`(`employeeID`,`positionID`,`jobStatus`,`dateHired`) values 
+<<<<<<< HEAD
 (0001,2,1,'2019-07-04'),
 (0002,1,0,'2019-07-03'),
 (0003,1,0,'2019-07-03'),
 (0004,1,1,'2019-07-06'),
 (0005,1,1,'2019-07-15'),
 (0006,1,1,'2019-07-08');
+=======
+<<<<<<< HEAD
+(0001,3,1,'2019-08-01'),
+(0002,3,0,'2019-07-30'),
+(0003,1,1,'2019-08-01'),
+(0004,1,0,'2019-08-01'),
+(0005,1,1,'2019-08-02');
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `eventstbl` */
 
@@ -241,8 +356,22 @@ CREATE TABLE `eventstbl` (
 
 insert  into `eventstbl`(`eventID`,`title`,`description`,`startDate`,`endDate`,`status`) values 
 (1,'Binyag ni Eddie','','2019-08-11 00:00:00','2019-08-12 00:00:00',1),
+<<<<<<< HEAD
 (2,'Tuli ni Eddie','yehey','2019-08-18 00:00:00','2019-08-19 00:00:00',0),
 (3,'Seminar','Android Development','2019-08-14 00:00:00','2019-08-15 00:00:00',1);
+=======
+(2,'Tuli ni Eddie','yehey','2019-08-18 00:00:00','2019-08-19 00:00:00',0);
+=======
+(0001,1,1,'2019-08-01'),
+(0002,3,1,'2019-08-01'),
+(0003,1,1,'2019-08-01'),
+(0004,2,0,'2019-08-01'),
+(0005,1,1,'2019-08-01'),
+(0006,2,0,'2019-08-01'),
+(0007,1,1,'2019-08-01'),
+(0008,2,1,'2019-08-01');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `leavecreditstbl` */
 
@@ -311,16 +440,41 @@ CREATE TABLE `personaldetailstbl` (
   `photo` varchar(255) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`personalID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+<<<<<<< HEAD
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Data for the table `personaldetailstbl` */
 
 insert  into `personaldetailstbl`(`personalID`,`firstName`,`middleName`,`lastName`,`contactNumber`,`email`,`gender`,`birthday`,`age`,`photo`,`status`) values 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 (1,'Bryan','','Balaga','0973-823-7827','bryan.balaga@gmail.com',1,'2001-08-01',18,'../uploads/437141125421.png',1),
 (2,'akdjhakjsdhakdh','aksjhdkajh','askjdhakjsdh','3918-273-1298','kasjdkajhd@gmail.com',1,'2001-07-30',18,'',0),
 (3,'Eddie','','Madrona','0982-387-2738','eddie@gmail.com',1,'2001-08-01',18,'../uploads/763911eddie.jpg',1),
 (4,'Jayvie','','Malaluan','0937-287-2872','lasd@gmail.com',1,'2001-08-02',18,'../uploads/6805494.jpg',1),
 (5,'qweqweq','qweqe','qweqwe','0918-645-3313','austin123@gmail.com',1,'2001-08-02',18,'../uploads/5612601.jpg',1);
+<<<<<<< HEAD
+=======
+=======
+(1,'Jayvie','','Malaluan','1230-928-1309','bryan@gmail.com',1,'2001-08-01',18,'../uploads/8321554.jpg',1),
+(2,'Jordan','','Michael','3219-301-2391','jordan@gmail.com',1,'2001-07-07',18,'',1),
+(3,'Ken','','Manalang','0973-827-3821','ken@gmail.com',1,'2001-08-01',18,'../uploads/889620cert-app-logo.png',1),
+(4,'Bryan','','Balags','0938-273-8237','basdas@gmail.com',1,'2001-02-13',18,'../uploads/560165bry.jpg',0),
+(5,'Jayvie','','Malaluan','1230-928-1309','bryan@gmail.com',1,'2001-08-01',18,'../uploads/3689561_w0lwbyqymmphmmtu5npzja.png',1),
+(6,'Eddie','','Madrona','0983-712-3812','edd@gmail.com',1,'2001-06-06',18,'',1),
+(7,'Gab','','Riel','3128-372-1897','gab@gmail.com',1,'2001-08-01',18,'../uploads/6680424.jpg',1),
+(8,'akjdhaksjdh','kajshdkjh','aksjdhaksjdh','3128-321-8773','asdkjahsdk@gmail.com',1,'2001-07-30',18,'',0);
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 /*Table structure for table `philhealthmatrixtbl` */
 

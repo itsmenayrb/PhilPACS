@@ -1,10 +1,13 @@
 require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $) {
 	$(document).ready(function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		$(window).on('load', function() {
 			fetchListOfEvents();
 		});
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 	   var calendar = $('#calendar').fullCalendar({
 =======
@@ -277,6 +280,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	     		});
 
 	    	}
+<<<<<<< HEAD
 	   }); // calendar
 
 		//list
@@ -291,6 +295,8 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 		}
 
 =======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
+=======
 	     		if(confirm("Are you sure you want to remove it?")) {
 	      			var id = event.id;
 	     	 		$.ajax({
@@ -304,6 +310,10 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	      			})
 	     		}
 	    	},
+<<<<<<< HEAD
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 	   }); // calendar
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	}); // document ready

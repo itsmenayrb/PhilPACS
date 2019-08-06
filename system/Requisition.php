@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 require '../models/requisition.inc.php';
 
 $requestt = new Request();
@@ -169,6 +170,8 @@ if (isset($_POST['Declined'])) {
   </body>
 </html>
 =======
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
   require '../models/requisition.inc.php';
 
     $requestt = new Request();
@@ -307,4 +310,7 @@ if (isset($_POST['Declined'])) {
                 </script>
               </body>
             </html>
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9

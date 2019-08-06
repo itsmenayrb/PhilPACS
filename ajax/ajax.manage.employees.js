@@ -605,7 +605,11 @@
 					address_error = "";
 					$("#address_error").text(address_error);
 					$('#zipcode').removeClass('is-invalid');
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 				}
 			}
 
@@ -700,7 +704,11 @@
 		$('#second').removeClass('text-success');
 
 	});
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 	//Button for next button at employment details section
 		$('#employmentDetailsBtnNext').on('click', function(e) {
@@ -928,7 +936,11 @@
 					}, 2000);
 				}
 			});
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 		});
 
 		//Updating of employee information
@@ -1228,7 +1240,11 @@
 				pasword_error = "";
 				$("#password_error").text(password_error);
 				$('#password').removeClass('is-invalid');
+<<<<<<< HEAD
 >>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+=======
+>>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+>>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 			}
 
 			if (rpassword == "") {
