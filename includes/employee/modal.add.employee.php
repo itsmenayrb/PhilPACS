@@ -153,13 +153,8 @@
                                                 <div class="col-md-5 col-xs-12">
                                                     <div class="form-group">
                                                          <label class="form-label" for="email">Email<span class="text-danger">*</span></label>
-<<<<<<< HEAD
-                                                            <input type="email" class="required email form-control" id="email" name="email" placeholder="Email" />
-                                                        <span id="email_error" class="invalid-feedback"></span>
-=======
                                                          <input type="email" class="required email form-control" id="email" name="email" placeholder="Email" />
                                                          <span id="email_error" class="invalid-feedback"></span>
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                                                     </div>
                                                 </div>
                                             </div>

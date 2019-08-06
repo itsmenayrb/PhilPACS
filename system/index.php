@@ -107,7 +107,6 @@
                         });
                       });
                     </script>
-<<<<<<< HEAD
 
                     <div class="row">
                       <div class="col-sm-12">
@@ -153,11 +152,6 @@
                     </div>
 
                </div>
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                <div class="col-xs-12 col-sm-7">
                 <div class="card">
                   <div class="card-body">
@@ -168,13 +162,8 @@
                   </div>
                 </div>
                </div>
-
-=======
-<<<<<<< HEAD
                </div>
 
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                <div class="col-xs-12 col-sm-3">
                  
                </div>
@@ -182,7 +171,6 @@
                <div class="col-xs-12 col-sm-4">
                  
                </div>
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
              </div>
 
           </div>

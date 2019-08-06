@@ -1,12 +1,6 @@
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" id="passwordModal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document" style="overflow-y: initial !important">
     <div class="modal-content">
-<<<<<<< HEAD
-                  
-=======
-            
-      
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
       <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
         <div class="dimmer active">
           <div id="loader"></div>
@@ -47,7 +41,6 @@
       </div> <!-- /.modal-body -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-<<<<<<< HEAD
 </div><!-- /.modal -->
 <script type="text/javascript">
     require(['jquery'], function($) {
@@ -56,4 +49,3 @@
 </script>
 =======
 </div><!-- /.modal -->
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7

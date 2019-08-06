@@ -1,12 +1,6 @@
 require(['sweetalert', 'jquery'], function(Swal, $) {
 	$(document).ready(function () {
 
-
-<<<<<<< HEAD
-=======
-		// $('#sssMatrixTable').DataTable();
-
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 		$('#file').on('change', function(e) {
 			e.preventDefault();
 			uploadFile();
@@ -31,37 +25,14 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
                 "color": "#8E99A5"
               });
             });
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-            var form = $('#uploadAttendanceFrom');
-=======
-<<<<<<< HEAD
             var form = $('#uploadAttendanceForm');
-=======
-
-            var form = $('#uploadAttendanceFrom');
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-=======
-            var form = $('#uploadAttendanceForm');
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			var formData = false;
 
 			if (window.FormData) {
 				formData = new FormData(form[0]);
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$.ajax({
 				type: 'post',
 				url: '../controllers/controller.import.attendance.php',
@@ -103,47 +74,8 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 
 			return false;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 		}
 
-
-<<<<<<< HEAD
-=======
-		}
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-		// });
-
-=======
-
-		// });
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-
-		// $('#uploadSSSBtn').on('click', function(e) {
-		// 	e.preventDefault();
-
-<<<<<<< HEAD
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-		// });
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-
-<<<<<<< HEAD
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 	});
 });

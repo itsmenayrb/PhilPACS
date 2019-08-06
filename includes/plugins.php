@@ -4,14 +4,10 @@
 <link href="../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
 <link href="../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
 <link href="../assets/plugins/bootstrap-datepicker/dist/bootstrap-datepicker.min.css" rel="stylesheet" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <link href="../assets/plugins/sweetalert/sweetalert.min.css" rel="stylesheet" />
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
-=======
+
 <link href="../assets/plugins/sweetalert/sweetalert.min.css" rel="stylesheet" />
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet" />
 <link href="../assets/plugins/animate/animate.min.css" rel="stylesheet" />
 <link href="../assets/plugins/fullcalendar/plugin.css" rel="stylesheet" />
@@ -31,10 +27,7 @@
 <script src="../assets/plugins/dropzone/plugin.js"></script>
 <script src="../assets/plugins/fullcalendar/plugin.js"></script>
 <script src="../assets/plugins/datetimepicker/plugin.js"></script>
-<<<<<<< HEAD
 <script src="../assets/plugins/notification/plugin.js"></script>
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 <!-- <script src="../assets/plugins/timepicker/plugin.js"></script> -->
 <script>
   requirejs.config({

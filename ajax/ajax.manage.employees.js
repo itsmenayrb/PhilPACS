@@ -589,7 +589,6 @@
 					$("#address_error").text(address_error);
 					$('#zipcode').addClass('is-invalid');
 				} else {
-<<<<<<< HEAD
 
 					if (zipcode.length < 4) {
 						address_error = "Address should be complete. Input n/a if not applicable.";
@@ -601,15 +600,7 @@
 						$("#address_error").text(address_error);
 						$('#zipcode').removeClass('is-invalid');	
 					}
-=======
-					address_error = "";
-					$("#address_error").text(address_error);
-					$('#zipcode').removeClass('is-invalid');
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
+
 				}
 			}
 
@@ -617,17 +608,7 @@
 
 
 			//proceed to next step if no error encountered
-<<<<<<< HEAD
 			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && address_error == "") {
-=======
-			if (firstname_error == "" && middlename_error == "" && lastname_error == "" && contact_number_error == "" && birthday_error == "" && email_error == "" && address_error == "") {
-				$('#personalDetailsTab').removeClass('active');
-				$('#navPersonalDetailsTab').removeAttr('href data-toggle');
-				$('#navPersonalDetailsTab').removeClass('active');
-				$('#navPersonalDetailsTab').addClass('disabled');
-				$('#first').removeClass('text-success');
-
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
 				$.ajax({
 					method: 'post',
@@ -670,7 +651,6 @@
 		});
 
 		//Button for previous button at Employment Details Section
-<<<<<<< HEAD
 		$('#employmentDetailsBtnPrevious').on('click', function() {
 			$('#personalDetailsTab').addClass('active in');
 			$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
@@ -687,7 +667,7 @@
 			$('#second').removeClass('text-success');
 
 		});
-=======
+
 	$('#employmentDetailsBtnPrevious').on('click', function() {
 		$('#personalDetailsTab').addClass('active in');
 		$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
@@ -704,11 +684,6 @@
 		$('#second').removeClass('text-success');
 
 	});
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
 	//Button for next button at employment details section
 		$('#employmentDetailsBtnNext').on('click', function(e) {
@@ -807,7 +782,6 @@
 		 */
 		$('#addEmployeeBtn').on('click', function(e) {
 			e.preventDefault();
-<<<<<<< HEAD
 			var id = 1;
 			$('#loader').addClass('loader');
 			$('#dimmer-content').addClass('dimmer-content');
@@ -817,8 +791,7 @@
 				$('#passwordModal').modal('show');
 				$('#hiddenAddEmployeeID').val(id);
 
-			}, 2000) 
-=======
+			}, 2000) ;
 
 			var form = $('#addEmployeeForm');
 			var formData = false;
@@ -936,11 +909,7 @@
 					}, 2000);
 				}
 			});
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
+
 		});
 
 		//Updating of employee information
@@ -1226,7 +1195,6 @@
 				$("#password_error").text(password_error);
 				$('#password').addClass('is-invalid');
 			} else {
-<<<<<<< HEAD
 				if (validatePassword(password) == false) {
 					password_error = "Password must be at least 6 characters and composed of alphanumeric characters.";
 					$("#password_error").text(password_error);
@@ -1236,16 +1204,8 @@
 					$("#password_error").text(password_error);
 					$('#password').removeClass('is-invalid');
 				}
-=======
-				pasword_error = "";
-				$("#password_error").text(password_error);
-				$('#password').removeClass('is-invalid');
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 			}
+			
 
 			if (rpassword == "") {
 				rpassword_error = "Please re-type your password.";
@@ -1291,39 +1251,39 @@
 					success: function(response) {
 						
 
-							if (response.empty_password){
-								Swal.fire({
-								  type: 'error',
-								  title: response.empty_password
-								});
-							}
+						if (response.empty_password){
+							Swal.fire({
+							  type: 'error',
+							  title: response.empty_password
+							});
+						}
 
-							if (response.empty_rpassword) {
-								Swal.fire({
-								  type: 'error',
-								  title: response.empty_rpassword
-								});
-							}
+						if (response.empty_rpassword) {
+							Swal.fire({
+							  type: 'error',
+							  title: response.empty_rpassword
+							});
+						}
 
-							if (response.error_password) {
-								Swal.fire({
-								  type: 'error',
-								  title: response.error_password
-								});
-							}
+						if (response.error_password) {
+							Swal.fire({
+							  type: 'error',
+							  title: response.error_password
+							});
+						}
 
-							if (response.success) {
-								Swal.fire({
-								  type: 'success',
-								  title: response.success,
-								  confirmButtonColor: '#3085d6',
-								  confirmButtonText: 'OK'
-								}).then((result) => {
-								  if (result.value) {
-								  	location.reload();
-								  }
-								});
-							}
+						if (response.success) {
+							Swal.fire({
+							  type: 'success',
+							  title: response.success,
+							  confirmButtonColor: '#3085d6',
+							  confirmButtonText: 'OK'
+							}).then((result) => {
+							  if (result.value) {
+							  	location.reload();
+							  }
+							});
+						}
 					}
 				});
 			}

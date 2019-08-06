@@ -1,18 +1,11 @@
 require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $) {
 	$(document).ready(function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 		$(window).on('load', function() {
 			fetchListOfEvents();
 		});
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
-	   var calendar = $('#calendar').fullCalendar({
-=======
-		var calendar = $('#calendar').fullCalendar({
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+	   	var calendar = $('#calendar').fullCalendar({
 
 	    	editable:true,
 	    	header:{
@@ -20,7 +13,6 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	    		center: 'title',
 	    		right: 'month, agendaWeek, agendaDay'
 	    	},
-<<<<<<< HEAD
 		    events: '../models/event/load.php',
 		    eventColor: 'green',
 		    selectable: true,
@@ -50,18 +42,10 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
      			var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
-=======
-		    events: '../controllers/controller.event.php?load=true',
-		    selectable: true,
-		    selectHelper: true,
-
-		    select: function(start, end, allDay) {
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	     		$('#addEventModal').modal('show');
 
 	     		$('#addEventBtn').on('click', function(e) {
 	     			e.preventDefault();
-<<<<<<< HEAD
 	     			
 	     			var title_error= "";
 
@@ -102,35 +86,6 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	     			}
 
 	     		});
-=======
-
-	     			var start = $('#startTime').val();
-	     			var end = $('#endTime').val();
-
-	     			console.log(start);
-	     			console.log(end);
-
-	     		});
-	     		// if(title) {
-				    // var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-				    // var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-				    // $.ajax({
-	       //  			url:"../controllers/controller.event.php",
-				    //    	type:"POST",
-				    //    	data:{
-				    //    		title: title,
-				    //    		description: description,
-				    //    		start: start,
-				    //    		end: end,
-				    //    		addEvent: 1
-				    //    	},
-				    //    	success:function() {
-					   //      calendar.fullCalendar('refetchEvents');
-					   //      alert("Added Successfully");
-	       // 				}
-	      	// 		})
-	     		// }
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	    	},
 
 		    editable:true,
@@ -140,54 +95,31 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 			    var title = event.title;
 			    var id = event.id;
 			    $.ajax({
-<<<<<<< HEAD
 	      			url:"../controllers/controller.event.php",
 		        	type:"POST",
 		      		data:{title:title, start:start, end:end, id:id, updateEventOnResize: 1},
 		      		success:function(){
 	       				calendar.fullCalendar('refetchEvents');
-=======
-	      			url:"update.php",
-		        	type:"POST",
-		      		data:{title:title, start:start, end:end, id:id},
-		      		success:function(){
-	       				calendar.fullCalendar('refetchEvents');
-	       				alert('Event Update');
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	      			}
 	     		})
 	    	},
 
 	    	eventDrop:function(event) {
-<<<<<<< HEAD
-	    		
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			    var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
 			    var title = event.title;
 			    var id = event.id;
 			    $.ajax({
-<<<<<<< HEAD
 	      			url:"../controllers/controller.event.php",
 	      			type:"POST",
 	      			data:{title:title, start:start, end:end, id:id, updateEventOnDrop: 1},
 	      			success:function() {
 	       				calendar.fullCalendar('refetchEvents');
-=======
-	      			url:"update.php",
-	      			type:"POST",
-	      			data:{title:title, start:start, end:end, id:id},
-	      			success:function() {
-	       				calendar.fullCalendar('refetchEvents');
-	       				alert("Event Updated");
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	      			}
 	     		});
 	    	},
 
 	    	eventClick:function(event) {
-<<<<<<< HEAD
 	     		var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
 			    var title = event.title;
@@ -280,7 +212,6 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	     		});
 
 	    	}
-<<<<<<< HEAD
 	   }); // calendar
 
 		//list
@@ -294,27 +225,8 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
   			});
 		}
 
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-=======
-	     		if(confirm("Are you sure you want to remove it?")) {
-	      			var id = event.id;
-	     	 		$.ajax({
-	       				url:"delete.php",
-	       				type:"POST",
-	       				data:{id:id},
-	       				success:function() {
-	        				calendar.fullCalendar('refetchEvents');
-	        				alert("Event Removed");
-	       				}
-	      			})
-	     		}
-	    	},
-<<<<<<< HEAD
-=======
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
+
+	     		
 	   }); // calendar
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	}); // document ready
 }); // require

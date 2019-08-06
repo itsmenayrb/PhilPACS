@@ -1,15 +1,8 @@
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEventModalTitle" id="addEventModal" data-backdrop="static" data-keyboard="false">
-<<<<<<< HEAD
-    <div class="modal-dialog" role="document" style="overflow-y: initial !important">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-=======
     <div class="modal-dialog modal-lg" role="document" style="overflow-y: initial !important">
         <div class="modal-content">
           <div class="modal-body">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearForm();">
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><i class="fe fe-times"></i></span>
             </button>
             <h6 class="form-text text-muted float-right mr-2"><span class="text-danger">*</span> required fields.</h6>
@@ -22,9 +15,6 @@
                 <form method="post" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="addEventForm">
 
                     <div class="container">
-<<<<<<< HEAD
-                            
-=======
                             <div class="row">
                                 <label class="form-label col-sm-2 col-xs-12 align-self-center">Time<span class="text-danger">*</span> </label>
                                 <div class="col-sm-5">
@@ -85,8 +75,6 @@
 
                                 });
                             </script>
-
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                         <div class="form-group">
                             <label class="form-label" for="title">Title<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Title" />
