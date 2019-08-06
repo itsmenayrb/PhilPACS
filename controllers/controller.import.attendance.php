@@ -21,6 +21,7 @@ if (!empty($_FILES['file']['name'])) {
 		$importAttendance->deleteAttendance();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
 		// fgetcsv($file_data);
@@ -36,6 +37,15 @@ if (!empty($_FILES['file']['name'])) {
 		while ($column = fgetcsv($file_data)) {
 
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
+		// fgetcsv($file_data);
+
+		while ($column = fgetcsv($file_data)) {
+
+			// $rangeOfCompensationFromBelow = explode('Below', $column[0])[0];
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$lastName = $config->checkInput($column[0]);
 			$firstName = $config->checkInput($column[1]);
 			$Edate = $config->checkInput($column[2]);
@@ -44,14 +54,20 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimein = $config->checkInput($column[5]);
 			$EATimeout = $config->checkInput($column[6]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			// if ($rangeOfCompensationFromBelow == 'Below') {
 			// 	$rangeOfCompensationFrom = 0;
 			// }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$lastName = str_replace(',', '', $lastName);
 			$firstName = str_replace(',', '', $firstName);
 			$Edate = str_replace(',', '', $Edate);
@@ -61,9 +77,12 @@ if (!empty($_FILES['file']['name'])) {
 			$EATimeout = str_replace(',', '', $EATimeout);
 
 			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
+<<<<<<< HEAD
 =======
 			$importSSS->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout);
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			// print_r($rangeOfCompensationFrom . "<br>");
 		}
 		// $output = 'File uploaded successfully!';

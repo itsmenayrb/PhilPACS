@@ -62,45 +62,65 @@
                                 <div class="p-3">
                                   <div class="panel-body">
                                     <div class="box-body table-responsive">
-                                      <table id="example3" class="table table-bordered table-striped datatable2">
-                                              <thead>
-                                                  <tr>
-                                                    <th>Request Type</th>
-                                                    <th>Last Name</th>
-                                                    <th>Request</th>
-                                                    <th>Date Request</th>
-                                                    <th>Date From</th>
-                                                    <th>Date To</th>
-                                                    <th>Reason</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                      <table class="table card-table table-vcenter text-nowrap datatable table-hover" id="employeeTable">
+                                        <thead>
+                                          <tr>
+                                            <th class="w-1"></th>
+                                            <th>Request type</th>
+                                            <th>Last Name</th>
+                                            <th>Request</th>
+                                            <th>Date Request</th>
+                                            <th>Date From</th>
+                                            <th>Date To</th>
+                                            <th>Reason</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php
+                                            $status = 'pending';
+                                            $stmt = $config->runQuery("SELECT personaldetailstbl.photo AS profilePicture,
+                                                                        personaldetailstbl.lastName, requestformtbl.lastName,
+                                                                        requestformtbl.firstName, requestformtbl.Request,
+                                                                        requestformtbl.DateRequest, requestformtbl.RequestType,
+                                                                        requestformtbl.DateFrom, requestformtbl.DateTo, requestformtbl.Reason,
+                                                                        requestformtbl.requestID
+                                                                         FROM personaldetailstbl INNER JOIN requestformtbl
+                                                                         ON requestformtbl.lastName = personaldetailstbl.lastName
+                                                                       WHERE requestformtbl.status=:status");
+                                            $stmt->execute(array(":status" => $status));
+                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                              $profilePicture = $row['profilePicture'];
+                                                $requestID = $row['requestID'];
+                                              $RequestType = $row['RequestType'];
+                                              $firstName = $row['firstName'];
+                                              $lastName = $row['lastName'];
+                                              $Request = $row['Request'];
+                                              $DateRequest = $row['DateRequest'];
+                                              $DateFrom = $row['DateFrom'];
+                                              $DateTo = $row['DateTo'];
+                                              $Reason = $row['Reason'];
+
+                                              ?>
+                                              <tr class="employee-link" data-toggle="modal" data-target="#viewRequestModal" data-id="<?=$requestID;?>">
+                                                <td>
+                                                    <span class="avatar d-block rounded" style="background-image: url(<?php if ($profilePicture !== "") { ?>'<?=$profilePicture?>' <?php ; } else { ?> ../assets/logo/image_placeholder.png <?php } ?>)"></span>
+                                                </td>
+                                                  <td>
+                                                      <?=$RequestType;?>
+                                                  </td>
+                                                  <td><?=$lastName;?></td>
+                                                  <td><?=$Request;?></td>
+                                                  <td><?=$DateRequest;?></td>
+                                                  <td><?=$DateFrom;?></td>
+                                                  <td><?=$DateTo;?></td>
+                                                  <td><?=$Reason;?></td>
+                                              </tr>
                                               <?php
-                                              if(!empty($result)){
-                                                foreach($result as $rows => $v) {
-                                                  $requestID = $result[$rows]['requestID'];
-                                                  ?>
-                                                    <tr>
-                                                        <td><?php echo $result[$rows]['RequestType']; ?></td>
-                                                        <td><?php echo $result[$rows]['lastName']; ?></td>
-                                                        <td><?php echo $result[$rows]['Request']; ?></td>
-                                                        <td><?php echo $result[$rows]['DateRequest']; ?></td>
-                                                        <td><?php echo $result[$rows]['DateFrom']; ?></td>
-                                                        <td><?php echo $result[$rows]['DateTo']; ?></td>
-                                                        <td><?php echo $result[$rows]['Reason']; ?></td>
-                                                        <td><button type= "button" class ="btn btn-primary view_form" data-id="<?=$requestID;?>" data-toggle="modal" data-target="#viewRequestForm">
-                                                        <i class ="fe fe-eye"></i></button>
-                                                        <button type= "button" class ="btn btn-danger view_form" data-id="<?=$requestID;?>" data-toggle="modal" data-target="#viewRequestForm">
-                                                        <i class ="fe fe-trash"></i></button></td>
-                                                      </tr>
-                                                        <?php
-                                                      }
-                                                    }
-                                               ?>
-                                           </tbody>
-                                          </table>
-                                        </div>
+                                            }
+                                          ?>
+                                        </tbody>
+                                      </table>
+                                    </div>
                                   </div>
                                 </div>
                             </div>
@@ -112,13 +132,14 @@
                                         <table id="example3" class="table table-bordered table-striped datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>EID</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
-                                                    <th>Time in</th>
-                                                    <th>Time out</th>
-                                                    <th>Deration</th>
-                                                    <th>Over Time</th>
+                                                  <th class="w-1"></th>
+                                                  <th>Request type</th>
+                                                  <th>Last Name</th>
+                                                  <th>Request</th>
+                                                  <th>Date Request</th>
+                                                  <th>Date From</th>
+                                                  <th>Date To</th>
+                                                  <th>Reason</th>
                                                 </tr>
                                             </thead>
                                             <?php
@@ -139,13 +160,14 @@
                                         <table id="example3" class="table table-bordered table-striped datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>EID</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
-                                                    <th>Time in</th>
-                                                    <th>Time out</th>
-                                                    <th>Deration</th>
-                                                    <th>Over Time</th>
+                                                  <th class="w-1"></th>
+                                                  <th>Request type</th>
+                                                  <th>Last Name</th>
+                                                  <th>Request</th>
+                                                  <th>Date Request</th>
+                                                  <th>Date From</th>
+                                                  <th>Date To</th>
+                                                  <th>Reason</th>
                                                 </tr>
                                             </thead>
                                             <?php
@@ -153,6 +175,7 @@
                                           ?>
 
                                         </table>
+
                                         </div>
 
                                 </div>

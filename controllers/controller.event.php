@@ -9,6 +9,24 @@ require_once '../models/Event.php';
 
 $config = new Config();
 
+<<<<<<< HEAD
+=======
+if (isset($_GET['load']) && $_GET['load'] == 'true') {
+	$data = array();
+	$stmt = $config->runQuery("SELECT * FROM eventstbl ORDER BY startDate DESC");
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	foreach ($result as $row) {
+		$data[] = array(
+			'title' => $row['title'],
+			'description' => $row['description'],
+			'startDate' => $row['startDate'],
+			'endDate' => $row['endDate'] 
+		);
+	}
+	echo json_encode($data);
+}
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 
 if (isset($_POST['addEvent'])) {
 	$title = $config->checkInput($_POST['title']);
@@ -18,6 +36,7 @@ if (isset($_POST['addEvent'])) {
 
 	$addEvent = new Event();
 	$addEvent->addEvent($title, $description, $start, $end);
+<<<<<<< HEAD
 }
 
 if (isset($_POST['updateEventOnResize'])) {
@@ -52,4 +71,6 @@ if (isset($_POST['removeEvent'])) {
 	$id = $config->checkInput($_POST['edit_id']);
 	$removeEvent = new Event();
 	$removeEvent->removeEvent($id);
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 }

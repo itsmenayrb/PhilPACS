@@ -193,10 +193,14 @@
                             <td>". $rows['EATimein'] ."</td>
                             <td>". $rows['EATimeout'] ."</td>
 <<<<<<< HEAD
+<<<<<<< HEAD
                           
 =======
                             <td>". hoursandmins($total, '%02d Hours, %02d Minutes') ."</td>
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+                          
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
                             ";
                         }
                     }

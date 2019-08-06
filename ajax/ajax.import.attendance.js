@@ -29,20 +29,27 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
               });
             });
 <<<<<<< HEAD
+<<<<<<< HEAD
             var form = $('#uploadAttendanceForm');
 =======
 
             var form = $('#uploadAttendanceFrom');
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+            var form = $('#uploadAttendanceForm');
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			var formData = false;
 
 			if (window.FormData) {
 				formData = new FormData(form[0]);
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$.ajax({
 				type: 'post',
 				url: '../controllers/controller.import.attendance.php',
@@ -85,14 +92,18 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 			return false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 		}
 
 		// $('#uploadSSSBtn').on('click', function(e) {
 		// 	e.preventDefault();
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 		// });
 
@@ -102,5 +113,9 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 
 
 >>>>>>> 61f66e9473d951964ebdccb678a17e2c5672df4f
+=======
+		// });
+
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 	});
 });

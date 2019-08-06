@@ -15,24 +15,36 @@ class Event extends Config {
 
 	public function addEvent($title, $description, $startDate, $endDate) {
 		try {
+<<<<<<< HEAD
 			$status = 1;
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$stmt = $this->conn->runQuery("INSERT INTO eventstbl (
 										   		title,
 										   		description,
 										   		startDate,
+<<<<<<< HEAD
 										   		endDate,
 										   		status
+=======
+										   		endDate
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 										   ) VALUES (
 										   		:title,
 										   		:description,
 										   		:startDate,
+<<<<<<< HEAD
 										   		:endDate,
 										   		:status
+=======
+										   		:endDate
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 										   )");
 			$stmt->bindparam(":title", $title);
 			$stmt->bindparam(":description", $description);
 			$stmt->bindparam(":startDate", $startDate);
 			$stmt->bindparam(":endDate", $endDate);
+<<<<<<< HEAD
 			$stmt->bindparam(":status", $status);
 			$stmt->execute();
 			return $stmt;
@@ -88,6 +100,8 @@ class Event extends Config {
 			$stmt = $this->conn->runQuery("UPDATE eventstbl SET status=:status WHERE eventID=:id");
 			$stmt->bindparam(":id", $id);
 			$stmt->bindparam(":status", $status);
+=======
+>>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
 			$stmt->execute();
 			return $stmt;
 		} catch (PDOException $e) {
