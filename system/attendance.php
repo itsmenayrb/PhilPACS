@@ -52,7 +52,7 @@
                                     Click here to Import
                                   </div>
                                 </div>
-                                <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadAttendanceFrom">
+                                <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadAttendanceForm">
                                   <input type="file" id="file" name="file" accept=".csv" />
                                 </form>
                               </div>

@@ -69,51 +69,51 @@
 
     <div class="row mb-4">
       <div class="col-md-12">
-      <a class="btn btn-secondary btn-lg mb-4" href="./employee.php">Back</a>
-      <a class="ml-2 float-right btn btn-lime" data-toggle="tooltip" title="Print" href="javascript:void(0)">
-        <i class="fe fe-printer"></i> Print  
-      </a>
-      <span class="float-right" data-toggle="tooltip" title="Update Employee Details">
-        <a class="btn btn-teal" href="./employee.php?edit=<?=$personalID;?>">
-          <i class="fe fe-edit-2"></i> Update
+        <a class="btn btn-secondary btn-lg mb-4" href="./employee.php">Back</a>
+        <a class="ml-2 float-right btn btn-lime" data-toggle="tooltip" title="Print" href="javascript:void(0)">
+          <i class="fe fe-printer"></i> Print  
         </a>
-      </span>
-      <div class="clearfix"></div>
-      </div>
-    </div>
+        <span class="float-right" data-toggle="tooltip" title="Update Employee Details">
+          <a class="btn btn-teal" href="./employee.php?edit=<?=$personalID;?>">
+            <i class="fe fe-edit-2"></i> Update
+          </a>
+        </span>
+        <div class="clearfix"></div>
+      </div> <!-- ./col -->
+    </div> <!-- /.row -->
+
 
     <div class="row">
+
       <div class="col-md-3">
         <div class="card border-info">
           <div class="card-header">
             <h3 class="card-title">Employees</h3>
           </div>
           <div class="card-body">
-          <table class="table table-sm datatable">
-            <tbody>
-              <?php
-              $display = $config->runQuery("SELECT personalID, CONCAT (personaldetailstbl.firstName, ' ', personaldetailstbl.lastName) AS fullname
-                                            FROM personaldetailstbl WHERE status=:status LIMIT 10");
-              $display->execute(array(":status"=>1));
-              while ($rows = $display->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                <tr>
-                  <td>
-                    <a href="./employee.php?id=<?=$rows['personalID'];?>" class="btn btn-link"><?=$rows['fullname'];?></a>
-                  </td>
-                </tr>
+            <table class="table table-sm datatable">
+              <tbody>
                 <?php
-              }
-              ?>
-            </tbody>
-          </table>
+                $display = $config->runQuery("SELECT personalID, CONCAT (personaldetailstbl.firstName, ' ', personaldetailstbl.lastName) AS fullname
+                                              FROM personaldetailstbl WHERE status=:status LIMIT 10");
+                $display->execute(array(":status"=>1));
+                while ($rows = $display->fetch(PDO::FETCH_ASSOC)) {
+                  ?>
+                  <tr>
+                    <td>
+                      <a href="./employee.php?id=<?=$rows['personalID'];?>" class="btn btn-link"><?=$rows['fullname'];?></a>
+                    </td>
+                  </tr>
+                  <?php
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
-        </div>
-      </div>
+        </div> <!-- /.card -->
+      </div> <!-- ./col -->
 
       <div class="col-md-9">
-
-
         <div class="card card-profile">
           <div class="card-header image-parallax"></div>
           <div class="card-body text-center">
@@ -158,7 +158,7 @@
               </li>
             </ul>
             <!-- /ul> -->
-
+            
             <hr>
 
             <div class='tab-content mt-3 text-left' id='pills-tabContent'>
@@ -205,7 +205,7 @@
                       <dd class='col-sm-7'><?=$bankAccountNumber;?></dd>
                   </dl>
 
-                </div>
+                </div> <!-- /container -->
               </div> <!-- /personal-tab -->
 
               <div class='tab-pane fade mb-3' id='pills-employment' role='tabpanel' aria-labelledby='pills-employment-tab'>
@@ -250,67 +250,16 @@
                   </table>
                 </div>
               </div> <!-- /attendance-tab -->
+
               <script type="text/javascript">
                 require(['datatables', 'jquery'], function(datatable, $) {
                   $('#attendance_table').DataTable();
                 });
               </script>
 
-            
               <div class='tab-pane fade' id='pills-contribution' role='tabpanel' aria-labelledby='pills-contribution-tab'>
 
-                <!-- <div class="table-responsive">
-                  <table class="table card-table table-vcenter text-nowrap datatable" id="contribution_table">
-                    <thead>
-
-                          <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Amount</th>
-                            <th class="w-1"><i class="fe fe-settings"></i></th>
-                          </tr>
-
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>3</td>
-                        <td>1</td>
-                        <td><?=$basicSalary;?></td>
-                        <td>3</td>
-                      </tr> -->
-                      <?php
-                        $contribution = 0;
-                        $sss = $config->runQuery("SELECT rangeOfCompensationFrom, rangeOfCompensationTo, socialSecurityEmployee FROM sssmatrixtbl");
-                        $sss->execute();
-                        while ($sssRow = $sss->fetch(PDO::FETCH_ASSOC)) {
-                          $rangeOfCompensationFrom = $sssRow['rangeOfCompensationFrom'];
-                          $rangeOfCompensationTo = $sssRow['rangeOfCompensationTo'];
-                          // $rangeOfCompensationFrom  = floatval(preg_replace("/[^-0-9\.]/", "", $rangeOfCompensationFrom));
-                          // $rangeOfCompensationTo2  = floatval(preg_replace("/[^-0-9\.]/", "", $rangeOfCompensationTo));
-                          // $basicSalary  = floatval(preg_replace("/[^-0-9\.]/", "", $basicSalary));
-
-                          if ($basicSalary >= $rangeOfCompensationFrom && $rangeOfCompensationTo == 0) {
-                            $contribution = $sssRow['socialSecurityEmployee'];
-                            echo $contribution;
-                          } else {
-
-                            if ($basicSalary >= $rangeOfCompensationFrom && $basicSalary <= $rangeOfCompensationTo) {
-                              $contribution = floatval(preg_replace("/[^-0-9\.]/", "", $sssRow['socialSecurityEmployee']));
-                              echo $contribution;
-                              ?>
-                              <?php
-                            }
-                          }
-
-                          // echo $rangeOfCompensationTo+$basicSalary . "<br>";
-
-                          // echo $rangeOfCompensationTo . "<br>";
-                        }
-
-                      ?>
-                    <!-- </tbody>
-                  </table>
-                </div> -->
+                
               </div> <!-- /contributions-tab -->
               <script type="text/javascript">
                 require(['datatables', 'jquery'], function(datatable, $) {
@@ -387,117 +336,112 @@
                   $('#requisition_table').DataTable();
                 });
               </script>
-              
+
               <div class='tab-pane fade mb-3' id='pills-settings' role='tabpanel' aria-labelledby='pills-settings-tab'>
 
-              <div class='container'>
-                <dl class='row'>
-                  <dt class='offset-sm-2 col-sm-4'>Account: </dt>
+                <div class='container'>
 
-
-                  <dd class='col-sm-6' id='accountContainer'>
-                    <?php
-                    $account = $config->runQuery("SELECT personalID, username, IF (accountType = 1, 'Authorizer', 'Maker') AS accountType, status
-                              FROM accountstbl WHERE personalID=:personalID LIMIT 1");
-                    $account->execute(array(":personalID"=>$id));
-                    $rowcheck = $account->fetch(PDO::FETCH_ASSOC);
+                  <dl class='row'>
                     
-                    if ($rowcheck > 0) {
-
-                      if ($rowcheck['personalID'] == $id && $rowcheck['status'] == 1) {
-                        ?>
-                        Username: <?=$rowcheck['username'];?><br>
-                        Account Type: <?=$rowcheck['accountType'];?><br>
-                        <a class='btn btn-sm btn-warning resetPasswordLinkModal' href='javascript:void(0)' data-id='<?=$rowcheck['personalID'];?>' data-username='<?=$rowcheck['username'];?>' data-toggle='modal' data-target='#resetPasswordModal' role='button'>Edit Account</a>
-                        <script type="text/javascript">
-                          require(['jquery'], function($) {
-                            $('.resetPasswordLinkModal').on('click', function() {
-                              var id = $(this).data('id');
-                              var username = $(this).data('username');
-                              $('#hiddenPersonalIDResetPassword').val(id);
-                              $('#reset_username').val(username);
-                             });
-                          });
-                        </script>
-                        <?php
-                      } else if ($rowcheck['personalID'] == $id && $rowcheck['status'] == 0) {
-                        ?>
-                        <a class="btn btn-sm btn-info reactivateAccount" href="javascript:void(0)" role="button" data-id='<?=$rowcheck['personalID'];?>'>Re-activate Account</a>
-                        <script type='text/javascript'>
-                          require(['jquery', 'sweetalert'], function($, Swal) {
-                            $('.reactivateAccount').on('click', function(e) {
-                              var id = $(this).data('id');
-                              //console.log(id);
-                              
-                              Swal.fire({
-                                title: 'Are you sure?',
-                                text: 'Re-activate account?',
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes!'
-                              }).then((result) => {
-                                if (result.value) {
-                                  $('#hiddenReactivateAccountID').val(id);
-                                  $('#passwordModal').modal('show');
-              
-                                }
+                    <dt class='offset-sm-2 col-sm-4'>Account: </dt>
+                    <dd class='col-sm-6' id='accountContainer'>
+                      <?php
+                      $account = $config->runQuery("SELECT personalID, username, IF (accountType = 1, 'Authorizer', 'Maker') AS accountType, status
+                                FROM accountstbl WHERE personalID=:personalID LIMIT 1");
+                      $account->execute(array(":personalID"=>$id));
+                      $rowcheck = $account->fetch(PDO::FETCH_ASSOC);
+                      
+                      if ($rowcheck > 0)
+                      {
+                        
+                        if ($rowcheck['personalID'] == $id && $rowcheck['status'] == 1)
+                        {
+                          ?>
+                          Username: <?=$rowcheck['username'];?><br>
+                          Account Type: <?=$rowcheck['accountType'];?><br>
+                          <a class='btn btn-sm btn-warning resetPasswordLinkModal' href='javascript:void(0)' data-id='<?=$rowcheck['personalID'];?>' data-username='<?=$rowcheck['username'];?>' data-toggle='modal' data-target='#resetPasswordModal' role='button'>Edit Account</a>
+                          <script type="text/javascript">
+                            require(['jquery'], function($) {
+                              $('.resetPasswordLinkModal').on('click', function() {
+                                var id = $(this).data('id');
+                                var username = $(this).data('username');
+                                $('#hiddenPersonalIDResetPassword').val(id);
+                                $('#reset_username').val(username);
+                               });
+                            });
+                          </script>
+                          <?php
+                        } else if ($rowcheck['personalID'] == $id && $rowcheck['status'] == 0) {
+                          ?>
+                          <a class="btn btn-sm btn-info reactivateAccount" href="javascript:void(0)" role="button" data-id='<?=$rowcheck['personalID'];?>'>Re-activate Account</a>
+                          <script type='text/javascript'>
+                            require(['jquery', 'sweetalert'], function($, Swal) {
+                              $('.reactivateAccount').on('click', function(e) {
+                                var id = $(this).data('id');
+                                //console.log(id);
+                                
+                                Swal.fire({
+                                  title: 'Are you sure?',
+                                  text: 'Re-activate account?',
+                                  type: 'warning',
+                                  showCancelButton: true,
+                                  confirmButtonColor: '#3085d6',
+                                  cancelButtonColor: '#d33',
+                                  confirmButtonText: 'Yes!'
+                                }).then((result) => {
+                                  if (result.value) {
+                                    $('#hiddenReactivateAccountID').val(id);
+                                    $('#passwordModal').modal('show');
+                
+                                  }
+                                });
                               });
                             });
-                          });
-                        </script>
-                        <?php
+                          </script>
+                          <?php
+                        }
                       } else {
                         ?>
                         <a class='btn-link text-primary createAccountLinkModal' href='#' data-id='<?=$personalID;?>' data-toggle='modal' data-target='#createAccountModal' role='button'>Create an account</a>
                         <?php
                       }
-                    ?>
-                  </dd>
+                      ?>
+                    <dt class='offset-sm-2 col-sm-4'>Remove Employee: </dt>
+                    <dd class='col-sm-6'>
+                      <a class='btn-link text-danger removeEmployeeBtn' href='javascript:void(0);' role='button' data-id='<?=$id;?>'>Remove</a>
+                    </dd>
+                    <script type='text/javascript'>
+                      require(['jquery', 'sweetalert'], function($, Swal) {
+                        $('.removeEmployeeBtn').on('click', function(e) {
+                          var id = $(this).data('id');
+                          //console.log(id);
 
-                  <br>
-                  <div class='border-top'></div>
-                  <br>
-
-                  <dt class='offset-sm-2 col-sm-4'>Remove Employee: </dt>
-                  <dd class='col-sm-6'>
-                    <a class='btn-link text-danger removeEmployeeBtn' href='javascript:void(0);' role='button' data-id='<?=$id;?>'>Remove</a>
-                  </dd>
-                  <script type='text/javascript'>
-                    require(['jquery', 'sweetalert'], function($, Swal) {
-                      $('.removeEmployeeBtn').on('click', function(e) {
-                        var id = $(this).data('id');
-                        //console.log(id);
-
-                        Swal.fire({
-                          title: 'Are you sure?',
-                          text: 'Remove this employee?',
-                          type: 'warning',
-                          showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: 'Yes!'
-                        }).then((result) => {
-                          if (result.value) {
-                            $('#passwordModal').modal('show');
-                            $('#hiddenRemoveID').val(id);
-
-                          }
-
+                          Swal.fire({
+                            title: 'Are you sure?',
+                            text: 'Remove this employee?',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes!'
+                          }).then((result) => {
+                            if (result.value) {
+                              $('#passwordModal').modal('show');
+                              $('#hiddenRemoveID').val(id);
+                            }
+                          });
                         });
-
                       });
-                    });
-                  </script>
-                </dl>
+                    </script>
+                  </dl> <!-- /row -->
+                </div> <!-- /container -->
               </div>
 
             </div> <!-- /tab-content -->
+
           </div> <!-- /card-body -->
         </div> <!-- /card -->
-
-      </div> <!-- /col -->
+      </div> <!-- /col-md-9 -->
     </div> <!-- /row -->
-  </div>
-</div>
+  </div> <!-- /dimmer-content -->
+</div> <!-- dimmer -->

@@ -25,6 +25,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 		    	start: $.fullCalendar.moment().format('YYYY-MM-DD'),
        	 		end: '2100-01-01'
 		    },
+
 		    eventRender: function(event, element) {
 	    		// element.find('.fc-title').append("<br/>" + event.description);
 	    		element.popover({
@@ -35,6 +36,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	    			container: "body"
 
 	    		});
+
 	    	},
 
 		    select: function(start, end, allDay) {
@@ -101,7 +103,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 		      		success:function(){
 	       				calendar.fullCalendar('refetchEvents');
 	      			}
-	     		})
+	     		});
 	    	},
 
 	    	eventDrop:function(event) {
@@ -224,9 +226,5 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
    				}
   			});
 		}
-
-
-	     		
-	   }); // calendar
 	}); // document ready
 }); // require

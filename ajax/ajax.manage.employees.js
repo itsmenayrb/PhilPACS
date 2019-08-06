@@ -790,126 +790,8 @@
 				$('#dimmer-content').removeClass('dimmer-content');
 				$('#passwordModal').modal('show');
 				$('#hiddenAddEmployeeID').val(id);
-
 			}, 2000) ;
-
-			var form = $('#addEmployeeForm');
-			var formData = false;
-
-			if (window.FormData) {
-				formData = new FormData(form[0]);
-			}
-
-			$.ajax({
-				type: 'post',
-				url: '../controllers/controller.employee.php',
-				data: formData ? formData : form.serialize(),
-				cache: false,
-				contentType: false,
-				processData: false,
-				success: function(response) {
-					$('#loader').addClass('loader');
-			          $('#dimmer-content').addClass('dimmer-content');
-			          setTimeout(function() {
-			            $('#loader').removeClass('loader');
-			            $('#dimmer-content').removeClass('dimmer-content');
-						var err = JSON.parse(response);
-						if (err.employee_exist) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.employee_exist
-								});
-							});
-						}
-
-						if (err.email_exist) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.email_exist
-								});
-							});
-						}
-
-						if (err.invalid_firstname){
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_firstname
-								});
-							});
-						}
-
-						if (err.invalid_middlename) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_middlename
-								});
-							});
-						}
-
-						if (err.invalid_lastname) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_lastname
-								});
-							});
-						}
-
-						if (err.invalid_image) {
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'error',
-								  title: err.invalid_image
-								});
-							});
-						}
-
-
-						if (err.success){
-							require(['sweetalert'], function(Swal) {
-								Swal.fire({
-								  type: 'success',
-								  title: err.success,
-								  confirmButtonColor: '#3085d6',
-								  confirmButtonText: 'Yes',
-								  showCancelButton: true,
-								  cancelButtonColor: '#d33'
-								}).then((result) => {
-								  if (result.value) {
-								  	$('#imagePreview').css('background-image', 'url(../assets/img/image_placeholder.png)');
-								  	$('#addEmployeeForm')[0].reset();
-								  	$('#personalDetailsTab').addClass('active in');
-									$('#navPersonalDetailsTab').attr('data-toggle', 'tab');
-									$('#navPersonalDetailsTab').attr('href', '#personalDetailsTab');
-									$('#navPersonalDetailsTab').removeClass('disabled');
-									$('#navPersonalDetailsTab').addClass('active');
-									$('#first').addClass('text-success');
-
-									$('#navEmploymentDetailsTab').removeClass('active');
-									$('#navEmploymentDetailsTab').removeAttr('href', 'data-toggle');
-									$('#navEmploymentDetailsTab').addClass('disabled');
-									$('#employmentDetailsTab').removeClass('active');
-									$('#second').removeClass('text-success');
-
-									$('#navOtherInfoTab').removeClass('active');
-									$('#navOtherInfoTab').removeAttr('href', 'data-toggle');
-									$('#navOtherInfoTab').addClass('disabled');
-									$('#otherInfoTab').removeClass('active');
-									$('#third').removeClass('text-success');
-								  } else if (result.dismiss === Swal.DismissReason.cancel) {
-								  	location.reload();
-								  }
-								});
-							});
-						}
-					}, 2000);
-				}
-			});
-
+								 
 		});
 
 		//Updating of employee information
@@ -1350,11 +1232,6 @@
 					processData: false,
 					dataType: 'json',
 					success: function(response) {
-						$('#loader').addClass('loader');
-            $('#dimmer-content').addClass('dimmer-content');
-            setTimeout(function() {
-              $('#loader').removeClass('loader');
-              $('#dimmer-content').removeClass('dimmer-content');
 							if (response.username_exist) {
 								Swal.fire({
 								  type: 'error',
@@ -1402,7 +1279,6 @@
 								  }
 								});
 							}
-						}, 2000);
 					}
 				});
 			}

@@ -74,7 +74,6 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 
 			return false;
 
-
 		}
 
 	});
