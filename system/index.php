@@ -139,7 +139,7 @@
                                       <tr>
                                         <td><?=$title;?></td>
                                         <td><?=$description;?></td>
-                                        <td><?=$remainingDays;?> days to go</td>
+                                        <td><?=$remainingDays;?> day/s to go</td>
                                       </tr>
                                     <?php
                                   }

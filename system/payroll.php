@@ -26,6 +26,8 @@
             <div class="my-3 my-md-5">
               <div class="container">
 
+                <?php if (!isset($_GET['id'])) : ?>
+
                   <div class="page-header">
                     <h1 class="page-title">
                       Payroll
@@ -39,96 +41,80 @@
                     <div class="col-md-12">
                       <div class="card">
                         <div class="card-body">
-                          <form method="post" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" style="width: 80%; margin: 0 auto;">
+                          <div class="table-responsive">
+                            <table class="table card-table table-vcenter table-hover text-center table-bordered table-hover text-nowrap datatable" id="payrollPeriodTable">
+                              <thead>
+                                <tr>
+                                  <th colspan="2">Payroll Period</th>
+                                  <th width="10%"></th>
+                                </tr>
+                                <tr>
+                                  <th width="45%">From</th>
+                                  <th width="45%">To</th>
+                                  <th width="10%">Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php
+                                    try {
+                                        $status = 1;
+                                        $result = $config->runQuery("SELECT
+                                                                      MIN(Edate) AS datePeriodFrom,
+                                                                      MAX(Edate) AS datePeriodTo,
+                                                                      hashedFile
+                                                                    FROM attendancetbl
+                                                                    WHERE status=:status
+                                                                    GROUP BY hashedFile");
 
-                            <div class="row">
-                              <label class="form-label col-sm-4 col-xs-12 align-self-center">Payroll Period: </label>
-                              <div class="col-md-4 mb-1">
-                                <div class="form-group">
-                                  <small class="form-text text-muted">From</small>
-                                  <input type="text" class="form-control disabled" disabled />
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <small class="form-text text-muted">To</small>                                
-                                  <input type="text" class="form-control disabled" disabled/>
-                                </div>
-                              </div>
-                            </div>
+                                        $result->execute(array(":status" => $status));
 
-                            <hr class="bg-gray" width="70%">
+                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                          $datePeriodFrom = strtotime($row['datePeriodFrom']);
+                                          $datePeriodTo = strtotime($row['datePeriodTo']);
+                                          $payrollStatus = 'Unprocessed';
+                                          ?>
+                                            <tr class="payroll-link" data-href="./payroll.php?id=<?=$row['hashedFile'];?>" style="cursor: pointer;">
+                                              <td><?=date('F j, Y', $datePeriodFrom);?></td>
+                                              <td><?=date('F j, Y', $datePeriodTo);?></td>
+                                              <td>
+                                                  <?php if ($payrollStatus == 'Unprocessed') { ?>
+                                                    <span class="badge badge-danger px-4 py-2"><?=$payrollStatus;?></span>
+                                                  <?php } else if ($payrollStatus == 'Processed') { ?>
+                                                    <span class="badge badge-success px-4 py-2"><?=$payrollStatus;?></span>
+                                                  <?php } else { ?>
+                                                    <span class="badge badge-warning px-4 py-2"><?=$payrollStatus;?></span>
+                                                  <?php } ?>
+                                              </td>
+                                            </tr>
+                                          <?php 
+                                        }
+                                    }catch (PDOException $e) {
+                                        echo "Connection Error: " . $e->getMessage();
+                                    }
+                                  ?>
+                              </tbody>
+                            </table>
+                            <script type="text/javascript">
+                              require(['datatables', 'jquery'], function(datatable, $) {
+                                $('#payrollPeriodTable').DataTable();
 
-                            <div class="row">
-                              <label class="form-label col-sm-4 col-xs-12 align-self-center">Employees: </label>
-                              <div class="table-responsive">
-                                <table class="table card-table table-vcenter text-nowrap datatable table-hover table-bordered" id="payrollTable">
-                                  <thead>
-                                    <tr>
-                                      <th width="20%">Employee ID</th>
-                                      <th width="65%">Full Name</th>
-                                      <th>Total No. of Hours</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <td>A0001</td>
-                                    <td>Balaga Bryan</td>
-                                    <td>60</td>
-                                  </tbody>
-                                </table>
-                                <script type="text/javascript">
-                                  require(['datatables', 'jquery', 'sweetalert'], function(datatable, $, Swal) {
-                                    $('#payrollTable').DataTable();
-                                  });
-                                </script>
-                              </div>
-                            </div>
+                                $('.payroll-link').on('click', function(e) {
+                                  e.preventDefault();
+                                  window.location = $(this).data('href');
+                                });
 
-                            <hr class="bg-gray">
-
-                            <div class="row">
-                              <div class="form-label col-sm-3 col-xs-12">Contributions: </div>
-                              <div class="form-group col-sm-9">
-                                <div>
-                                  <label class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" name="example-inline-checkbox1" value="option1" checked>
-                                    <span class="custom-control-label">SSS</span>
-                                  </label>
-                                  <label class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" name="example-inline-checkbox2" value="option2">
-                                    <span class="custom-control-label">PhilHealth</span>
-                                  </label>
-                                  <label class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" name="example-inline-checkbox3" value="option3">
-                                    <span class="custom-control-label">Pag-ibig</span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="row">
-                              <div class="form-label col-sm-3 col-xs-12">Less: </div>
-                              <div class="form-group col-sm-9">
-                                <div>
-                                  <label class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" class="custom-control-input" name="example-inline-checkbox2" value="option2">
-                                    <span class="custom-control-label">Tax</span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-
-                            <hr class="bg-gray" width="70%">
-
-                            <div class="text-center">
-                              <button class="btn btn-green btn-lg" type="submit">Generate Payroll</button>
-                            </div>
-
-                          </form>
+                              });
+                            </script>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                <?php endif ?>
+
+                <?php if (isset($_GET['id'])) : ?>
+                  <?php include '../includes/payroll/view.payroll.php'; ?>
+                <?php endif ?>
 
               </div>
               <!-- /container -->
@@ -138,6 +124,7 @@
           <!-- flex-fill -->
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
+
 
     <script type="text/javascript" src="../ajax/ajax.payroll.js"></script>
     <script type="text/javascript">

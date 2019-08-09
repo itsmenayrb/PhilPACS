@@ -250,10 +250,25 @@ class Attendance extends Imports {
 			$stmt->bindparam(':hashedFile', $hashedFile);
 			$stmt->execute();
 			return $stmt;
+
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();
 		}
+	}
 
+	public function checkAttendanceIfExist($hashedFile) {
+		try {
+			$checkFile = $this->conn->runQuery("SELECT hashedFile FROM attendancetbl WHERE hashedFile=:hashedFile LIMIT 1");
+			$checkFile->execute(array(":hashedFile" => $hashedFile));
+			$row = $checkFile->fetch(PDO::FETCH_ASSOC);
+			if ($checkFile->rowCount() > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
 	}
 
 }

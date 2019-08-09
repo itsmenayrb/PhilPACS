@@ -9,8 +9,8 @@
 
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
     <title>Human Resources :: Attendance Management</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext"> -->
 
     <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
@@ -25,7 +25,7 @@
             <div class="my-3 my-md-5">
               <div class="container">
 
-                <?php if (!isset($_GET['id'])) : ?>
+                <?php if (!isset($_GET['id']) && !isset($_GET['fname']) && !isset($_GET['lname'])) : ?>
 
                   <div class="page-header">
                     <h1 class="page-title">
@@ -84,27 +84,39 @@
                               <tbody>
                                   <?php
                                     try {
-                                        $status = 0;
                                         $result = $config->runQuery("SELECT
                                                                       MIN(Edate) AS datePeriodFrom,
                                                                       MAX(Edate) AS datePeriodTo,
-                                                                      IF (status = 0, 'Unprocessed', 'Processed') AS status,
+                                                                      CASE WHEN status = 0
+                                                                           THEN 'Unprocessed'
+                                                                           WHEN status = 1
+                                                                           THEN 'Processed'
+                                                                           ELSE 'Pending'
+                                                                      END AS status,
                                                                       hashedFile
                                                                     FROM attendancetbl
-                                                                    WHERE status=:status
                                                                     GROUP BY hashedFile");
 
-                                        $result->execute(array(":status" => $status));
+                                        $result->execute();
 
                                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                           $datePeriodFrom = strtotime($row['datePeriodFrom']);
                                           $datePeriodTo = strtotime($row['datePeriodTo']);
+                                          $status = $row['status'];
 
                                           ?>
                                             <tr class="attendance-link" data-href="./attendance.php?id=<?=$row['hashedFile'];?>" style="cursor: pointer;">
                                               <td><?=date('F j, Y', $datePeriodFrom);?></td>
                                               <td><?=date('F j, Y', $datePeriodTo);?></td>
-                                              <td><?=$row['status'];?></td>
+                                              <td>
+                                                  <?php if ($status == 'Unprocessed') { ?>
+                                                    <span class="badge badge-danger px-4 py-2"><?=$status;?></span>
+                                                  <?php } else if ($status == 'Processed') { ?>
+                                                    <span class="badge badge-success px-4 py-2"><?=$status;?></span>
+                                                  <?php } else { ?>
+                                                    <span class="badge badge-warning px-4 py-2"><?=$status;?></span>
+                                                  <?php } ?>
+                                              </td>
                                             </tr>
                                           <?php 
                                         }
@@ -134,9 +146,13 @@
 
                 <?php endif ?>
 
-                <?php if (isset($_GET['id'])) : ?>
+                <?php if (isset($_GET['id']) && !isset($_GET['fname']) && !isset($_GET['lname'])) : ?>
                   <?php include '../includes/attendance/view.attendance.php'; ?>
-                <?php endif ?>  
+                <?php endif ?>
+
+                <?php if (isset($_GET['id']) && isset($_GET['fname']) && isset($_GET['lname'])) : ?>
+                  <?php include '../includes/attendance/personal.attendance.php'; ?>
+                <?php endif ?>
 
               </div>
               <!-- /container -->
@@ -148,7 +164,9 @@
         <?php include '../includes/footer.php'; ?>
 
     <?php include '../includes/attendance/modal.view.attendance.php'; ?>
+    <?php include '../includes/modal.password.php'; ?>
     <script type="text/javascript" src="../ajax/ajax.import.attendance.js"></script>
+    <script type="text/javascript" src="../ajax/ajax.attendance.js"></script>
     <script type="text/javascript">
       function reload() {
         location.reload();

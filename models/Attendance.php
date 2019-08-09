@@ -12,68 +12,72 @@ class Attendance extends Config {
 
 	}
 
-	public function populateAttendance($firstName, $lastName, $hashedFile) {
+	public function updateAttendanceRecord($hashedFile, $attendanceID, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes) {
 		try {
-			$stmt = $this->conn->runQuery("SELECT * FROM attendancetbl WHERE firstName=:firstName AND lastName=:lastName AND hashedFile=:hashedFile ORDER BY Edate");
-			$stmt->execute(array(":firstName" => $firstName, ":lastName" => $lastName, ":hashedFile" => $hashedFile));
+			$stmt = $this->conn->runQuery("UPDATE attendancetbl
+											SET EMTimein=:EMTimein,
+												EMTimeout=:EMTimeout,
+												EATimein=:EATimein,
+												EATimeout=:EATimeout,
+												totalMinutes=:totalMinutes
+											WHERE attendanceID=:attendanceID");
+			$stmt->bindparam(":EMTimein", $EMTimein);
+			$stmt->bindparam(":EMTimeout", $EMTimeout);
+			$stmt->bindparam(":EATimein", $EATimein);
+			$stmt->bindparam(":EATimeout", $EMTimeout);
+			$stmt->bindparam(":attendanceID", $attendanceID);
+			$stmt->bindparam(":totalMinutes", $totalMinutes);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+	public function resetAttendance($attendanceID) {
+		try {
 
-			?>
-			<div class='table-responsive'>
-                <table class='table table-sm card-table table-vcenter table-hover table-bordered table-hover text-nowrap datatable' id="personalAttendanceTable">
-                    <thead>
-                        <tr>
-                        	<th>Date</th>
-                        	<th colspan="2" class="text-center">Full Name</th>
-							<th colspan="2" class="text-center">AM</th>
-							<th colspan="2" class="text-center">PM</th>
-                        </tr>
-                        <tr>
-                        	<th></th>
-                        	<th>Last Name</th>
-                        	<th>First Name</th>
-                        	<th>Time In</th>
-                        	<th>Time Out</th>
-                        	<th>Time In</th>
-                        	<th>Time Out</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    	<?php
-							while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-								$date = strtotime($row['Edate']);
-								$date = date('F j, Y', $date);
-								?>
-	                            <tr>
-	                            	<?php if ($this->isWeekend($date) == true) { ?>
-	                            		<td></td>
-	                            	<?php } else { ?>
-	                            		<td><?=$date;?></td>
-	                            	<?php } ?>
-	                            	<td><?=$row['lastName'];?></td>
-	                            	<td><?=$row['firstName'];?></td>
-	                            	<td><?=$row['EMTimein'];?></td>
-	                            	<td><?=$row['EMTimeout'];?></td>
-	                            	<td><?=$row['EATimein'];?></td>
-	                            	<td><?=$row['EATimeout'];?></td>
-	                            </tr>
-	                            <?php
-	                        }
-	                    ?>
-                    </tbody>
-                </table>
-            </div>
-            <script type="text/javascript">
-            	require(['datatables', 'jquery'], function(datatable, $) {
-                	$('#personalAttendanceTable').DataTable();
-            	});
-            </script>
-				<?php
+			$totalMinutes = null;
+
+			$stmt = $this->conn->runQuery("UPDATE attendancetbl
+											SET totalMinutes=:totalMinutes
+											WHERE attendanceID=:attendanceID");
+			$stmt->bindparam(":attendanceID", $attendanceID);
+			$stmt->bindparam(":totalMinutes", $totalMinutes);
+			$stmt->execute();
+			return $stmt;
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();
 		}
 	}
 
-	public function isWeekend($date) {
-		return (date('N', strtotime($date)) >= 6);
+	public function saveAttendanceForPending($hashedFile) {
+		try {
+			$status = 2;
+			$stmt = $this->conn->runQuery("UPDATE attendancetbl
+											SET status=:status
+											WHERE hashedFile=:hashedFile");
+			$stmt->bindparam(":status", $status);
+			$stmt->bindparam(":hashedFile", $hashedFile);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
 	}
+
+	public function sendToPayroll($hashedFile) {
+		try {
+			$status = 1;
+			$stmt = $this->conn->runQuery("UPDATE attendancetbl
+											SET status=:status
+											WHERE hashedFile=:hashedFile");
+			$stmt->bindparam(":status", $status);
+			$stmt->bindparam(":hashedFile", $hashedFile);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
 }

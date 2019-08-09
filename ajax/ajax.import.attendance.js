@@ -56,6 +56,11 @@ require(['sweetalert', 'jquery'], function(Swal, $) {
 							  type: 'error',
 							  title: 'Invalid file format.'
 							})
+						} else if (response === 'exist') {
+							Swal.fire({
+							  type: 'error',
+							  title: 'The file is already been uploaded.'
+							})
 						} else if (response === "success") {
 							Swal.fire({
 							  type: 'success',

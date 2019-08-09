@@ -18,27 +18,34 @@ if (!empty($_FILES['file']['name'])) {
 		$file_data = fopen($_FILES['file']['tmp_name'], 'r');
 		$hashedFile = md5_file($_FILES['file']['tmp_name']);
 		$importAttendance = new Attendance();
-		// $importAttendance->deleteAttendance();
 
-		while ($column = fgetcsv($file_data)) {
+		if ($importAttendance->checkAttendanceIfExist($hashedFile) == true) {
+			echo 'exist';
+		} else {
+			while ($column = fgetcsv($file_data)) {
 
-			$lastName = $config->checkInput($column[0]);
-			$firstName = $config->checkInput($column[1]);
-			$Edate = $config->checkInput($column[2]);
-			$EMTimein = $config->checkInput($column[3]);
-			$EMTimeout = $config->checkInput($column[4]);
-			$EATimein = $config->checkInput($column[5]);
-			$EATimeout = $config->checkInput($column[6]);
-			$first = computeTotalOfMinutes($EMTimein, $EMTimeout);
-			$second = computeTotalOfMinutes($EATimein, $EATimeout);
-			$totalMinutes = $first + $second; 
+				$lastName = $config->checkInput($column[0]);
+				$firstName = $config->checkInput($column[1]);
+				$Edate = $config->checkInput($column[2]);
+				$EMTimein = $config->checkInput($column[3]);
+				$EMTimeout = $config->checkInput($column[4]);
+				$EATimein = $config->checkInput($column[5]);
+				$EATimeout = $config->checkInput($column[6]);
+				$first = computeTotalOfMinutes($EMTimein, $EMTimeout);
+				$second = computeTotalOfMinutes($EATimein, $EATimeout);
+				$totalMinutes = $first + $second;
 
-			$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile);
+				$Edate = strtotime($Edate);
+				$Edate = date('Y-m-d', $Edate);
 
+				$importAttendance->importAttendance($lastName, $firstName, $Edate, $EMTimein, $EMTimeout, $EATimein, $EATimeout, $totalMinutes, $hashedFile);
+
+			}
+			// $output = 'File uploaded successfully!';
+			// echo json_encode(array("success" => $output));
+			echo "success";
 		}
-		// $output = 'File uploaded successfully!';
-		// echo json_encode(array("success" => $output));
-		echo "success";
+
 	} else {
 		// $output = 'Invalid file format.';
 		// echo json_encode(array("error_file" => $output));

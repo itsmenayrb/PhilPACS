@@ -14,12 +14,19 @@
   $hashedFile = $config->checkInput($_GET['id']);
   $stmt = $config->runQuery("SELECT *, MIN(Edate) AS datePeriodFrom,
                               MAX(Edate) AS datePeriodTo,
-                              SUM(totalMinutes) AS totalMinutes
+                              SUM(totalMinutes) AS totalMinutes,
+                              CASE WHEN status = 0
+                                   THEN 'Unprocessed'
+                                   WHEN status = 1
+                                   THEN 'Processed'
+                                   ELSE 'Pending'
+                              END AS status
                             FROM attendancetbl WHERE hashedFile=:hashedFile GROUP BY lastName");
   $stmt->execute(array(":hashedFile" => $hashedFile));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   $datePeriodFrom = strtotime($row['datePeriodFrom']);
   $datePeriodTo = strtotime($row['datePeriodTo']);
+  $status = $row['status'];
 ?>
 <div class="dimmer active">
   <div id="loader"></div>
@@ -46,7 +53,6 @@
                   <th width="15%">Employee ID</th>
                   <th>Full Name</th>
                   <th width="20%">Total Number of Hours</th>
-                  <th class="w-1"><i class="fe fe-settings"></i> </th>
                 </tr>
               </thead>
               <tbody>
@@ -54,15 +60,10 @@
                   while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $fullName = $result['lastName'] . ", " . $result['firstName'];
                     ?>
-                    <tr>
+                    <tr class="personal-attendance-link" data-href="./attendance.php?id=<?=$row['hashedFile'];?>&fname=<?=$result['firstName'];?>&lname=<?=$result['lastName'];?>" style="cursor: pointer;">
                       <td></td>
                       <td><?=$fullName;?></td>
                       <td><?=convertToHoursAndMins($result['totalMinutes'], '%02d hours and %02d minute/s');?></td>
-                      <td class="w-1 text-center">
-                        <button class="btn btn-teal btn-icon viewEmployeeAttendanceBtn" type="button" data-toggle="modal" data-target="#viewEmployeeAttendanceModal" data-fname="<?=$result['firstName'];?>" data-lname="<?=$result['lastName'];?>" data-id="<?=$hashedFile;?>">
-                          <i class="fe fe-eye" data-toggle="tooltip" title="View"></i>
-                        </button>
-                      </td>
                     </tr>
                     <?php
                   }
@@ -71,6 +72,12 @@
             </table>
             <script type="text/javascript">
               require(['datatables', 'jquery'], function(datatable, $) {
+
+                $('.personal-attendance-link').on('click', function(e) {
+                  e.preventDefault();
+                  window.location = $(this).data('href');
+                });
+
                 $('#detailedAttendanceTable').DataTable();
 
                 $('.viewEmployeeAttendanceBtn').on('click', function() {
@@ -92,14 +99,19 @@
                       $('.attendanceContainer').html(response);
                     }
                   });
-                  // console.log(firstName);
-                  // console.log(lastName);
-                  // console.log(hashedFile);
 
                 });
               });
             </script>
             
+          </div> <!-- /card-body -->
+          <div class="card-footer">
+            <?php if ($status == 'Pending') : ?>
+              <button class="btn btn-lime float-right" type="button" data-id="<?=$hashedFile;?>" id="sendToPayrollBtn">Send to Payroll</button>
+            <?php endif ?>
+            <?php if ($status == 'Unprocessed') : ?>
+              <button class="btn btn-teal float-right mr-2" type="button" data-id="<?=$hashedFile;?>" id="saveAttendanceForPendingBtn">Save</button>
+            <?php endif ?>
           </div>
         </div>
       </div>

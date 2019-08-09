@@ -1,8 +1,8 @@
 require.config({
     shim: {
-        'datetimepicker': ['jquery','core'],
+        'timepicker': ['jquery','core'],
     },
     paths: {
-        'datetimepicker': '../assets/plugins/timepicker/timepicker.min',
+        'timepicker': '../assets/plugins/timepicker/jquery.timepicker.min',
     }
 });

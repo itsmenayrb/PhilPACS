@@ -17,13 +17,19 @@
                 <div class="card">
                     <form method="post" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="passwordForm">
                         <div class="card-body">
+                            <!-- employee -->
                             <input type="hidden" id="hiddenArchiveID" name="hiddenArchiveID" value="" />                            
                             <input type="hidden" id="hiddenEditEmployeeID2" name="hiddenEditEmployeeID2" value="" />
                             <input type="hidden" id="hiddenAddEmployeeID" name="hiddenAddEmployeeID" value="" />                            
                             <input type="hidden" id="hiddenRemoveID" name="hiddenRemoveID" value="" />
                             <input type="hidden" id="hiddenDeactivateAccountID" name="hiddenDeactivateAccountID" value="" />
                             <input type="hidden" id="hiddenReactivateAccountID" name="hiddenReactivateAccountID" value="" />
-                            
+
+                            <!-- attendance -->
+                            <input type="hidden" id="hiddenUpdatePersonalAttendanceID" name="hiddenUpdatePersonalAttendanceID" value="" />
+                            <input type="hidden" id="hiddenSaveAttendanceForPendingID" name="hiddenSaveAttendanceForPendingID" value="" />
+                            <input type="hidden" id="hiddenSendToPayrollID" name="hiddenSendToPayrollID" value="" />
+                            <!-- /// -->
                             <input type="hidden" id="hiddenHref" name="hiddenHref" value="" />
                             <input type="hidden" id="hiddenIDSession" name="hiddenIDSession" value="<?=$_SESSION['accountID'];?>" />
                             <div class="form-group">
@@ -47,5 +53,3 @@
         
     });
 </script>
-=======
-</div><!-- /.modal -->
