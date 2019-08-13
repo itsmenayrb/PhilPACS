@@ -7,12 +7,70 @@
       </a>
       <div class="d-flex order-lg-2 ml-auto">
 
+        <div class="dropdown d-none d-md-flex">
+          <a class="nav-link icon" data-toggle="dropdown">
+            <i class="fe fe-bell"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <?php
+              $notifyEventRemainingDays = 0;
+              $notifyEventStatus = 1;
+              $notifyEvent = $config->runQuery("SELECT * FROM eventstbl WHERE status=:status ORDER BY startDate");
+              $notifyEvent->execute(array(":status" => $notifyEventStatus));
+              while ($eventRowNotify = $notifyEvent->fetch(PDO::FETCH_ASSOC)) {
+                $fromx = strtotime($eventRowNotify['startDate']);
+                $dateTodayx = time();
+                $notifyEventRemainingDays = $fromx - $dateTodayx;
+                $notifyEventRemainingDays = floor($notifyEventRemainingDays/86400) + 1;
+                $titlex = $eventRowNotify['title'];
+                $descriptionx = $eventRowNotify['description'];
+
+                if ($notifyEvent->rowCount() > 0) {
+
+                  if ($notifyEventRemainingDays == 5 || $notifyEventRemainingDays == 3 || $notifyEventRemainingDays == 1) {
+                    ?>
+                    <a href="#" class="dropdown-item d-flex">
+                      <div>
+                        <strong><?=$titlex;?>:</strong> <?=$descriptionx;?>
+                        <div class="small text-muted"><?=$notifyEventRemainingDays?> day/s to go.</div>
+                      </div>
+                    </a>
+                    <?php
+                  }
+
+                } else {
+                  ?>
+                  <a href="#" class="dropdown-item text-center">
+                    No notification at this time.
+                  </a>
+                  <?php 
+                }
+              }
+            ?>
+          </div>
+        </div>
+
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
             <span class="avatar"></span>
             <span class="ml-2 d-none d-lg-block">
-              <span class="text-default">Bryan Balaga</span>
-              <small class="text-muted d-block mt-1">Administrator</small>
+              <span class="text-default">
+                <?php
+                  $session = $config->runQuery("SELECT username,
+                                                CASE WHEN accountType = 1
+                                                     THEN 'Authorizer'
+                                                     WHEN accountType = 0
+                                                     THEN 'Maker'
+                                                     ELSE 'Administrator'
+                                                END AS accountType, personalID
+                                                FROM accountstbl
+                                                WHERE username=:username LIMIT 1");
+                  $session->execute(array(":username" => $_SESSION['username']));
+                  $display = $session->fetch(PDO::FETCH_ASSOC);
+                  echo $display['username'];
+                ?>
+              </span>
+              <small class="text-muted d-block mt-1"><?=$display['accountType'];?></small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -22,6 +80,7 @@
             <a class="dropdown-item" href="#">
               <i class="dropdown-icon fe fe-settings"></i> Settings
             </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="./logout.php?logout=true">
               <i class="dropdown-icon fe fe-log-out"></i> Sign out
             </a>
@@ -97,8 +156,6 @@
                     <a href="./contribution.tax.php" class="dropdown-item ">Tax Contribution Matrix</a>
                   </div>
 
-                <a href="./department.php" class="dropdown-item ">Department</a>
-                <a href="./position.php" class="dropdown-item ">Position</a>
                 <a href="./archives.php" class="dropdown-item ">Archives</a>
               </div>
             </li>
@@ -111,6 +168,16 @@
                 <a href="./salary.calculator.php" class="dropdown-item ">Salary Calculator</a>
               </div>
             </li>
+
+            <li class="nav-item dropdown">
+              <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-file"></i> Setting Up</a>
+              <div class="dropdown-menu dropdown-menu-arrow">
+                <a href="./department.php" class="dropdown-item ">Department</a>
+                <a href="./position.php" class="dropdown-item ">Position</a>
+                <a href="./salary.code.php" class="dropdown-item ">Salary Code</a>
+              </div>
+            </li>
+            
           </ul>
         </div>
       </div>

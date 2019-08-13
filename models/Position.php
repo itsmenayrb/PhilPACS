@@ -18,40 +18,36 @@ class Position extends Config {
 	 * @param string $position_name string
 	 * @return $stmt
 	 */
-	public function addPosition($department_name, $position_name, $amount, $code) {
+	public function addPosition($department_name, $position_name, $code) {
 
 		try {
 
-			$check = $this->conn->runQuery("SELECT positionName, departmentID, basicSalary, code
+			$check = $this->conn->runQuery("SELECT positionName, departmentName, salaryCode
 											FROM positiontbl
 											WHERE positionName=:position_name
 											LIMIT 1");
 			$check->execute(array(":position_name" => $position_name));
 			$row = $check->fetch(PDO::FETCH_ASSOC);
 
-			if ($row['positionName'] == $position_name && $row['departmentID'] == $department_name) {
+			if ($row['positionName'] == $position_name && $row['departmentName'] == $department_name) {
 				echo json_encode(array("error_position" => "$position_name is already exist on the same department."));
 			} else {
 
 				$status = 1;
-
 				$stmt = $this->conn->runQuery("INSERT INTO positiontbl (
-												departmentID,
+												departmentName,
 												positionName,
-												basicSalary,
-												code,
+												salaryCode,
 												status
 											) VALUES (
 											:department_name,
 											:position_name,
-											:basic_salary,
-											:code,
+											:salaryCode,
 											:status
 											)");
 				$stmt->bindparam(":department_name", $department_name);
 				$stmt->bindparam(":position_name", $position_name);
-				$stmt->bindparam(":basic_salary", $amount);
-				$stmt->bindparam(":code", $code);
+				$stmt->bindparam(":salaryCode", $code);
 				$stmt->bindparam(":status", $status);
 
 				$stmt->execute();
@@ -128,6 +124,41 @@ class Position extends Config {
 			echo "Connection Error: " . $e->getMessage();	
 		}
 
-	}	
+	}
+
+	public function displaySalaryCode($department_name) {
+		try {
+			$stmt = $this->conn->runQuery("SELECT salaryCodeID
+											 FROM departmenttbl WHERE departmentName=:departmentName");
+			$stmt->execute(array(":departmentName" => $department_name));
+			?>
+			<option value="" selected></option>
+			<?php
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$salaryCodeID = $row['salaryCodeID'];
+				$populate = $this->conn->runQuery("SELECT * FROM salarycodetbl WHERE salaryCodeID=:salaryCodeID");
+				$populate->execute(array(":salaryCodeID" => $salaryCodeID));
+				while ($result = $populate->fetch(PDO::FETCH_ASSOC)) {
+					?>
+					<option value="<?=$result['salaryCodeID'];?>"><?=$result['salaryCode'];?></option>
+					<?php
+				}
+			}
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
+	public function displayBasicSalary($salary_code) {
+		try {
+			$stmt = $this->conn->runQuery("SELECT basicSalary
+											 FROM salarycodetbl WHERE salaryCodeID=:salaryCodeID");
+			$stmt->execute(array(":salaryCodeID" => $salary_code));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			echo json_encode($row['basicSalary']);
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
 
 }

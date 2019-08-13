@@ -1,7 +1,6 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
-    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -61,9 +60,9 @@
                             <table class="table card-table table-vcenter text-nowrap datatable" id="positionTable">
                               <thead>
                                 <tr>
-                                  <th>Department</th>
-                                  <th>Position Code</th>
                                   <th>Position</th>
+                                  <th class="w-1">Salary Code</th>
+                                  <th>Department</th>
                                   <th>Basic Salary</th>
                                   <th>Status</th>
                                   <th class="w-1 text-center"><i class="fe fe-settings"></i></th>
@@ -72,23 +71,27 @@
                               <tbody>
                                   <?php
                                       $status = 1;
-                                      $stmt = $config->runQuery("SELECT positiontbl.positionID, positiontbl.positionName, IF (positiontbl.status = 1, 'Active', 'Archived') AS status, positiontbl.basicSalary, positiontbl.code, departmenttbl.departmentName FROM positiontbl INNER JOIN departmenttbl ON positiontbl.departmentID = departmenttbl.departmentID WHERE positiontbl.status=:status");
+                                      $stmt = $config->runQuery("SELECT positiontbl.positionID, positiontbl.positionName,
+                                                                  IF (positiontbl.status = 1, 'Active', 'Archived') AS status,
+                                                                  salarycodetbl.basicSalary, salarycodetbl.salaryCode AS salaryCode, positiontbl.departmentName
+                                                                 FROM positiontbl INNER JOIN salarycodetbl ON positiontbl.salaryCode=salarycodetbl.salaryCodeID
+                                                                 WHERE positiontbl.status=:status");
 
                                       $stmt->execute(array(":status" => $status));
                                       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                          $code = $row['code'];
+                                          $code = $row['salaryCode'];
+                                          $basicSalary = $row['basicSalary'];
+
                                           $position_id = $row['positionID'];
                                           $position_name = $row['positionName'];
                                           $department_name = $row['departmentName'];
                                           $status = $row['status'];
-                                          $basicSalary = $row['basicSalary'];
-                                          $basicSalary = number_format($basicSalary, 2);
 
                                           ?>
                                           <tr>
-                                              <td><?=$department_name;?></td>
-                                              <td><?=$code;?></td>
                                               <td><?=$position_name;?></td>
+                                              <td><?=$code;?></td>
+                                              <td><?=$department_name;?></td>
                                               <td><?=$basicSalary;?></td>
                                               <td><?=$status;?></td>
                                               <td class="text-center">

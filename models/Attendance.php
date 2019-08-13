@@ -80,4 +80,15 @@ class Attendance extends Config {
 		}
 	}
 
+	public function removeAttendance($hashedFile) {
+		try {
+			$stmt = $this->conn->runQuery("DELETE FROM attendancetbl WHERE hashedFile=:hashedFile");
+			$stmt->bindparam(":hashedFile", $hashedFile);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+	}
+
 }

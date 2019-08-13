@@ -1,7 +1,6 @@
 <?php
     require_once '../models/Config.php';
     $config = new Config();
-    $config->isnot_loggedin();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -11,9 +10,9 @@
     <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" /> -->
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
-    <title>Human Resources :: Department</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <title>Setting Up :: Department</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext"> -->
     <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     
@@ -61,6 +60,7 @@
                             <table class="table card-table table-vcenter text-nowrap datatable" id="departmentTable">
                               <thead>
                                 <tr>
+                                  <th class="w-1">Salary Code</th>
                                   <th>Department</th>
                                   <th>Status</th>
                                   <th class="w-1 text-center"><i class="fe fe-settings"></i></th>
@@ -69,15 +69,23 @@
                               <tbody>
                                   <?php
                                       $status = 1;
-                                      $stmt = $config->runQuery("SELECT *, IF (status = 1, 'Active', 'Archived') as status FROM departmenttbl WHERE status=:status");
+                                      $stmt = $config->runQuery("SELECT departmenttbl.departmentID, departmenttbl.departmentName,
+                                                                    IF (departmenttbl.status = 1, 'Active', 'Archived') as status,
+                                                                    salarycodetbl.salaryCode
+                                                                 FROM departmenttbl
+                                                                 INNER JOIN salarycodetbl ON departmenttbl.salaryCodeID = salarycodetbl.salaryCodeID
+                                                                 WHERE departmenttbl.status=:status");
                                       $stmt->execute(array(":status" => $status));
+
                                       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                           $department_id = $row['departmentID'];
+                                          $salary_code = $row['salaryCode'];
                                           $department_name = $row['departmentName'];
                                           $status = $row['status'];
 
                                           ?>
                                           <tr>
+                                              <td><?=$salary_code;?></td>
                                               <td><?=$department_name;?></td>
                                               <td><?=$status;?></td>
                                               <td class="text-center">

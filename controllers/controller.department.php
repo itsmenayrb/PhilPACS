@@ -13,22 +13,37 @@ $config = new Config();
 /**
  * If adding of department has been set
  */
-if (isset($_POST['add_department_name'])) {
+if (isset($_POST['department_name'])) {
 
 	$department_name = $config->checkInput($_POST['department_name']);
+	$salary_code = $_POST['salary_code'];
+	$i = 0;
 
 	if (empty($department_name)) {
 
-		echo json_encode(array("error" => "Department Name is required."));
+		echo json_encode(array("error_department_name" => "Department Name is required."));
 
-	} else {
+	} 
 
-		$add_department_name = new Department();
-		if ($add_department_name->addDepartment($department_name)){
+	if (empty($salary_code)) {
+
+		echo json_encode(array("error_salary_code" => "Salary Code is required."));
+
+	}
+
+	if (!empty($department_name) && !empty($salary_code)) {
+
+		if ($add_department_name = new Department()) {
+			for ($i=0; $i<count($salary_code); $i++) {
+				$add_department_name->addDepartment($department_name, $salary_code[$i]);
+			}
+
 			echo json_encode(array("success" => "$department_name Added Successfully!"));
 		}
 
 	}
+	// var_dump($department_name);
+	// var_dump($salary_code);
 
 }
 /**

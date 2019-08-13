@@ -17,15 +17,35 @@
                 <div id="loader"></div>
                 <div id="dimmer-content">
                   <form class="m-t-40" id="addDepartmentForm" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
+                      <div class="alert alert-success">
+                        <i class="fe fe-info"></i> Press and hold <kbd>ctrl</kbd> key to select multiple salary code.  
+                      </div>
 
                       <div class="form-group">
+                        <label class="form-label" for="salary_code">Salary Code<span class="text-danger">*</span></label>
+                        <select class="form-control" name="salary_code[]" id="salary_code" multiple>
+                             <?php
+                              $status = 1;
+                              $stmt = $config->runQuery("SELECT * FROM salarycodetbl WHERE status=:status ORDER BY salaryCode");
+                              $stmt->execute(array(":status" => $status));
+                              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                <option value="<?=$row['salaryCodeID'];?>"><?=$row['salaryCode'];?></option>
+                                <?php
+                              }
+                             ?>
+                        </select>
+                         <span id="salary_code_error" class="invalid-feedback"></span>
+                      </div>
+                      <div class="form-group">
                            <label class="form-label" for="department_name">Department Name<span class="text-danger">*</span></label>
-                           <input type="text" class="required form-control" id="department_name" placeholder="Department Name" autofocus="true" required/>
+                           <input type="text" class="required form-control" name="department_name" id="department_name" placeholder="Department Name" autofocus="true" required/>
                            <span id="department_name_error" class="invalid-feedback"></span>
                       </div>
+
                       
                       <div class="text-right">
-                          <button type="submit" class="btn btn-success" id="addDepartmentBtn">Add</button>
+                          <button type="submit" class="btn btn-success" id="addDepartmentBtn" name="addDepartmentBtn">Add</button>
                       </div>
                   </form>
                 </div>

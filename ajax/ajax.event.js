@@ -41,10 +41,9 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 
 		    select: function(start, end, allDay) {
      			
+	     		$('#addEventModal').modal('show');
      			var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-
-	     		$('#addEventModal').modal('show');
 
 	     		$('#addEventBtn').on('click', function(e) {
 	     			e.preventDefault();
@@ -55,7 +54,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	     			var description = $('#description').val();
 
 	     			if (title == "") {
-	     				title_error = "Start time is required.";
+	     				title_error = "Title is required.";
 	     				$('#title_error').text(title_error);
 	     				$('#title').addClass('is-invalid');
 	     			} else {
@@ -226,5 +225,6 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
    				}
   			});
 		}
+
 	}); // document ready
 }); // require

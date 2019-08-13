@@ -18,37 +18,25 @@ class Department extends Config {
 	 * @param string $department_name string
 	 * @return $stmt
 	 */
-	public function addDepartment($department_name) {
+	public function addDepartment($department_name, $salary_code) {
 
 		try {
 
-			$check = $this->conn->runQuery("SELECT departmentName
-											FROM departmenttbl
-											WHERE departmentName=:department_name
-											LIMIT 1");
-			$check->execute(array(":department_name" => $department_name));
-			$row = $check->fetch(PDO::FETCH_ASSOC);
-
-			if ($row['departmentName'] == $department_name) {
-				echo json_encode(array("error_department_name" => "$department_name is already exist."));
-			} else {
-
-				$status = 1;
-
-				$stmt = $this->conn->runQuery("INSERT INTO departmenttbl (
-												departmentName,
-												status
-											) VALUES (
-											:department_name,
-											:status
-											)");
-				$stmt->bindparam(":department_name", $department_name);
-				$stmt->bindparam(":status", $status);
-
-				$stmt->execute();
-				return $stmt;
-
-			}
+			$status = 1;
+			$stmt = $this->conn->runQuery("INSERT INTO departmenttbl (
+											salaryCodeID,
+											departmentName,
+											status
+										) VALUES (
+										:salaryCodeID,
+										:department_name,
+										:status
+										)");
+			$stmt->bindparam(":salaryCodeID", $salary_code);
+			$stmt->bindparam(":department_name", $department_name);
+			$stmt->bindparam(":status", $status);
+			$stmt->execute();
+			return $stmt;
 			
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();	

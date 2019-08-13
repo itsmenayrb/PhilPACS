@@ -14,36 +14,45 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 		    return parts.join(".");
 		}
 
-		$('#amount').on('change', function() {
+		$('#department_name').on('change', function() {
 
-			var amount_error = "";
-			var amount = $(this).val();
-			let formattedAmount = 0;
+			var department_name = $(this).val();
+			$('#amount').val("");
 
-			if (isNaN(amount)) {
-				amount_error = "Invalid amount.";
-				$('#amount_error').text(amount_error);
-				$(this).addClass('is-invalid');
-			} else {
+			$.ajax({
+				method: 'POST',
+		       	url: '../controllers/controller.position.php',
+	       		data: {
+	       			department_name: department_name,
+	       			displaySalaryCode: 1
+	       		},
+	       		dataType: 'html',
+	       		success: function(response) {
+	       			$('#salary_code').html(response);
+	       		}
+			});
+			// console.log(department_name);
 
-				if (amount == "") {
-					amount_error = "Basic Salary is required.";
-					$('#amount_error').text(amount_error);
-					$(this).addClass('is-invalid');
-				} else {
+		});
 
-					amount_error = "";
-					$('#amount_error').text(amount_error);
-					$(this).removeClass('is-invalid');
-					formattedAmount = numberWithCommas(amount);
-					$(this).val(formattedAmount);
-					amount = parseFloat(amount.replace(/,/g, ''));
-					$('#hiddenSalary').val(amount);
-				}
 
-			}
+		$('#salary_code').on('change', function() {
 
-			return false;
+			var salary_code = $(this).val();
+
+			$.ajax({
+				method: 'POST',
+		       	url: '../controllers/controller.position.php',
+	       		data: {
+	       			salary_code: salary_code,
+	       			displayBasicSalary: 1
+	       		},
+	       		dataType: 'json',
+	       		success: function(response) {
+	       			$('#amount').val(response);
+	       		}
+			});
+			// console.log(salary_code);
 
 		});
 
@@ -57,11 +66,11 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			var code_error = "";
 			var department_name_error = "";
 			var position_name_error = "";
+
 			var department_name = $('#department_name').val();
 			var position_name = $('#position_name').val();
-			var amount = $('#hiddenSalary').val();
-			var code = $('#code').val();
-			code = code.toUpperCase();
+			// var amount = $('#amount').val();
+			var code = $('#salary_code').val();
 
 			if (department_name == "") {
 				department_name_error = "Department Name is required.";
@@ -83,40 +92,40 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				$('#position_name').removeClass('is-invalid');
 			}
 
-			if (amount == "") {
-				amount_error = "Basic Salary is required.";
-				$("#amount_error").text(amount_error);
-				$('#amount').addClass('is-invalid');
-			} else {
+			// if (amount == "") {
+			// 	amount_error = "Basic Salary is required.";
+			// 	$("#amount_error").text(amount_error);
+			// 	$('#amount').addClass('is-invalid');
+			// } else {
 
-				if (isNaN(amount)) {
-					amount_error = "Invalid amount.";
-					$('#amount_error').text(amount_error);
-					$(this).addClass('is-invalid');
-				} else {
-					amount_error = "";
-					$("#amount_error").text(amount_error);
-					$('#amount').removeClass('is-invalid');
-				}
-			}
+			// 	if (isNaN(amount)) {
+			// 		amount_error = "Invalid amount.";
+			// 		$('#amount_error').text(amount_error);
+			// 		$(this).addClass('is-invalid');
+			// 	} else {
+			// 		amount_error = "";
+			// 		$("#amount_error").text(amount_error);
+			// 		$('#amount').removeClass('is-invalid');
+			// 	}
+			// }
 
 			if (code == "") {
-				code_error = "Position Code is required.";
-				$("#code_error").text(code_error);
-				$('#code').addClass('is-invalid');
+				code_error = "Salary Code is required.";
+				$("#salary_code_error").text(code_error);
+				$('#salary_code').addClass('is-invalid');
 			} else {
 				code_error = "";
-				$("#code_error").text(code_error);
-				$('#code').removeClass('is-invalid');
+				$("#salary_code_error").text(code_error);
+				$('#salary_code').removeClass('is-invalid');
 			}
 
-			if (department_name_error == "" && position_name_error == "" && amount_error == "" && code_error == "") {
+			if (department_name_error == "" && position_name_error == "" && code_error == "") {
+				code = code.toUpperCase();
 				$.ajax({
 					method: 'POST',
 		       		url: '../controllers/controller.position.php',
 		       		data: {
 		       			code: code,
-		       			amount: amount,
 		       			department_name: department_name,
 		       			position_name: position_name,
 		       			add_position_name: 1
@@ -138,10 +147,10 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 								$('#position_name').addClass('is-invalid');	
 			       			}
 
-			       			if (response.error_amount) {
-								$("#amount_error").text(response.error_amount);
-								$('#amount').addClass('is-invalid');
-			       			}
+			     //   			if (response.error_amount) {
+								// $("#amount_error").text(response.error_amount);
+								// $('#amount').addClass('is-invalid');
+			     //   			}
 
 			       			if (response.error_code) {
 								$("#code_error").text(response.error_code);

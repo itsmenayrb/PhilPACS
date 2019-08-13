@@ -5,13 +5,6 @@
 require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 	$(document).ready(function() {
 
-		/**
-		 * Data Table for department table
-		 */
-		$('#department_table').DataTable();
-		/**
-		 * End of Data Table
-		 */
 
 		 /**
 		  * When adding form of department submit
@@ -21,9 +14,10 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			e.preventDefault();
 
 			var department_name_error = "";
-			var department_type_error = "";
+			var salary_code_error = "";
 
 			var department_name = $('#department_name').val();
+			var salary_code = $('#salary_code').val();
 
 			if (department_name == "") {
 				department_name_error = "Department Name is required.";
@@ -35,26 +29,50 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				$('#department_name').removeClass('is-invalid');
 			}
 
-			if(department_name_error == "") {
+			if (salary_code == "") {
+				salary_code_error = "Salary Code is required.";
+				$("#salary_code_error").text(salary_code_error);
+				$('#salary_code').addClass('is-invalid');
+			} else {
+				salary_code_error = "";
+				$("#salary_code_error").text(salary_code_error);
+				$('#salary_code').removeClass('is-invalid');
+			}
+
+			if(department_name_error == "" && salary_code_error == "") {
+
+				var form = $('#addDepartmentForm');
+				var formData = false;
+
+				if (window.FormData) {
+					formData = new FormData(form[0]);
+				}
 
 				$.ajax({
 					method: 'POST',
 		       		url: '../controllers/controller.department.php',
-		       		data: {
-		       			department_name: department_name,
-		       			add_department_name: 1
-		       		},
-		       		dataType: 'json',
+		       		data: formData ? formData : form.serialize(),
+					cache: false,
+					contentType: false,
+					processData: false,
+					dataType: 'json',
 		       		success: function(response) {
 		       			$('#loader').addClass('loader');
 				        $('#dimmer-content').addClass('dimmer-content');
 				        setTimeout(function() {
 				            $('#loader').removeClass('loader');
 				            $('#dimmer-content').removeClass('dimmer-content');
+
+				            // response = JSON.parse(response);
 		       			
 			       			if (response.error_department_name) {
-								$("#department_name_error").text(response.error);
+								$("#department_name_error").text(response.error_department_name);
 								$('#department_name').addClass('is-invalid');
+			       			}
+
+			       			if (response.error_salary_code) {
+								$("#salary_code_error").text(response.error_salary_code);
+								$('#salary_code').addClass('is-invalid');
 			       			}
 
 		       				if (response.success) {

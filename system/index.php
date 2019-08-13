@@ -124,6 +124,7 @@
                               </thead>
                               <tbody>
                                 <?php
+                                  $remainingDays = 0;
                                   $eventStatus = 1;
                                   $queryDays = $config->runQuery("SELECT * FROM eventstbl WHERE status=:status ORDER BY startDate");
                                   $queryDays->execute(array(":status" => $eventStatus));
@@ -135,6 +136,7 @@
                                     $title = $rowCheck['title'];
                                     $description = $rowCheck['description'];
 
+                                    if ($remainingDays > 0) {
                                     ?>
                                       <tr>
                                         <td><?=$title;?></td>
@@ -142,6 +144,7 @@
                                         <td><?=$remainingDays;?> day/s to go</td>
                                       </tr>
                                     <?php
+                                    }
                                   }
                                 ?>
                               </tbody>

@@ -25,13 +25,13 @@
                               <option value="" selected>Select a department.</option>
                               <?php
                                   $status = 1;
-                                  $stmt = $config->runQuery("SELECT * FROM departmenttbl WHERE status=:status");
+                                  $stmt = $config->runQuery("SELECT * FROM departmenttbl WHERE status=:status GROUP BY departmentName");
                                   $stmt->execute(array(":status" => $status));
                                   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                       $department_id = $row['departmentID'];
                                       $department_name = $row['departmentName'];
                                       ?>
-                                      <option value="<?=$department_id;?>"><?=$department_name;?></option>
+                                      <option value="<?=$department_name;?>"><?=$department_name;?></option>
                                       <?php
                                   }
                               ?>
@@ -39,28 +39,31 @@
                           <span id="department_name_error" class="invalid-feedback"></span>
                       </div>
 
+                      <div class="form-group">
+                           <label class="form-label" for="position_name">Position Name<span class="text-danger">*</span></label>
+                           <input type="text" class="required form-control" id="position_name" placeholder="Position Name" autofocus="true" required/>
+                           <span id="position_name_error" class="invalid-feedback"></span>
+                      </div>
+
                       <div class="row">
-                          <div class="col-md-4 col-xs-12">
+                          <div class="col-md-6 col-xs-12">
                               <div class="form-group">
-                                   <label class="form-label" for="code">Code<span class="text-danger">*</span></label>
-                                   <input type="text" class="required form-control" id="code" placeholder="A/B/C/D" autofocus="true" required/>
-                                   <span id="code_error" class="invalid-feedback"></span>
+                                   <label class="form-label" for="code">Salary Code<span class="text-danger">*</span></label>
+                                   <select id="salary_code" class="form-control">
+                                      <option value="" selected></option>
+                                   </select>
+                                   <span id="salary_code_error" class="invalid-feedback"></span>
                               </div>
                           </div>
-                          <div class="col-md-8 col-xs-12">
-                              <div class="form-group">
-                                   <label class="form-label" for="department_name">Position Name<span class="text-danger">*</span></label>
-                                   <input type="text" class="required form-control" id="position_name" placeholder="Position Name" autofocus="true" required/>
-                                   <span id="position_name_error" class="invalid-feedback"></span>
-                              </div>
+                          <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                 <label class="form-label" for="amount">Basic Salary</label>
+                                 <input type="text" class="required form-control" id="amount" placeholder="0.00" readonly />
+                                 <!-- <span id="amount_error" class="invalid-feedback"></span> -->
+                            </div>
                           </div>
                       </div>
 
-                      <div class="form-group">
-                           <label class="form-label" for="amount">Basic Salary<span class="text-danger">*</span></label>
-                           <input type="text" class="required form-control" id="amount" placeholder="0.00" autofocus="true" required/>
-                           <span id="amount_error" class="invalid-feedback"></span>
-                      </div>
                       
                       <div class="text-right">
                           <button type="submit" class="btn btn-success" id="addPositionBtn">Add</button>

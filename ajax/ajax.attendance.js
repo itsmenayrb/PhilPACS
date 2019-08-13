@@ -106,8 +106,9 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 								var hiddenUpdatePersonalAttendanceID = $('#hiddenUpdatePersonalAttendanceID').val();
 								var hiddenSaveAttendanceForPendingID = $('#hiddenSaveAttendanceForPendingID').val();
 								var hiddenSendToPayrollID = $('#hiddenSendToPayrollID').val();
+								var hiddenRemoveAttendanceID = $('#hiddenRemoveAttendanceID').val();
 
-								if (hiddenUpdatePersonalAttendanceID != "" && hiddenSaveAttendanceForPendingID == "" && hiddenSendToPayrollID == "") {
+								if (hiddenUpdatePersonalAttendanceID != "" && hiddenSaveAttendanceForPendingID == "" && hiddenSendToPayrollID == "" && hiddenRemoveAttendanceID == "") {
 								
 									var form = $('#updateAttendanceRecordForm');
 									var formData = false;
@@ -142,7 +143,7 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 									    	
 									    }
 									});
-								} else if (hiddenUpdatePersonalAttendanceID == "" && hiddenSaveAttendanceForPendingID != "" && hiddenSendToPayrollID == "") {
+								} else if (hiddenUpdatePersonalAttendanceID == "" && hiddenSaveAttendanceForPendingID != "" && hiddenSendToPayrollID == "" && hiddenRemoveAttendanceID == "") {
 									$.ajax({
 										method: 'post',
 										url: '../controllers/controller.attendance.php',
@@ -163,7 +164,7 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 											});
 										}
 									});
-								} else if (hiddenUpdatePersonalAttendanceID == "" && hiddenSaveAttendanceForPendingID == "" && hiddenSendToPayrollID != "") {
+								} else if (hiddenUpdatePersonalAttendanceID == "" && hiddenSaveAttendanceForPendingID == "" && hiddenSendToPayrollID != "" && hiddenRemoveAttendanceID == "") {
 									$.ajax({
 										method: 'post',
 										url: '../controllers/controller.attendance.php',
@@ -175,6 +176,27 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 											Swal.fire({
 											  type: 'success',
 											  title: "Attendance has been sent!",
+											  confirmButtonColor: '#3085d6',
+											  confirmButtonText: 'OK'
+											}).then((result) => {
+											  if (result.value) {
+											  	window.location = './attendance.php';
+											  }
+											});
+										}
+									});
+								} else if (hiddenUpdatePersonalAttendanceID == "" && hiddenSaveAttendanceForPendingID == "" && hiddenSendToPayrollID == "" && hiddenRemoveAttendanceID != "") {
+									$.ajax({
+										method: 'post',
+										url: '../controllers/controller.attendance.php',
+										data: {
+											id: hiddenRemoveAttendanceID,
+											removeAttendance: 1
+										},
+										success: function(){
+											Swal.fire({
+											  type: 'success',
+											  title: "Attendance has been removed!",
 											  confirmButtonColor: '#3085d6',
 											  confirmButtonText: 'OK'
 											}).then((result) => {
@@ -226,7 +248,7 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 				$('#dimmer-content').addClass('dimmer-content')
 				setTimeout(function() {
 					$("#loader").removeClass('loader');
-					$('#dimmer-content').removeClass('dimmer-content')
+					$('#dimmer-content').removeClass('dimmer-content');
 					$('#passwordModal').modal('show');
 				}, 2000);
 			  }
@@ -234,6 +256,33 @@ require(['sweetalert', 'jquery', 'datatables', 'datetimepicker'], function(Swal,
 
 			return false;
 
+		});
+
+		$('.removeAttendanceBtn').on('click', function(e) {
+			e.preventDefault();
+
+			var id = $(this).data('id');
+			$('#hiddenRemoveAttendanceID').val(id);
+
+			Swal.fire({
+			  title: 'Are you sure?',
+			  text: 'This action is cannot be undone.',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes!'
+			}).then((result) => {
+			  if (result.value) {
+				$(this).addClass('btn-loading');
+				setTimeout(function() {
+					$('.removeAttendanceBtn').removeClass('btn-loading');
+					$('#passwordModal').modal('show');
+				}, 2000);
+			  }
+			});
+
+			return false;
 		});
 
 		function onlyUnique(value, index, self) {

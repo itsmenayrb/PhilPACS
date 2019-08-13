@@ -51,6 +51,12 @@ if (isset($_POST['sendToPayroll'])) {
 	$sendToPayroll->sendToPayroll($id);
 }
 
+if (isset($_POST['removeAttendance'])) {
+	$id = $config->checkInput($_POST['id']);
+	$removeAttendance = new Attendance();
+	$removeAttendance->removeAttendance($id);
+}
+
 function computeTotalOfMinutes($time_in, $time_out) {
 	$time_inA = strtotime($time_in);
 	$time_outA = strtotime($time_out);

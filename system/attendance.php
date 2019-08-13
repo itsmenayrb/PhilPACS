@@ -73,12 +73,14 @@
                               <thead>
                                 <tr>
                                     <th colspan="2">Date Period</th>
-                                    <th colspan="2"></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                                 <tr>
                                     <th>From</th>
                                     <th>To</th>
                                     <th width="20%">Status</th>
+                                    <th class="w-1"><i class="fe fe-settings"></i> </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -116,6 +118,15 @@
                                                   <?php } else { ?>
                                                     <span class="badge badge-warning px-4 py-2"><?=$status;?></span>
                                                   <?php } ?>
+                                              </td>
+                                              <td>
+                                                <?php if ($status != 'Processed'): ?>
+                                                  <span data-toggle="tooltip" title="Remove">
+                                                    <button class="btn btn-danger removeAttendanceBtn" type="button" data-id="<?=$row['hashedFile'];?>">
+                                                      <i class="fe fe-x"></i>
+                                                    </button>
+                                                  </span>
+                                                <?php endif ?>
                                               </td>
                                             </tr>
                                           <?php 

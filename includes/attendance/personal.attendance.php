@@ -138,8 +138,22 @@
                                           </span>
                                         </div>
                                       </td>
-                                      <td></td>
-                                      <td></td>
+                                      <td>
+                                        <div class="input-icon">
+                                          <input type="text" class="form-control attendanceInput overtimeAM" name="overtimeAM[]" value="" required readonly/>
+                                          <span class="input-icon-addon">
+                                              <span class="fe fe-clock"></span>
+                                          </span>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div class="input-icon">
+                                          <input type="text" class="form-control attendanceInput overtimePM" name="overtimePM[]" value="" required readonly/>
+                                          <span class="input-icon-addon">
+                                              <span class="fe fe-clock"></span>
+                                          </span>
+                                        </div>
+                                      </td>
                                       <td></td>
                                     </tr>
                                     <?php
