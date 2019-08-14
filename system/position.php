@@ -70,14 +70,12 @@
                               </thead>
                               <tbody>
                                   <?php
-                                      $status = 1;
                                       $stmt = $config->runQuery("SELECT positiontbl.positionID, positiontbl.positionName,
                                                                   IF (positiontbl.status = 1, 'Active', 'Archived') AS status,
                                                                   salarycodetbl.basicSalary, salarycodetbl.salaryCode AS salaryCode, positiontbl.departmentName
-                                                                 FROM positiontbl INNER JOIN salarycodetbl ON positiontbl.salaryCode=salarycodetbl.salaryCodeID
-                                                                 WHERE positiontbl.status=:status");
+                                                                 FROM positiontbl INNER JOIN salarycodetbl ON positiontbl.salaryCode=salarycodetbl.salaryCodeID");
 
-                                      $stmt->execute(array(":status" => $status));
+                                      $stmt->execute();
                                       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                           $code = $row['salaryCode'];
                                           $basicSalary = $row['basicSalary'];
@@ -86,6 +84,7 @@
                                           $position_name = $row['positionName'];
                                           $department_name = $row['departmentName'];
                                           $status = $row['status'];
+                                          $basicSalary = number_format($basicSalary, 2);
 
                                           ?>
                                           <tr>
@@ -95,12 +94,20 @@
                                               <td><?=$basicSalary;?></td>
                                               <td><?=$status;?></td>
                                               <td class="text-center">
+                                                <?php if ($status == 'Active') { ?>
                                                   <button type="button" data-toggle="modal" data-target="#updatePositionModal" class="btn btn-info updatePositionBtnModal" data-id="<?=$position_id;?>" data-name="<?=$position_name;?>" data-salary="<?=$basicSalary;?>">
                                                       <i class="fe fe-edit-2"></i>
                                                   </button>
                                                   <button type="button" class="btn btn-danger archivePositionBtn" data-id="<?=$position_id;?>" data-name="<?=$position_name;?>">
                                                       <i class="fe fe-x"></i>
                                                   </button>
+                                                <?php } else { ?>
+                                                  <span data-toggle="tooltip" title="Restore">
+                                                    <button type="button" class="btn btn-lime restorePositionBtn" data-id="<?=$position_id;?>" data-name="<?=$position_name;?>">
+                                                        <i class="fe fe-refresh-cw"></i>
+                                                    </button>
+                                                  </span>
+                                                <?php } ?>  
                                               </td>
                                           </tr>
                                           <?php

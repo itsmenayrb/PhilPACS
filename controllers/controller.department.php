@@ -13,7 +13,7 @@ $config = new Config();
 /**
  * If adding of department has been set
  */
-if (isset($_POST['department_name'])) {
+if (isset($_POST['department_name']) && !isset($_POST['update_department_name'])) {
 
 	$department_name = $config->checkInput($_POST['department_name']);
 	$salary_code = $_POST['salary_code'];
@@ -70,20 +70,32 @@ if (isset($_POST['archive_department'])) {
 /**
  * If updating of department has been set
  */
-if (isset($_POST['update_department_name'])) {
+if (isset($_POST['update_department_name']) && $_POST['update_department_name'] == 1) {
 
 	$department_id = $config->checkInput($_POST['department_id']);
 	$department_name = $config->checkInput($_POST['department_name']);
+	$salary_code = $_POST['salary_code'];
 
 	if (empty($department_name)) {
 
-		echo json_encode(array("error" => "Department Name is required."));
+		echo json_encode(array("error_department_name" => "Department Name is required."));
 
-	} else {
+	} 
 
-		$update_department_name = new Department();
-		if ($update_department_name->updateDepartment($department_id, $department_name)){
-			echo json_encode(array("success" => "Successfully changed to $department_name!"));
+	if (empty($salary_code)) {
+
+		echo json_encode(array("error_salary_code" => "Salary Code is required."));
+
+	}
+
+	if (!empty($department_name) && !empty($salary_code)) {
+
+		if ($update_department_name = new Department()) {
+			$update_department_name->updateDepartment($department_id);
+			for ($i=0; $i<count($salary_code); $i++) {
+				$update_department_name->addDepartment($department_name, $salary_code[$i]);
+			}
+			echo json_encode(array("success" => "Success!"));
 		}
 
 	}
@@ -92,3 +104,15 @@ if (isset($_POST['update_department_name'])) {
 /**
  * End of updating of department
  */
+
+//restore
+if (isset($_POST['restore_department'])) {
+
+	$department_id = $config->checkInput($_POST['id']);
+
+	$archive = new Department();
+	if ($archive->restoreDepartment($department_id)) {
+		echo json_encode(array("success" => "Department Restored Successfully!"));
+	}
+
+}

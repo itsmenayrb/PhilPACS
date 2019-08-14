@@ -78,7 +78,7 @@ if (isset($_POST['update_position_name'])) {
 	$position_id = $config->checkInput($_POST['position_id']);
 	$position_name = $config->checkInput($_POST['position_name']);
 	$department_name = $config->checkInput($_POST['department_name']);
-	$amount = $config->checkInput($_POST['amount']);
+	// $amount = $config->checkInput($_POST['amount']);
 	$code = $config->checkInput($_POST['code']);
 
 	if (empty($department_name)) {
@@ -93,26 +93,26 @@ if (isset($_POST['update_position_name'])) {
 
 	}
 
-	if (empty($amount)) {
+	// if (empty($amount)) {
 
-		echo json_encode(array("error_amount" => "Basic Salary is required."));
+	// 	echo json_encode(array("error_amount" => "Basic Salary is required."));
 
-	}
+	// }
 
-	if (!is_numeric($amount)) {
+	// if (!is_numeric($amount)) {
 
-		echo json_encode(array("error_amount" => "Invalid amount."));
+	// 	echo json_encode(array("error_amount" => "Invalid amount."));
 
-	}
+	// }
 
 	if (empty($code)) {
 		echo json_encode(array("error_code" => "Position Code is required."));
 	}
 
-	if(!empty($position_name) && !empty($department_name) && !empty($amount) && is_numeric($amount) && !empty($code)) {
+	if(!empty($position_name) && !empty($department_name) && !empty($code)) {
 
 		$update_position_name = new Position();
-		if ($update_position_name->updatePosition($position_id, $position_name, $department_name, $amount, $code)){
+		if ($update_position_name->updatePosition($position_id, $position_name, $department_name, $code)){
 			echo json_encode(array("success" => "Updated Successfully!"));
 		}
 
@@ -123,6 +123,18 @@ if (isset($_POST['update_position_name'])) {
 /**
  * End of updating of position
  */
+
+//restore
+if (isset($_POST['restore_position'])) {
+
+	$position_id = $config->checkInput($_POST['position_id']);
+
+	$restore = new Position();
+	if ($restore->restorePosition($position_id)) {
+		echo json_encode(array("success" => "Position Restored Successfully!"));
+	}
+
+}
 
 
 if (isset($_POST['displayBasicSalary'])) {

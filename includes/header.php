@@ -98,7 +98,7 @@
   <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
     <div class="container">
       <div class="row text-md-right text-sm-center align-items-center">
-        <div class="col-md-2 ml-auto col-xs-12 col-sm-12 align-self-center">
+        <div class="col-md-3 ml-auto col-xs-12 col-sm-12 align-self-center">
           <h6 class="text-muted form-text" id="clockbox"></h6>
           <script type="text/javascript">
             var tday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];

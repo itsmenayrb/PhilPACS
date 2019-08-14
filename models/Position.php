@@ -86,34 +86,31 @@ class Position extends Config {
 	 * @param  string
 	 * @return $stmt
 	 * */
-	public function updatePosition($position_id, $position_name, $department_name, $amount, $code) {
+	public function updatePosition($position_id, $position_name, $department_name, $code) {
 
 		try {
 
-			$check = $this->conn->runQuery("SELECT departmentID, positionName, basicSalary, code
+			$check = $this->conn->runQuery("SELECT positionName, departmentName, salaryCode
 											FROM positiontbl
 											WHERE positionID=:position_id
 											LIMIT 1");
 			$check->execute(array(":position_id" => $position_id));
 			$row = $check->fetch(PDO::FETCH_ASSOC);
 
-			if ($row['positionName'] == $position_name && $row['departmentID'] == $department_name && $row['basicSalary'] == $amount && $row['code'] == $code) {
+			if ($row['positionName'] == $position_name && $row['departmentName'] == $department_name  && $row['salaryCode'] == $code) {
 				echo json_encode(array("error_position" => "Nothing has been changed.",
 										"error_department" => "Nothing has been changed.",
-										"error_amount" => "Nothing has been changed.",
 										"error_code" => "Nothing has been changed."));
 			} else {
 
 				$stmt = $this->conn->runQuery("UPDATE positiontbl
 												SET positionName=:position_name,
-												departmentID=:department_id,
-												basicSalary=:amount,
-												code=:code
+												departmentName=:department_name,
+												salaryCode=:code
 												WHERE positionID=:position_id");
-				$stmt->bindparam(":department_id", $department_name);
+				$stmt->bindparam(":department_name", $department_name);
 				$stmt->bindparam(":position_id", $position_id);
 				$stmt->bindparam(":position_name", $position_name);
-				$stmt->bindparam(":amount", $amount);
 				$stmt->bindparam(":code", $code);	
 				$stmt->execute();
 				return $stmt;
@@ -159,6 +156,22 @@ class Position extends Config {
 		} catch (PDOException $e) {
 			echo "Connection Error: " . $e->getMessage();
 		}
+	}
+
+	//restore
+	public function restorePosition($position_id) {
+
+		$status = 1;
+		try {
+			$stmt = $this->conn->runQuery("UPDATE positiontbl SET status=:status WHERE positionID=:id");
+			$stmt->bindparam(':status', $status);
+			$stmt->bindparam('id', $position_id);
+			$stmt->execute();
+			return $stmt;
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
 	}
 
 }

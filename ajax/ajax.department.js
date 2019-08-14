@@ -122,7 +122,7 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 					method: 'POST',
 		       		url: '../controllers/controller.department.php',
 		       		data: {
-		       			department_id: id,
+		       			department_id: name,
 		       			archive_department: 1
 		       		},
 		       		dataType: 'json',
@@ -167,7 +167,7 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			var id = $(this).data('id');
 			var name = $(this).data('name');
 
-			$('#hiddenDepartmentID').val(id);
+			$('#hiddenDepartmentName').val(name);
 			$('#update_department_name_input').val(name);
 
 		});
@@ -178,20 +178,39 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 
 			var update_department_name_error = "";
 
-			var id = $('#hiddenDepartmentID').val();
+			var id = $('#hiddenDepartmentName').val();
 			var department_name = $('#update_department_name_input').val();
+			var salary_code = $('#update_salary_code').val();
 
 			if (department_name == "") {
-				update_department_name_error = "Department Name is required.";
-				$("#update_department_name_error").text(update_department_name_error);
-				$('#update_department_name_input').addClass('is-invalid');
+				department_name_error = "Department Name is required.";
+				$("#department_name_error").text(department_name_error);
+				$('#department_name').addClass('is-invalid');
 			} else {
+				department_name_error = "";
+				$("#department_name_error").text(department_name_error);
+				$('#department_name').removeClass('is-invalid');
+			}
+
+			if (salary_code == "") {
+				salary_code_error = "Salary Code is required.";
+				$("#salary_code_error").text(salary_code_error);
+				$('#salary_code').addClass('is-invalid');
+			} else {
+				salary_code_error = "";
+				$("#salary_code_error").text(salary_code_error);
+				$('#salary_code').removeClass('is-invalid');
+			}
+
+			if(department_name_error == "" && salary_code_error == "") {
+
 				$.ajax({
 					method: 'POST',
 		       		url: '../controllers/controller.department.php',
 		       		data: {
 		       			department_id: id,
 		       			department_name: department_name,
+		       			salary_code: salary_code,
 		       			update_department_name: 1
 		       		},
 		       		dataType: 'json',
@@ -201,10 +220,17 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				        setTimeout(function() {
 				            $('#update-loader').removeClass('loader');
 				            $('#update-dimmer-content').removeClass('dimmer-content');
-			       			if (response.error) {
-								$("#update_department_name_error").text(response.error);
-								$('#update_department_name_input').addClass('is-invalid');
-			       			} 
+			       			
+			       			if (response.error_department_name) {
+								$("#department_name_error").text(response.error_department_name);
+								$('#department_name').addClass('is-invalid');
+			       			}
+
+			       			if (response.error_salary_code) {
+								$("#salary_code_error").text(response.error_salary_code);
+								$('#salary_code').addClass('is-invalid');
+			       			}
+
 		       				if (response.success) {
 		       					Swal.fire({
 								  type: 'success',
@@ -229,6 +255,58 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 		 * End of updating of department
 		 */
 
+		 //restore
+		 $('.restoreDepartmentBtn').on('click', function(e) {
+			e.preventDefault();
+
+			var id = $(this).data('id');
+			var name = $(this).data('name');
+			// console.log(id);
+			
+			Swal.fire({
+			  title: 'Restore Department: ' + name + '?',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, restore it!'
+			}).then((result) => {
+			  if (result.value) {
+			  	$.ajax({
+					method: 'POST',
+		       		url: '../controllers/controller.department.php',
+		       		data: {
+		       			id: name,
+		       			restore_department: 1
+		       		},
+		       		dataType: 'json',
+		       		success: function(response) {
+		       			$('#archive-loader').addClass('loader');
+				        $('#archive-dimmer-content').addClass('dimmer-content');
+				        setTimeout(function() {
+				            $('#archive-loader').removeClass('loader');
+				            $('#archive-dimmer-content').removeClass('dimmer-content');
+			       			if(response.success) {
+			   					Swal.fire({
+								  type: 'success',
+								  title: response.success,
+								  confirmButtonColor: '#3085d6',
+								  confirmButtonText: 'OK'
+								}).then((result) => {
+								  if (result.value) {
+								  	location.reload();
+								  }
+								});
+							}
+						}, 2000);
+		       		} 
+				});
+			  }
+			});
+
+			return false;
+
+		});
 
 	});
 });

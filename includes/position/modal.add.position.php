@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"><i class="fe fe-times"></i></span>
         </button>
-         <h6 class="form-text text-muted"><span class="text-danger">*</span> required fields.</h6>
+         <h6 class="form-text text-muted float-right mr-2"><span class="text-danger">*</span> required fields.</h6>
         <div class="card text-white bg-lime mb-1">
           <div class="card-body p-3">
              <h6 class="card-title"><i class="fe fe-layers"></i> Add Position</h6>
@@ -39,11 +39,6 @@
                           <span id="department_name_error" class="invalid-feedback"></span>
                       </div>
 
-                      <div class="form-group">
-                           <label class="form-label" for="position_name">Position Name<span class="text-danger">*</span></label>
-                           <input type="text" class="required form-control" id="position_name" placeholder="Position Name" autofocus="true" required/>
-                           <span id="position_name_error" class="invalid-feedback"></span>
-                      </div>
 
                       <div class="row">
                           <div class="col-md-6 col-xs-12">
@@ -64,6 +59,11 @@
                           </div>
                       </div>
 
+                      <div class="form-group">
+                           <label class="form-label" for="position_name">Position Name<span class="text-danger">*</span></label>
+                           <input type="text" class="required form-control" id="position_name" placeholder="Position Name" autofocus="true" required/>
+                           <span id="position_name_error" class="invalid-feedback"></span>
+                      </div>
                       
                       <div class="text-right">
                           <button type="submit" class="btn btn-success" id="addPositionBtn">Add</button>

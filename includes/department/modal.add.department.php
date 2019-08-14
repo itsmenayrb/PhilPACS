@@ -18,7 +18,7 @@
                 <div id="dimmer-content">
                   <form class="m-t-40" id="addDepartmentForm" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
                       <div class="alert alert-success">
-                        <i class="fe fe-info"></i> Press and hold <kbd>ctrl</kbd> key to select multiple salary code.  
+                        <i class="fe fe-info"></i> Press and hold <kbd>ctrl</kbd> or <kbd>shift</kbd> key to select multiple salary code.  
                       </div>
 
                       <div class="form-group">
