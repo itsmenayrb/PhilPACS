@@ -10,75 +10,43 @@
 
    }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-   public function RequestFrom($RequestType, $lastName, $Request, $DateFrom, $DateTo, $Reason){
-=======
    public function RequestFrom($RequestType, $lastName, $TypeRequest, $DateFrom, $DateTo, $Reason){
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
-   public function RequestFrom($RequestType, $lastName, $TypeRequest, $DateFrom, $DateTo, $Reason){
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
      try {
 
 
        if ($RequestType == 'OverTime Request') {
-         $Request = 'None';
+         $TypeRequest = 'None';
+         $TimeFrom =date("H:i", strtotime("$DateFrom"));
+         $TimeTo =date("H:i", strtotime("$DateTo"));
+         $DateFrom = date("Y-m-d $TimeFrom");
+         $DateTo = date("Y-m-d $TimeTo");
        }
-<<<<<<< HEAD
-<<<<<<< HEAD
-       $sql = "SELECT firstName, lastName FROM totalhourstbl WHERE lastName = '$lastName'";
-=======
+       $DateFrom = date("$DateFrom");
+       $DateTo = date("$DateTo");
        $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
-       $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
        $result = $this->conn->runQuery($sql);
        $numRows = $result->execute();
        $rows = $result->fetch(PDO::FETCH_ASSOC);
 
        $firstName = $rows['firstName'];
 
-      $DateRequest = date("Y-m-d h:i:s");
+      $DateRequest = date("Y-m-d H:i:s");
        $status = 'pending';
        $stmt = $this->conn->runQuery("INSERT INTO requestformtbl(RequestType, firstName, lastName, Request, DateFrom, DateTo, Reason, DateRequest, status)
-<<<<<<< HEAD
-<<<<<<< HEAD
-       VALUES (:RequestType, :firstName, :lastName, :Request, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
-=======
        VALUES (:RequestType, :firstName, :lastName, :TypeRequest, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
-       VALUES (:RequestType, :firstName, :lastName, :TypeRequest, :DateFrom, :DateTo, :Reason, :DateRequest, :status)");
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
 
        $stmt->bindparam(":RequestType", $RequestType);
        $stmt->bindparam(":firstName", $firstName);
        $stmt->bindparam(":lastName", $lastName);
-<<<<<<< HEAD
-<<<<<<< HEAD
-       $stmt->bindparam(":Request", $Request);
-=======
        $stmt->bindparam(":TypeRequest", $TypeRequest);
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
-       $stmt->bindparam(":TypeRequest", $TypeRequest);
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
        $stmt->bindparam(":DateFrom", $DateFrom);
        $stmt->bindparam(":DateTo", $DateTo);
        $stmt->bindparam(":Reason", $Reason);
        $stmt->bindparam(":DateRequest", $DateRequest);
        $stmt->bindparam(":status", $status);
        $stmt->execute();
-       ?>
-        <script type="text/javascript">
-          alert("Submitted to HR department");
-
-        </script>
-       <?php
-       return 0;
+       return $stmt;
      }catch (PDOException $e) {
       echo "Connection Error: " . $e->getMessage();
    }
@@ -104,12 +72,6 @@
           $stmt = $this->conn->runQuery("UPDATE requestformtbl SET status ='approved' WHERE requestID =:requestID");
           $stmt->bindparam(":requestID", $requestID);
           $stmt->execute();
-          ?>
-            <script type="text/javascript">
-              alert("Successful Approved");
-            </script>
-          <?php
-
           return $stmt;
         } catch (PDOException $e) {
          echo "Connection Error: " . $e->getMessage();
@@ -121,13 +83,7 @@
           $stmt = $this->conn->runQuery("UPDATE requestformtbl SET status ='declined' WHERE requestID =:requestID");
           $stmt->bindparam(":requestID", $requestID);
           $stmt->execute();
-
-          ?>
-            <script type="text/javascript">
-              alert("Successful Declined");
-            </script>
-          <?php
-
+          return $stmt;
         } catch (PDOException $e) {
          echo "Connection Error: " . $e->getMessage();
        }
@@ -139,15 +95,7 @@
         try {
 
             $sql = "SELECT RequestType, firstName, lastName, Request,
-<<<<<<< HEAD
-<<<<<<< HEAD
-             DateFrom, DateTo, Reason, requestID
-=======
              DateFrom, DateTo, Reason, requestID, status
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
-             DateFrom, DateTo, Reason, requestID, status
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
              FROM requestformtbl WHERE requestID = '$requestID'";
             $result = $this->conn->runQuery($sql);
             $numRows = $result->execute();
@@ -158,7 +106,7 @@
               echo "
               <div class='card'>
                   <div class='card-body'>
-                    <form method ='POST'>
+                    <form class='m-t-40' method ='POST'>
                       <div class='tab-content tabcontent-border p-2'>
                           <div class='tab-pane active'role='tabpanel'>
                               <div class='p-3'>
@@ -200,55 +148,73 @@
                                           </div>
 
                                       </div>
+                                      ";
+                                      if ($rows['RequestType'] == 'OverTime Request') {
+                                        $DateFrom =  date('h:i A', strtotime($rows['DateFrom']));
+                                        $DateTo =  date('h:i A', strtotime($rows['DateTo']));
 
+                                        echo "
+                                        <div class='row'>
+                                            <div class='col-md-6 col-xs-12'>
+                                                <div class='form-group'>
+                                                     <label class='form-control-label'>From</label>
+                                                     <input type='text' class='required form-control' value='". $DateFrom ."' name='DateFrom' id='DataFrom' disabled/>
+
+                                                </div>
+                                            </div>
+                                            <div class='col-md-6 col-xs-12'>
+                                                <div class='form-group'>
+                                                     <label class='form-control-label'>To</label>
+                                                     <input type='text' class='required form-control' value='". $DateTo ."' name='DateTo' id='DataTo' disabled/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        ";
+
+                                      }
+
+                                      else{
+                                        $DateFrom =  date('Y-m-d', strtotime($rows['DateFrom']));
+                                        $DateTo =  date('Y-m-d', strtotime($rows['DateTo']));
+
+                                      echo "
                                       <div class='row'>
                                           <div class='col-md-6 col-xs-12'>
                                               <div class='form-group'>
                                                    <label class='form-control-label'>Date From</label>
-                                                   <input type='date' class='required form-control' value='". $rows['DateFrom'] ."' name='DateFrom' id='DataFrom' placeholder='dd/mm/yyyy' disabled/>
+                                                   <input type='text' class='required form-control' value='". $DateFrom ."' name='DateFrom' id='DataFrom' disabled/>
 
                                               </div>
                                           </div>
                                           <div class='col-md-6 col-xs-12'>
                                               <div class='form-group'>
                                                    <label class='form-control-label'>Date To</label>
-                                                   <input type='date' class='required form-control' value='". $rows['DateTo'] ."' name='DateTo' id='DataTo' placeholder='dd/mm/yyyy' disabled/>
+                                                   <input type='text' class='required form-control' value='". $DateTo ."' name='DateTo' id='DataTo' disabled/>
 
                                               </div>
                                           </div>
                                       </div>
-
+                                      ";
+                                    }
+                                      echo "
                                       <div class='form-group'>
                                            <label class='form-control-label'>Reason</label>
-                                           <textarea class='required email form-control' placeholder='". $rows['Reason'] ."' name='Reason' id='Reason' disabled/></textarea>
+                                           <textarea class='form-control require'rows='4' cols='50' placeholder='". $rows['Reason'] ."' name='Reason' id='Reason' disabled/></textarea>
 
                                       </div>
-                                      <input type='text' name='requestID' id='requestID' value='". $requestID ."' hidden='true'/>
-
+                                      <input type='text' name='requestID' id='requestid' value='". $requestID ."' hidden='true'/>
 
                                       <div class='text-right'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-                                      <button class='btn btn-primary' type='submit' name='Approved'>Approved</button>
-                                      <button class='btn btn-danger' type='submit' name='Declined'>Declined</button>
-
-=======
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                       ";
                                       ?>
                                       <?php if ($rows['status'] == 'pending'): ?>
-                                        <button class='btn btn-primary' type='submit' name='Approved'>Approved</button>
-                                        <button class='btn btn-danger' type='submit' name='Declined'>Declined</button>
+                                        <button class="btn btn-success" type="submit" id='approved'>Approved</button>
+                                        <button class='btn btn-danger' type='submit' id='declined'>Declined</button>
 
                                       <?php endif; ?>
                                       <?php
                                       echo "
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                                       </div>
 
                                   </div>
@@ -267,27 +233,6 @@
 
         try {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            $sql = "SELECT * FROM requestformtbl WHERE status = 'approved'";
-            $result = $this->conn->runQuery($sql);
-            $numRows = $result->execute();
-            echo "<tbody>";
-            if ($numRows > 0) {
-               while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-                  echo "
-                        <tr>
-                            <td>". $rows['RequestType'] ."</td>
-                            <td>". $rows['lastName'] ."</td>
-                            <td>". $rows['Request'] ."</td>
-                            <td>". $rows['DateRequest'] ."</td>
-                            <td>". $rows['DateFrom'] ."</td>
-                            <td>". $rows['DateTo'] ."</td>
-                            <td>". $rows['Reason'] ."</td>
-                            ";
-=======
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
           $status ='approved';
            $sql = "SELECT personaldetailstbl.photo AS profilePicture,
                                        personaldetailstbl.lastName, requestformtbl.lastName,
@@ -305,26 +250,31 @@
               while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
                 $profilePicture = $rows['profilePicture'];
                 $requestID = $rows['requestID'];
+                $DateRequest =  date('Y-m-d h:i A', strtotime($rows['DateRequest']));
+
+                if ($rows['RequestType'] == 'Absent Request') {
+                  $DateFrom =  date('Y-m-d', strtotime($rows['DateFrom']));
+                  $DateTo =  date('Y-m-d', strtotime($rows['DateTo']));
+                }
+                else {
+                  $DateFrom =  date('h:i A', strtotime($rows['DateFrom']));
+                  $DateTo =  date('h:i A', strtotime($rows['DateTo']));
+
+                }
+
                        ?>
-                       <tr class="employee-link" data-toggle="modal" data-target="#viewRequestModal" data-id="<?=$requestID;?>">
+                       <tr class="requisition-link" data-toggle="modal" data-target="#viewModal" data-id="<?=$requestID;?>">
                        <td>
                              <span class="avatar d-block rounded" style="background-image: url(<?php if ($profilePicture !== "") { ?>'<?=$profilePicture?>' <?php ; } else { ?> ../assets/logo/image_placeholder.png <?php } ?>)"></span>
                       </td>
                       <?php
                       echo "
-
                            <td>". $rows['RequestType'] ."</td>
                            <td>". $rows['lastName'] ."</td>
                            <td>". $rows['Request'] ."</td>
-                           <td>". $rows['DateRequest'] ."</td>
-                           <td>". $rows['DateFrom'] ."</td>
-                           <td>". $rows['DateTo'] ."</td>
+                           <td>". $DateRequest ."</td>
                            <td>". $rows['Reason'] ."</td>
                            ";
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                         }
                     }
                  echo "
@@ -337,24 +287,6 @@
          public function viewDeclinedForm(){
 
            try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-               $sql = "SELECT * FROM requestformtbl WHERE status = 'declined'";
-               $result = $this->conn->runQuery($sql);
-               $numRows = $result->execute();
-               echo "<tbody>";
-               if ($numRows > 0) {
-                  while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-                     echo "
-                           <tr>
-                               <td>". $rows['RequestType'] ."</td>
-                               <td>". $rows['lastName'] ."</td>
-                               <td>". $rows['Request'] ."</td>
-                               <td>". $rows['DateRequest'] ."</td>
-=======
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
               $status ='declined';
                $sql = "SELECT personaldetailstbl.photo AS profilePicture,
                                            personaldetailstbl.lastName, requestformtbl.lastName,
@@ -373,10 +305,16 @@
                     $profilePicture = $rows['profilePicture'];
                     $requestID = $rows['requestID'];
                     $DateRequest =  date('Y-m-d h:i A', strtotime($rows['DateRequest']));
+                    if ($rows['RequestType'] == 'Absent Request') {
+                      $DateFrom =  date('Y-m-d', strtotime($rows['DateFrom']));
+                      $DateTo =  date('Y-m-d', strtotime($rows['DateTo']));
+                    }
+                    else {
+                      $DateFrom =  date('h:i A', strtotime($rows['DateFrom']));
+                      $DateTo =  date('h:i A', strtotime($rows['DateTo']));
 
-
-                           ?>
-                           <tr class="employee-link" data-toggle="modal" data-target="#viewRequestModal" data-id="<?=$requestID;?>">
+                    }       ?>
+                           <tr class="requisition-link" data-toggle="modal" data-target="#viewModal" data-id="<?=$requestID;?>">
                            <td>
                                <span class="avatar d-block rounded" style="background-image: url(<?php if ($profilePicture !== "") { ?>'<?=$profilePicture?>' <?php ; } else { ?> ../assets/logo/image_placeholder.png <?php } ?>)"></span>
                           <?php
@@ -387,12 +325,6 @@
                                <td>". $rows['lastName'] ."</td>
                                <td>". $rows['Request'] ."</td>
                                <td>". $DateRequest ."</td>
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
-                               <td>". $rows['DateFrom'] ."</td>
-                               <td>". $rows['DateTo'] ."</td>
                                <td>". $rows['Reason'] ."</td>
                                ";
                            }
@@ -407,26 +339,6 @@
             public function employeelastName(){
               try
               {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                $sql = "SELECT lastName FROM totalhourstbl";
-                $result = $this->conn->runQuery($sql);
-                $numRows = $result->execute();
-
-                if ($numRows > 0) {
-                  while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-
-                    echo "
-                           <option value='". $rows['lastName'] ."'>". $rows['lastName'] ."</option>
-                    ";
-                  }
-                }
-
-
-
-=======
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
                 $sql = "SELECT lastName FROM personaldetailstbl";
                 $result = $this->conn->runQuery($sql);
                 $numRows = $result->execute();
@@ -436,10 +348,6 @@
                            <option value='". $rows['lastName'] ."'>". $rows['lastName']."</option>
                     ";
                   }
-<<<<<<< HEAD
->>>>>>> 2a4a74c822818c0ccb191a0cd1353c5c64790ba7
-=======
->>>>>>> 97ea8b4d7ca0c3fde4df973995007f0a0dfd42a9
               } catch (PDOException $e) {
                echo "Connection Error: " . $e->getMessage();
              }
