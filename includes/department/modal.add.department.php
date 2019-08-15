@@ -56,3 +56,14 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script type="text/javascript">
+  function clearForm() {
+    $('#addDepartmentForm')[0].reset();
+    $('#salary_code').removeClass('is-invalid');
+    $('#salary_code_error').text("");
+
+    $('#department_name').removeClass('is-invalid');
+    $('#department_name_error').text("");    
+  }
+</script>

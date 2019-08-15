@@ -26,7 +26,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
        	 		end: '2100-01-01'
 		    },
 
-		    eventRender: function(event, element) {
+		    eventRender: function(event, element, view) {
 	    		// element.find('.fc-title').append("<br/>" + event.description);
 	    		element.popover({
 	    			title: event.title,
@@ -37,56 +37,78 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 
 	    		});
 
+	    		if (event.allDay === 'true') {
+	    			event.allDay = true;
+	    		} else {
+	    			event.allDay = false;
+	    		}
+
 	    	},
 
 		    select: function(start, end, allDay) {
-     			
-	     		$('#addEventModal').modal('show');
+			
      			var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
-	     		$('#addEventBtn').on('click', function(e) {
-	     			e.preventDefault();
-	     			
-	     			var title_error= "";
+			    Swal.fire({
+			    	title: 'Add Event',
+			    	html:
+			    		'<div class="container">' +
+				    	 	'<div class="form-group">' +
+	                            '<label class="form-label text-left" for="title">Title<span class="text-danger">*</span></label>' +
+	                            '<input type="text" class="form-control" id="title" name="title" placeholder="Title" />' +
+	                            '<span class="invalid-feedback" id="title_error"></span>' +
+	                        '</div>' +
 
-	     			var title = $('#title').val();
-	     			var description = $('#description').val();
+	                        '<div class="form-group">' +
+	                            '<label class="form-label text-left" for="description">Description</label>' +
+	                            '<textarea name="description" id="description" class="form-control" placeholder="Description"></textarea>' +
+	                            '<span class="invalid-feedback" id="description_error"></span>' +
+	                        '</div>' +
+	                    '</div>',
+	                showCancelButton: true,
+				    confirmButtonColor: "#1FAB45",
+				    confirmButtonText: "Add Event",
+				    cancelButtonText: "Cancel",
+				    buttonsStyling: true,
+				    allowOutsideClick: false,
+				    showLoaderOnConfirm: true,
+				    preConfirm: () => {
+				    	let title = Swal.getPopup().querySelector('#title').value;
+				    	let description = Swal.getPopup().querySelector('#description').value;
 
-	     			if (title == "") {
-	     				title_error = "Title is required.";
-	     				$('#title_error').text(title_error);
-	     				$('#title').addClass('is-invalid');
-	     			} else {
-	     				title_error = "";
-	     				$('#title_error').text(title_error);
-	     				$('#title').removeClass('is-invalid');
-	     			}
-
-	     			if (title_error == "") {
-					    $.ajax({
-		        			url:"../controllers/controller.event.php",
-					       	type:"POST",
-					       	data:{
-					       		title: title,
-					       		description: description,
-					       		start: start,
-					       		end: end,
-					       		addEvent: 1
-					       	},
-					       	success:function() {
-					       		$('#addEventModal').modal('hide');
-					       		$('#addEventForm')[0].reset();
-						        calendar.fullCalendar('refetchEvents');
-						        Swal.fire({
-						        	title: 'Event added successlly!',
-						        	type: 'success'
-						        });
-		       				}
-		      			});
-	     			}
-
-	     		});
+				    	if (title === '') {
+				    		Swal.showValidationMessage(`Title is required`);
+				    	} else {
+				    		return {
+				    			title: title,
+				    			description: description
+				    		};
+				    	}
+				    }
+			    }).then((result) => {
+				    $.ajax({
+	        			url:"../controllers/controller.event.php",
+				       	type:"POST",
+				       	data:{
+				       		title: result.value.title,
+				       		description: result.value.description,
+				       		start: start,
+				       		end: end,
+				       		addEvent: 1
+				       	},
+				       	success:function() {
+				       		$('#addEventModal').modal('hide');
+				       		$('#addEventForm')[0].reset();
+					        calendar.fullCalendar('refetchEvents');
+					        Swal.fire({
+					        	title: 'Event added successlly!',
+					        	type: 'success'
+					        });
+	       				}
+	      			});
+			    });
+			    calendar.fullCalendar('unselect');
 	    	},
 
 		    editable:true,
@@ -227,4 +249,6 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 		}
 
 	}); // document ready
+
+	
 }); // require

@@ -10,8 +10,8 @@
 
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
     <title>Accounting :: Payroll</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext"> -->
     <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
 
@@ -125,6 +125,7 @@
         </div> <!-- /page -->
         <?php include '../includes/footer.php'; ?>
 
+    <?php include '../includes/modal.password.php'; ?>
 
     <script type="text/javascript" src="../ajax/ajax.payroll.js"></script>
     <script type="text/javascript">

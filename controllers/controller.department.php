@@ -23,7 +23,13 @@ if (isset($_POST['department_name']) && !isset($_POST['update_department_name'])
 
 		echo json_encode(array("error_department_name" => "Department Name is required."));
 
-	} 
+	}
+
+	if (checkDepartment($department_name)) {
+
+		echo json_encode(array("error_department_name" => "Invalid Department Name."));
+
+	}
 
 	if (empty($salary_code)) {
 
@@ -115,4 +121,11 @@ if (isset($_POST['restore_department'])) {
 		echo json_encode(array("success" => "Department Restored Successfully!"));
 	}
 
+}
+
+function checkDepartment($name) {
+	if(preg_match("/^[a-zA-z\s]+$/", $name)) {
+		return true;
+	}
+	return false;
 }

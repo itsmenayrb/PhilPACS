@@ -77,9 +77,15 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				$("#department_name_error").text(department_name_error);
 				$('#department_name').addClass('is-invalid');
 			} else {
-				department_name_error = "";
-				$("#department_name_error").text(department_name_error);
-				$('#department_name').removeClass('is-invalid');
+				if (validatePosition(department_name) == false) {
+					department_name_error = "Invalid Department Name.";
+					$("#department_name_error").text(department_name_error);
+					$('#department_name').addClass('is-invalid');
+				} else {
+					department_name_error = "";
+					$("#department_name_error").text(department_name_error);
+					$('#department_name').removeClass('is-invalid');
+				}
 			}
 
 			if (position_name == "") {
@@ -87,9 +93,15 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				$("#position_name_error").text(position_name_error);
 				$('#position_name').addClass('is-invalid');
 			} else {
-				position_name_error = "";
-				$("#position_name_error").text(position_name_error);
-				$('#position_name').removeClass('is-invalid');
+				if (validatePosition(position_name) == false) {
+					position_name_error = "Invalid Position Name.";
+					$("#position_name_error").text(position_name_error);
+					$('#position_name').addClass('is-invalid');
+				} else {
+					position_name_error = "";
+					$("#position_name_error").text(position_name_error);
+					$('#position_name').removeClass('is-invalid');
+				}
 			}
 
 			// if (amount == "") {
@@ -507,6 +519,11 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			return false;
 
 		});
+
+		function validatePosition(name) {
+	    	var re = /^[A-Za-z\s]*$/;
+	    	return re.test(name);
+	    }
 
 	});
 });

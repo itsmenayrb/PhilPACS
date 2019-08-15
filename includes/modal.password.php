@@ -30,6 +30,9 @@
                             <input type="hidden" id="hiddenSaveAttendanceForPendingID" name="hiddenSaveAttendanceForPendingID" value="" />
                             <input type="hidden" id="hiddenSendToPayrollID" name="hiddenSendToPayrollID" value="" />
                             <input type="hidden" id="hiddenRemoveAttendanceID" name="hiddenRemoveAttendanceID" value="" />
+
+                            <!-- payroll -->
+                            <input type="hidden" id="hiddenPayrollID" name="hiddenPayrollID" value="" />                            
                             <!-- /// -->
                             <input type="hidden" id="hiddenHref" name="hiddenHref" value="" />
                             <input type="hidden" id="hiddenIDSession" name="hiddenIDSession" value="<?=$_SESSION['accountID'];?>" />

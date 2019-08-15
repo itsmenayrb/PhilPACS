@@ -53,9 +53,13 @@ CREATE TABLE `addresstbl` (
   `country` varchar(50) NOT NULL DEFAULT 'Philippines',
   `zipcode` int(4) DEFAULT NULL,
   PRIMARY KEY (`addressID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `addresstbl` */
+
+insert  into `addresstbl`(`addressID`,`houseNumber`,`block`,`lot`,`street`,`subdivision`,`barangay`,`city`,`province`,`country`,`zipcode`) values 
+(1,'House #l','Block l','Lot l','l St.','l','l','l','l','Philippines',3123),
+(2,'House #l','Block l','Lot l','l St.','l','l','l','l','l',1232);
 
 /*Table structure for table `attendancetbl` */
 
@@ -74,7 +78,7 @@ CREATE TABLE `attendancetbl` (
   `status` tinyint(1) NOT NULL,
   `hashedFile` varchar(100) NOT NULL,
   PRIMARY KEY (`attendanceID`)
-) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
 
 /*Data for the table `attendancetbl` */
 
@@ -134,61 +138,61 @@ insert  into `attendancetbl`(`attendanceID`,`firstName`,`lastName`,`Edate`,`EMTi
 (53,'Kenn Edward','Abiertas','2019-06-13','08:12:57','12:37:46','01:09:15','05:04:28',500.04,1,'1c435f753b779b209128ae3fff9837d2'),
 (54,'Kenn Edward','Abiertas','2019-06-19','08:08:31','12:36:01','01:13:33','05:13:39',507.6,1,'1c435f753b779b209128ae3fff9837d2'),
 (55,'Kenn Edward','Abiertas','2019-06-24','08:03:10','12:01:18','01:09:09','05:05:09',474.13,1,'1c435f753b779b209128ae3fff9837d2'),
-(111,'Jamille Ann','Agbuya','2019-06-25','07:39:20','12:05:16','01:00:48','05:04:35',509.71,0,'03f021358f18c27b1226ed160d1dd54d'),
-(112,'Earvin John','Tallod','2019-06-25','08:06:05','12:06:11','01:01:20','05:07:10',485.93,0,'03f021358f18c27b1226ed160d1dd54d'),
-(113,'Julius Michael','Balingit','2019-06-25','07:27:10','12:05:57','01:01:02','05:08:56',526.68,0,'03f021358f18c27b1226ed160d1dd54d'),
-(114,'Elsa','Contreras','2019-06-25','07:55:22','12:05:27','01:00:55','05:09:48',498.96,0,'03f021358f18c27b1226ed160d1dd54d'),
-(115,'Jeric','Macalawa','2019-06-25','07:47:57','12:05:24','01:01:09','05:09:07',505.42,0,'03f021358f18c27b1226ed160d1dd54d'),
-(116,'Adam','Tabudlong','2019-06-25','07:55:30','12:06:14','01:01:22','05:10:03',499.41,0,'03f021358f18c27b1226ed160d1dd54d'),
-(117,'Kenn Edward','Abiertas','2019-06-25','07:55:40','12:05:46','01:01:12','05:08:53',497.78,0,'03f021358f18c27b1226ed160d1dd54d'),
-(118,'Jamille Ann','Agbuya','2019-06-26','07:25:07','12:36:36','01:06:23','05:03:47',548.88,0,'03f021358f18c27b1226ed160d1dd54d'),
-(119,'Earvin John','Tallod','2019-06-26','07:29:51','12:37:43','01:09:18','05:04:53',543.45,0,'03f021358f18c27b1226ed160d1dd54d'),
-(120,'Julius Michael','Balingit','2019-06-26','07:44:35','12:37:35','01:06:49','03:51:52',458.05,0,'03f021358f18c27b1226ed160d1dd54d'),
-(121,'Elsa','Contreras','2019-06-26','08:12:44','12:36:43','01:09:25','05:05:02',499.6,0,'03f021358f18c27b1226ed160d1dd54d'),
-(122,'Jeric','Macalawa','2019-06-26','08:09:35','12:32:07','01:20:53','05:02:00',483.65,0,'03f021358f18c27b1226ed160d1dd54d'),
-(123,'Kenn Edward','Abiertas','2019-06-26','08:12:57','12:37:46','01:09:15','05:04:28',500.04,0,'03f021358f18c27b1226ed160d1dd54d'),
-(124,'Jamille Ann','Agbuya','2019-06-29','07:53:38','12:56:31','01:07:19','05:38:19',573.88,0,'03f021358f18c27b1226ed160d1dd54d'),
-(125,'Earvin John','Tallod','2019-06-29','08:13:17','12:02:16','01:12:46','05:38:29',494.7,0,'03f021358f18c27b1226ed160d1dd54d'),
-(126,'Elsa','Contreras','2019-06-29','08:13:12','12:02:36','01:08:55','05:39:18',499.78,0,'03f021358f18c27b1226ed160d1dd54d'),
-(127,'Jeric','Macalawa','2019-06-29','08:02:26','12:02:27','01:04:56','05:39:37',514.7,0,'03f021358f18c27b1226ed160d1dd54d'),
-(128,'Kenn Edward','Abiertas','2019-06-29','08:13:22','12:02:30','01:12:42','05:39:27',495.88,0,'03f021358f18c27b1226ed160d1dd54d'),
-(129,'Jamille Ann','Agbuya','2019-06-30','06:47:10','12:31:38','01:03:35','07:48:39',749.54,0,'03f021358f18c27b1226ed160d1dd54d'),
-(130,'Earvin John','Tallod','2019-06-30','08:10:51','12:31:46','01:03:26','05:57:37',555.1,0,'03f021358f18c27b1226ed160d1dd54d'),
-(131,'Elsa','Contreras','2019-06-30','06:47:25','12:31:10','01:03:20','05:57:57',638.37,0,'03f021358f18c27b1226ed160d1dd54d'),
-(132,'Jeric','Macalawa','2019-06-30','06:48:23','12:31:21','01:03:30','05:57:39',637.12,0,'03f021358f18c27b1226ed160d1dd54d'),
-(133,'Adam','Tabudlong','2019-06-30','06:47:34','12:31:28','01:03:48','05:57:23',637.48,0,'03f021358f18c27b1226ed160d1dd54d'),
-(134,'Kenn Edward','Abiertas','2019-06-30','06:47:42','12:31:32','01:03:43','05:58:18',638.41,0,'03f021358f18c27b1226ed160d1dd54d'),
-(135,'Jamille Ann','Agbuya','2019-07-01','07:43:34','12:03:33','01:47:14','05:28:37',481.36,0,'03f021358f18c27b1226ed160d1dd54d'),
-(136,'Earvin John','Tallod','2019-07-01','08:13:38','12:03:40','01:32:17','05:26:26',464.18,0,'03f021358f18c27b1226ed160d1dd54d'),
-(137,'Elsa','Contreras','2019-07-01','07:43:45','12:03:53','01:07:37','05:27:32',520.05,0,'03f021358f18c27b1226ed160d1dd54d'),
-(138,'Jeric','Macalawa','2019-07-01','08:04:25','12:04:24','01:01:17','05:26:33',505.25,0,'03f021358f18c27b1226ed160d1dd54d'),
-(139,'Adam','Tabudlong','2019-07-01','08:14:32','12:40:14','01:07:45','05:26:47',524.73,0,'03f021358f18c27b1226ed160d1dd54d'),
-(140,'Kenn Edward','Abiertas','2019-07-01','08:14:41','12:03:46','01:31:51','05:26:39',463.88,0,'03f021358f18c27b1226ed160d1dd54d'),
-(141,'Jamille Ann','Agbuya','2019-07-02','07:39:25','12:34:52','01:04:42','05:11:50',542.58,0,'03f021358f18c27b1226ed160d1dd54d'),
-(142,'Earvin John','Tallod','2019-07-02','08:00:20','12:35:16','01:07:43','05:13:31',520.73,0,'03f021358f18c27b1226ed160d1dd54d'),
-(143,'Elsa','Contreras','2019-07-02','08:08:37','12:35:05','01:03:41','05:15:14',518.02,0,'03f021358f18c27b1226ed160d1dd54d'),
-(144,'Jeric','Macalawa','2019-07-02','08:08:32','12:36:50','01:29:58','05:13:37',491.95,0,'03f021358f18c27b1226ed160d1dd54d'),
-(145,'Adam','Tabudlong','2019-07-02','08:08:40','12:36:07','01:05:03','05:05:03',507.45,0,'03f021358f18c27b1226ed160d1dd54d'),
-(146,'Kenn Edward','Abiertas','2019-07-02','08:08:31','12:36:01','01:13:33','05:13:39',507.6,0,'03f021358f18c27b1226ed160d1dd54d'),
-(147,'Jamille Ann','Agbuya','2019-07-03','07:43:42','12:22:37','01:05:01','05:09:15',523.15,0,'03f021358f18c27b1226ed160d1dd54d'),
-(148,'Earvin John','Tallod','2019-07-03','08:05:23','12:08:47','01:05:55','05:09:45',487.23,0,'03f021358f18c27b1226ed160d1dd54d'),
-(149,'Elsa','Contreras','2019-07-03','08:05:18','12:08:26','01:05:05','05:09:49',487.86,0,'03f021358f18c27b1226ed160d1dd54d'),
-(150,'Jeric','Macalawa','2019-07-03','07:38:23','12:08:08','01:05:21','05:08:41',513.08,0,'03f021358f18c27b1226ed160d1dd54d'),
-(151,'Adam','Tabudlong','2019-07-03','08:05:09','12:22:44','01:05:25','05:09:20',501.5,0,'03f021358f18c27b1226ed160d1dd54d'),
-(152,'Kenn Edward','Abiertas','2019-07-03','08:05:28','12:08:36','01:05:31','05:09:35',487.2,0,'03f021358f18c27b1226ed160d1dd54d'),
-(153,'Jamille Ann','Agbuya','2019-07-04','07:45:45','12:04:06','01:03:46','05:02:41',497.27,0,'03f021358f18c27b1226ed160d1dd54d'),
-(154,'Elsa','Contreras','2019-07-04','08:02:11','12:04:10','01:05:08','05:05:10',482.01,0,'03f021358f18c27b1226ed160d1dd54d'),
-(155,'Jeric','Macalawa','2019-07-04','07:55:38','12:03:44','01:04:06','05:03:06',487.1,0,'03f021358f18c27b1226ed160d1dd54d'),
-(156,'Adam','Tabudlong','2019-07-04','08:02:05','12:04:00','01:04:37','05:01:37',478.92,0,'03f021358f18c27b1226ed160d1dd54d'),
-(157,'Kenn Edward','Abiertas','2019-07-04','08:04:52','12:03:52','01:04:47','05:01:52',476.08,0,'03f021358f18c27b1226ed160d1dd54d'),
-(158,'Jamille Ann','Agbuya','2019-07-05','08:02:35','12:00:53','01:09:01','05:04:58',474.25,0,'03f021358f18c27b1226ed160d1dd54d'),
-(159,'Kenn Edward','Abiertas','2019-07-05','08:03:10','12:01:18','01:09:09','05:05:09',474.13,0,'03f021358f18c27b1226ed160d1dd54d'),
-(160,'Jamille Ann','Agbuya','2019-07-08','07:39:14','12:01:15','01:06:06','05:09:14',505.15,0,'03f021358f18c27b1226ed160d1dd54d'),
-(161,'Earvin John','Tallod','2019-07-08','07:48:00','12:00:43','01:10:05','05:08:11',490.82,0,'03f021358f18c27b1226ed160d1dd54d'),
-(162,'Elsa','Contreras','2019-07-08','08:06:59','12:01:03','01:10:13','05:09:09',473,0,'03f021358f18c27b1226ed160d1dd54d'),
-(163,'Jeric','Macalawa','2019-07-08','07:28:26','12:00:56','01:26:54','05:08:56',494.53,0,'03f021358f18c27b1226ed160d1dd54d'),
-(164,'Adam','Tabudlong','2019-07-08','08:06:55','12:00:53','01:10:19','05:08:48',472.45,0,'03f021358f18c27b1226ed160d1dd54d'),
-(165,'Kenn Edward','Abiertas','2019-07-08','08:06:50','12:00:58','01:10:10','05:08:54',472.86,0,'03f021358f18c27b1226ed160d1dd54d');
+(56,'Jamille Ann','Agbuya','2019-06-25','07:39:20','12:05:16','01:00:48','05:04:35',509.71,0,'03f021358f18c27b1226ed160d1dd54d'),
+(57,'Earvin John','Tallod','2019-06-25','08:06:05','12:06:11','01:01:20','05:07:10',485.93,0,'03f021358f18c27b1226ed160d1dd54d'),
+(58,'Julius Michael','Balingit','2019-06-25','07:27:10','12:05:57','01:01:02','05:08:56',526.68,0,'03f021358f18c27b1226ed160d1dd54d'),
+(59,'Elsa','Contreras','2019-06-25','07:55:22','12:05:27','01:00:55','05:09:48',498.96,0,'03f021358f18c27b1226ed160d1dd54d'),
+(60,'Jeric','Macalawa','2019-06-25','07:47:57','12:05:24','01:01:09','05:09:07',505.42,0,'03f021358f18c27b1226ed160d1dd54d'),
+(61,'Adam','Tabudlong','2019-06-25','07:55:30','12:06:14','01:01:22','05:10:03',499.41,0,'03f021358f18c27b1226ed160d1dd54d'),
+(62,'Kenn Edward','Abiertas','2019-06-25','07:55:40','12:05:46','01:01:12','05:08:53',497.78,0,'03f021358f18c27b1226ed160d1dd54d'),
+(63,'Jamille Ann','Agbuya','2019-06-26','07:25:07','12:36:36','01:06:23','05:03:47',548.88,0,'03f021358f18c27b1226ed160d1dd54d'),
+(64,'Earvin John','Tallod','2019-06-26','07:29:51','12:37:43','01:09:18','05:04:53',543.45,0,'03f021358f18c27b1226ed160d1dd54d'),
+(65,'Julius Michael','Balingit','2019-06-26','07:44:35','12:37:35','01:06:49','03:51:52',458.05,0,'03f021358f18c27b1226ed160d1dd54d'),
+(66,'Elsa','Contreras','2019-06-26','08:12:44','12:36:43','01:09:25','05:05:02',499.6,0,'03f021358f18c27b1226ed160d1dd54d'),
+(67,'Jeric','Macalawa','2019-06-26','08:09:35','12:32:07','01:20:53','05:02:00',483.65,0,'03f021358f18c27b1226ed160d1dd54d'),
+(68,'Kenn Edward','Abiertas','2019-06-26','08:12:57','12:37:46','01:09:15','05:04:28',500.04,0,'03f021358f18c27b1226ed160d1dd54d'),
+(69,'Jamille Ann','Agbuya','2019-06-29','07:53:38','12:56:31','01:07:19','05:38:19',573.88,0,'03f021358f18c27b1226ed160d1dd54d'),
+(70,'Earvin John','Tallod','2019-06-29','08:13:17','12:02:16','01:12:46','05:38:29',494.7,0,'03f021358f18c27b1226ed160d1dd54d'),
+(71,'Elsa','Contreras','2019-06-29','08:13:12','12:02:36','01:08:55','05:39:18',499.78,0,'03f021358f18c27b1226ed160d1dd54d'),
+(72,'Jeric','Macalawa','2019-06-29','08:02:26','12:02:27','01:04:56','05:39:37',514.7,0,'03f021358f18c27b1226ed160d1dd54d'),
+(73,'Kenn Edward','Abiertas','2019-06-29','08:13:22','12:02:30','01:12:42','05:39:27',495.88,0,'03f021358f18c27b1226ed160d1dd54d'),
+(74,'Jamille Ann','Agbuya','2019-06-30','06:47:10','12:31:38','01:03:35','07:48:39',749.54,0,'03f021358f18c27b1226ed160d1dd54d'),
+(75,'Earvin John','Tallod','2019-06-30','08:10:51','12:31:46','01:03:26','05:57:37',555.1,0,'03f021358f18c27b1226ed160d1dd54d'),
+(76,'Elsa','Contreras','2019-06-30','06:47:25','12:31:10','01:03:20','05:57:57',638.37,0,'03f021358f18c27b1226ed160d1dd54d'),
+(77,'Jeric','Macalawa','2019-06-30','06:48:23','12:31:21','01:03:30','05:57:39',637.12,0,'03f021358f18c27b1226ed160d1dd54d'),
+(78,'Adam','Tabudlong','2019-06-30','06:47:34','12:31:28','01:03:48','05:57:23',637.48,0,'03f021358f18c27b1226ed160d1dd54d'),
+(79,'Kenn Edward','Abiertas','2019-06-30','06:47:42','12:31:32','01:03:43','05:58:18',638.41,0,'03f021358f18c27b1226ed160d1dd54d'),
+(80,'Jamille Ann','Agbuya','2019-07-01','07:43:34','12:03:33','01:47:14','05:28:37',481.36,0,'03f021358f18c27b1226ed160d1dd54d'),
+(81,'Earvin John','Tallod','2019-07-01','08:13:38','12:03:40','01:32:17','05:26:26',464.18,0,'03f021358f18c27b1226ed160d1dd54d'),
+(82,'Elsa','Contreras','2019-07-01','07:43:45','12:03:53','01:07:37','05:27:32',520.05,0,'03f021358f18c27b1226ed160d1dd54d'),
+(83,'Jeric','Macalawa','2019-07-01','08:04:25','12:04:24','01:01:17','05:26:33',505.25,0,'03f021358f18c27b1226ed160d1dd54d'),
+(84,'Adam','Tabudlong','2019-07-01','08:14:32','12:40:14','01:07:45','05:26:47',524.73,0,'03f021358f18c27b1226ed160d1dd54d'),
+(85,'Kenn Edward','Abiertas','2019-07-01','08:14:41','12:03:46','01:31:51','05:26:39',463.88,0,'03f021358f18c27b1226ed160d1dd54d'),
+(86,'Jamille Ann','Agbuya','2019-07-02','07:39:25','12:34:52','01:04:42','05:11:50',542.58,0,'03f021358f18c27b1226ed160d1dd54d'),
+(87,'Earvin John','Tallod','2019-07-02','08:00:20','12:35:16','01:07:43','05:13:31',520.73,0,'03f021358f18c27b1226ed160d1dd54d'),
+(88,'Elsa','Contreras','2019-07-02','08:08:37','12:35:05','01:03:41','05:15:14',518.02,0,'03f021358f18c27b1226ed160d1dd54d'),
+(89,'Jeric','Macalawa','2019-07-02','08:08:32','12:36:50','01:29:58','05:13:37',491.95,0,'03f021358f18c27b1226ed160d1dd54d'),
+(90,'Adam','Tabudlong','2019-07-02','08:08:40','12:36:07','01:05:03','05:05:03',507.45,0,'03f021358f18c27b1226ed160d1dd54d'),
+(91,'Kenn Edward','Abiertas','2019-07-02','08:08:31','12:36:01','01:13:33','05:13:39',507.6,0,'03f021358f18c27b1226ed160d1dd54d'),
+(92,'Jamille Ann','Agbuya','2019-07-03','07:43:42','12:22:37','01:05:01','05:09:15',523.15,0,'03f021358f18c27b1226ed160d1dd54d'),
+(93,'Earvin John','Tallod','2019-07-03','08:05:23','12:08:47','01:05:55','05:09:45',487.23,0,'03f021358f18c27b1226ed160d1dd54d'),
+(94,'Elsa','Contreras','2019-07-03','08:05:18','12:08:26','01:05:05','05:09:49',487.86,0,'03f021358f18c27b1226ed160d1dd54d'),
+(95,'Jeric','Macalawa','2019-07-03','07:38:23','12:08:08','01:05:21','05:08:41',513.08,0,'03f021358f18c27b1226ed160d1dd54d'),
+(96,'Adam','Tabudlong','2019-07-03','08:05:09','12:22:44','01:05:25','05:09:20',501.5,0,'03f021358f18c27b1226ed160d1dd54d'),
+(97,'Kenn Edward','Abiertas','2019-07-03','08:05:28','12:08:36','01:05:31','05:09:35',487.2,0,'03f021358f18c27b1226ed160d1dd54d'),
+(98,'Jamille Ann','Agbuya','2019-07-04','07:45:45','12:04:06','01:03:46','05:02:41',497.27,0,'03f021358f18c27b1226ed160d1dd54d'),
+(99,'Elsa','Contreras','2019-07-04','08:02:11','12:04:10','01:05:08','05:05:10',482.01,0,'03f021358f18c27b1226ed160d1dd54d'),
+(100,'Jeric','Macalawa','2019-07-04','07:55:38','12:03:44','01:04:06','05:03:06',487.1,0,'03f021358f18c27b1226ed160d1dd54d'),
+(101,'Adam','Tabudlong','2019-07-04','08:02:05','12:04:00','01:04:37','05:01:37',478.92,0,'03f021358f18c27b1226ed160d1dd54d'),
+(102,'Kenn Edward','Abiertas','2019-07-04','08:04:52','12:03:52','01:04:47','05:01:52',476.08,0,'03f021358f18c27b1226ed160d1dd54d'),
+(103,'Jamille Ann','Agbuya','2019-07-05','08:02:35','12:00:53','01:09:01','05:04:58',474.25,0,'03f021358f18c27b1226ed160d1dd54d'),
+(104,'Kenn Edward','Abiertas','2019-07-05','08:03:10','12:01:18','01:09:09','05:05:09',474.13,0,'03f021358f18c27b1226ed160d1dd54d'),
+(105,'Jamille Ann','Agbuya','2019-07-08','07:39:14','12:01:15','01:06:06','05:09:14',505.15,0,'03f021358f18c27b1226ed160d1dd54d'),
+(106,'Earvin John','Tallod','2019-07-08','07:48:00','12:00:43','01:10:05','05:08:11',490.82,0,'03f021358f18c27b1226ed160d1dd54d'),
+(107,'Elsa','Contreras','2019-07-08','08:06:59','12:01:03','01:10:13','05:09:09',473,0,'03f021358f18c27b1226ed160d1dd54d'),
+(108,'Jeric','Macalawa','2019-07-08','07:28:26','12:00:56','01:26:54','05:08:56',494.53,0,'03f021358f18c27b1226ed160d1dd54d'),
+(109,'Adam','Tabudlong','2019-07-08','08:06:55','12:00:53','01:10:19','05:08:48',472.45,0,'03f021358f18c27b1226ed160d1dd54d'),
+(110,'Kenn Edward','Abiertas','2019-07-08','08:06:50','12:00:58','01:10:10','05:08:54',472.86,0,'03f021358f18c27b1226ed160d1dd54d');
 
 /*Table structure for table `bankaccounttbl` */
 
@@ -198,9 +202,13 @@ CREATE TABLE `bankaccounttbl` (
   `bankAccountID` int(11) NOT NULL AUTO_INCREMENT,
   `bankAccountNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`bankAccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `bankaccounttbl` */
+
+insert  into `bankaccounttbl`(`bankAccountID`,`bankAccountNumber`) values 
+(1,''),
+(2,'');
 
 /*Table structure for table `benefitnumberstbl` */
 
@@ -213,9 +221,13 @@ CREATE TABLE `benefitnumberstbl` (
   `pagibigNumber` varchar(50) NOT NULL,
   `taxIdentificationNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`benefitID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `benefitnumberstbl` */
+
+insert  into `benefitnumberstbl`(`benefitID`,`sssNumber`,`philhealthNumber`,`pagibigNumber`,`taxIdentificationNumber`) values 
+(1,'','','',''),
+(2,'','','','');
 
 /*Table structure for table `departmenttbl` */
 
@@ -227,7 +239,7 @@ CREATE TABLE `departmenttbl` (
   `departmentName` varchar(50) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`departmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `departmenttbl` */
 
@@ -235,7 +247,12 @@ insert  into `departmenttbl`(`departmentID`,`salaryCodeID`,`departmentName`,`sta
 (4,1,'Administration',1),
 (5,3,'Administration',1),
 (6,3,'Maintenance',1),
-(7,2,'Human Resources',1);
+(7,2,'Human Resources',1),
+(8,4,'IT',1),
+(9,2,'IT',1),
+(10,4,'Operations',1),
+(11,2,'Operations',1),
+(12,2,'Administration 2',1);
 
 /*Table structure for table `employeetbl` */
 
@@ -247,9 +264,13 @@ CREATE TABLE `employeetbl` (
   `jobStatus` tinyint(1) NOT NULL,
   `dateHired` date NOT NULL,
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employeetbl` */
+
+insert  into `employeetbl`(`employeeID`,`positionID`,`jobStatus`,`dateHired`) values 
+(0001,2,0,'2019-08-14'),
+(0002,3,0,'2019-08-06');
 
 /*Table structure for table `eventstbl` */
 
@@ -263,9 +284,21 @@ CREATE TABLE `eventstbl` (
   `endDate` datetime NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`eventID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eventstbl` */
+
+insert  into `eventstbl`(`eventID`,`title`,`description`,`startDate`,`endDate`,`status`) values 
+(1,'asdlkasjdlakjsd','','2019-08-15 00:00:00','2019-08-16 00:00:00',1),
+(2,'asdlkasjdlakjsd','','2019-08-16 00:00:00','2019-08-17 00:00:00',1),
+(3,'asdlkasjdlakjsd','','2019-08-27 00:00:00','2019-08-28 00:00:00',1),
+(4,'asdlkasjdlakjsd','','2019-08-29 00:00:00','2019-08-30 00:00:00',1),
+(5,'Eddie','','2019-08-19 00:00:00','2019-08-24 00:00:00',1),
+(6,'Eddie','','2019-08-17 00:00:00','2019-08-18 00:00:00',1),
+(7,'asdlkasjdlakjsd','','2019-08-15 00:00:00','2019-08-16 00:00:00',1),
+(8,'Birthday','Birthday','2019-08-28 00:00:00','2019-08-29 00:00:00',1),
+(9,'asdlkasjdlakjsd','','2019-08-22 00:00:00','2019-08-23 00:00:00',1),
+(10,'Binyag ni eddie','','2019-08-31 00:00:00','2019-09-01 00:00:00',0);
 
 /*Table structure for table `leavecreditstbl` */
 
@@ -334,9 +367,13 @@ CREATE TABLE `personaldetailstbl` (
   `photo` varchar(255) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`personalID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `personaldetailstbl` */
+
+insert  into `personaldetailstbl`(`personalID`,`firstName`,`middleName`,`lastName`,`contactNumber`,`email`,`gender`,`birthday`,`age`,`photo`,`status`) values 
+(1,'alsdkjakdsj','alksjd','laksjd','0923-948-2918','bryan.balaga@gmail.com',1,'2001-08-02',18,'../uploads/825887bry.jpg',1),
+(2,'Eddie','','Madrona','0938-273-2738','ed@gmail.com',1,'2001-07-30',18,'../uploads/680744eddie.jpg',1);
 
 /*Table structure for table `philhealthmatrixtbl` */
 
@@ -373,14 +410,17 @@ CREATE TABLE `positiontbl` (
   `positionName` varchar(50) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`positionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `positiontbl` */
 
 insert  into `positiontbl`(`positionID`,`departmentName`,`salaryCode`,`positionName`,`status`) values 
 (1,'Human Resources','2','HR Assistant',1),
 (2,'Maintenance','3','Maintenance Personnel',1),
-(3,'Administration','3','Admin Personnel',1);
+(3,'Administration','3','Admin Personnel',1),
+(4,'IT','2','Junior Programmer 1',1),
+(5,'Operations','4','Chief Operations Officer',1),
+(6,'IT','2','Senior Programmer',1);
 
 /*Table structure for table `requestformtbl` */
 
@@ -431,14 +471,15 @@ CREATE TABLE `salarycodetbl` (
   `basicSalary` double(10,2) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`salaryCodeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `salarycodetbl` */
 
 insert  into `salarycodetbl`(`salaryCodeID`,`salaryCode`,`description`,`basicSalary`,`status`) values 
 (1,'C','',24000.00,1),
 (2,'B','',26000.00,1),
-(3,'D','',18000.00,1);
+(3,'D','',18000.00,1),
+(4,'A','',50000.00,1);
 
 /*Table structure for table `sssmatrixtbl` */
 

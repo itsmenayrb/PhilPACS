@@ -136,7 +136,7 @@
                                     $title = $rowCheck['title'];
                                     $description = $rowCheck['description'];
 
-                                    if ($remainingDays > 0) {
+                                    if ($remainingDays > 0 && $remainingDays < 7) {
                                     ?>
                                       <tr>
                                         <td><?=$title;?></td>

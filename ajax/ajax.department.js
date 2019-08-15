@@ -5,7 +5,6 @@
 require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 	$(document).ready(function() {
 
-
 		 /**
 		  * When adding form of department submit
 		  * Perform client-side validation when submit
@@ -24,9 +23,15 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				$("#department_name_error").text(department_name_error);
 				$('#department_name').addClass('is-invalid');
 			} else {
-				department_name_error = "";
-				$("#department_name_error").text(department_name_error);
-				$('#department_name').removeClass('is-invalid');
+				if (validateDepartment(department_name) == false) {
+					department_name_error = "Invalid Department Name.";
+					$("#department_name_error").text(department_name_error);
+					$('#department_name').addClass('is-invalid');
+				} else {
+					department_name_error = "";
+					$("#department_name_error").text(department_name_error);
+					$('#department_name').removeClass('is-invalid');
+				}
 			}
 
 			if (salary_code == "") {
@@ -307,6 +312,11 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			return false;
 
 		});
+
+		 function validateDepartment(name) {
+	    	var re = /^[A-Za-z\s]*$/;
+	    	return re.test(name);
+	    }
 
 	});
 });

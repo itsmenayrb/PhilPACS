@@ -35,7 +35,8 @@
 
     <div class="row">
       <div class="col-md-12">
-        <form method="post" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>">
+        <form method="post" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="payrollForm">
+          <input type="hidden" value="<?=$hashedFile;?>" id="hiddenHashedFile" />
           <div class="card">
             <div class="card-header" style="margin: 0 auto;">
               <b>Payroll Period: <?=date('F j, Y', $datePeriodFrom);?> - <?=date('F j, Y', $datePeriodTo);?></b>
@@ -47,6 +48,7 @@
                     <th width="15%">Employee ID</th>
                     <th>Full Name</th>
                     <th width="20%">Total Number of Hours</th>
+                    <th width="20%">Overtime</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,6 +60,7 @@
                         <td></td>
                         <td><?=$fullName;?></td>
                         <td><?=convertToHoursAndMins($result['totalMinutes'], '%02d hours and %02d minute/s');?></td>
+                        <td></td>
                       </tr>
                       <?php
                     }
@@ -72,17 +75,18 @@
                   <div class="form-group col-sm-9">
                     <div>
                       <label class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" name="example-inline-checkbox1" value="option1" checked>
+                        <input type="checkbox" class="custom-control-input" name="contribution[]" id="sss" value="sss">
                         <span class="custom-control-label">SSS</span>
                       </label>
                       <label class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" name="example-inline-checkbox2" value="option2">
+                        <input type="checkbox" class="custom-control-input" name="contribution[]" id="philhealth" value="philhealth">
                         <span class="custom-control-label">PhilHealth</span>
                       </label>
                       <label class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" name="example-inline-checkbox3" value="option3">
+                        <input type="checkbox" class="custom-control-input" name="contribution[]" id="pagibig" value="pagibig">
                         <span class="custom-control-label">Pag-ibig</span>
                       </label>
+                      <i><small class="text-danger align-self-center" id="contributions_error"></small></i>
                     </div>
                   </div>
                 </div>
@@ -92,8 +96,11 @@
                   <div class="form-group col-sm-9">
                     <div>
                       <label class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" name="example-inline-checkbox2" value="option2">
+                        <input type="checkbox" class="custom-control-input" name="tax" id="tax" value="tax">
                         <span class="custom-control-label">Tax</span>
+                      </label>
+                      <label class="custom-control custom-checkbox custom-control-inline">
+                        <span class="invalid-feedback align-self-center" id="deductions_error"></span>
                       </label>
                     </div>
                   </div>
@@ -101,8 +108,8 @@
               
             </div> <!-- /card-body -->
             <div class="card-footer">
-                <div class="text-center">
-                  <button class="btn btn-green btn-lg" type="submit">Generate Payroll</button>
+                <div class="float-right">
+                  <button class="btn btn-green btn-lg" type="submit" name="savePayrollBtn" id="savePayrollBtn">Save</button>
                 </div>
             </div>
           </div>

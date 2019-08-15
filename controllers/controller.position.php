@@ -35,6 +35,16 @@ if (isset($_POST['add_position_name'])) {
 	// if (!is_numeric($amount)) {
 	// 	echo json_encode(array("error_amount" => "Invalid amount."));
 	// }
+	// 
+
+	if (checkPosition($department_name)) {
+		echo json_encode(array("error_department" => "Invalid Department Name."));
+	}
+
+	if (checkPosition($position_name)) {
+		echo json_encode(array("error_position" => "Invalid Position Name."));
+	}
+	
 
 	if (empty($code)) {
 		echo json_encode(array("error_code" => "Salary Code is required."));
@@ -147,4 +157,11 @@ if (isset($_POST['displaySalaryCode'])) {
 	$department_name = $config->checkInput($_POST['department_name']);
 	$displaySalaryCode = new Position();
 	$displaySalaryCode->displaySalaryCode($department_name);
+}
+
+function checkPosition($name) {
+	if(preg_match("/^[a-zA-z\s]+$/", $name)) {
+		return true;
+	}
+	return false;
 }

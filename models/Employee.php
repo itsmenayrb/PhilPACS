@@ -18,7 +18,11 @@ class Employee extends Config {
 	public function getSalary($position_id) {
 
 		try {
-			$stmt = $this->conn->runQuery("SELECT * FROM positiontbl WHERE positionID=:position_id LIMIT 1");
+			$stmt = $this->conn->runQuery("SELECT salarycodetbl.basicSalary AS basicSalary
+										   FROM salarycodetbl
+										   INNER JOIN positiontbl ON salarycodetbl.salaryCodeID = positiontbl.salaryCode
+										   WHERE positiontbl.positionID=:position_id
+										   LIMIT 1");
 			$stmt->execute(array(":position_id" => $position_id));
 			if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$this->salary = $row['basicSalary'];
