@@ -102,4 +102,31 @@ class Department extends Config {
 
 	}
 
+	//populate
+	public function populate_checked_salary_code($salary_code) {
+
+		try {
+
+			$salary_codes = str_split($salary_code);
+			$status = 1;
+	        $stmt = $this->conn->runQuery("SELECT * FROM salarycodetbl WHERE status=:status ORDER BY salaryCode");
+	        $stmt->execute(array(":status" => $status));
+
+	        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {	
+    			?>
+    			<tr>
+    				<td class="w-1">
+                        <input type="checkbox" name="update_salary_code[]" id="update_salary_code" value="<?=$row['salaryCodeID'];?>" <?php foreach ($salary_codes as $salaryCode) { if ($row['salaryCodeID'] == $salaryCode) { ?> checked <?php } } ?> />
+                    </td>
+                    <td><span class="form-label"><?=$row['salaryCode'];?></span></td>
+                    <td><?=number_format($row['basicSalary'], 2);?></td>
+    			</tr>
+    			<?php
+	        }
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}	
+
 }

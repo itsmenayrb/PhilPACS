@@ -5,6 +5,8 @@
 require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 	$(document).ready(function() {
 
+
+
 		 /**
 		  * When adding form of department submit
 		  * Perform client-side validation when submit
@@ -16,7 +18,8 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			var salary_code_error = "";
 
 			var department_name = $('#department_name').val();
-			var salary_code = $('#salary_code').val();
+			var salary_code = $('input[name="salary_code[]"]');
+			var hasCheck = false;
 
 			if (department_name == "") {
 				department_name_error = "Department Name is required.";
@@ -34,14 +37,29 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 				}
 			}
 
-			if (salary_code == "") {
-				salary_code_error = "Salary Code is required.";
+			// console.log(salary_code);
+			for (var i=0; i<salary_code.length; i++) {
+				if (salary_code[i].checked) {
+					hasCheck = true;
+					break;
+				}
+			}
+
+			if (hasCheck == false) {
+				salary_code_error = "Salary Code is required. Please select at least one.";
 				$("#salary_code_error").text(salary_code_error);
-				$('#salary_code').addClass('is-invalid');
+				// $('#salary_code').addClass('is-invalid');
+				
+				for (var i=0; i<salary_code.length; i++) {
+					$(salary_code[i]).addClass('is-invalid');
+				}
+
 			} else {
 				salary_code_error = "";
 				$("#salary_code_error").text(salary_code_error);
 				$('#salary_code').removeClass('is-invalid');
+
+				salary_code = $('#salary_code').val();
 			}
 
 			if(department_name_error == "" && salary_code_error == "") {
@@ -169,11 +187,29 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 		$('.updateDepartmentBtnModal').on('click', function(e) {
 			e.preventDefault();
 
+			// let salary_code = [];
+
 			var id = $(this).data('id');
 			var name = $(this).data('name');
+			var salary_code = $(this).data('salaryid');
 
 			$('#hiddenDepartmentName').val(name);
 			$('#update_department_name_input').val(name);
+			
+			$.ajax({
+				type: 'post',
+				url: '../controllers/controller.department.php',
+				data: {
+					salary_code: salary_code,
+					populate_checked_salary_code: 1
+				},
+				dataType: 'html',
+				success: function(response) {
+					$('#updateDepartmentSalaryCodeTable tbody').html(response);
+				}
+			});
+
+			// console.log(salary_code);
 
 		});
 
@@ -185,40 +221,60 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 
 			var id = $('#hiddenDepartmentName').val();
 			var department_name = $('#update_department_name_input').val();
-			var salary_code = $('#update_salary_code').val();
+			var salary_code = $('input[name="update_salary_code[]"]');
+			var hasCheck = false;
 
 			if (department_name == "") {
 				department_name_error = "Department Name is required.";
-				$("#department_name_error").text(department_name_error);
-				$('#department_name').addClass('is-invalid');
+				$("#update_department_name_error").text(department_name_error);
+				$('#update_department_name_input').addClass('is-invalid');
 			} else {
 				department_name_error = "";
-				$("#department_name_error").text(department_name_error);
-				$('#department_name').removeClass('is-invalid');
+				$("#update_department_name_error").text(department_name_error);
+				$('#update_department_name_input').removeClass('is-invalid');
 			}
 
-			if (salary_code == "") {
-				salary_code_error = "Salary Code is required.";
-				$("#salary_code_error").text(salary_code_error);
-				$('#salary_code').addClass('is-invalid');
+			for (var i=0; i<salary_code.length; i++) {
+				if (salary_code[i].checked) {
+					hasCheck = true;
+					break;
+				}
+			}
+
+			if (hasCheck == false) {
+				salary_code_error = "Salary Code is required. Please select at least one.";
+				$("#update_salary_code_error").text(salary_code_error);
+				// $('#salary_code').addClass('is-invalid');
+				
+				for (var i=0; i<salary_code.length; i++) {
+					$(salary_code[i]).addClass('is-invalid');
+				}
+
 			} else {
 				salary_code_error = "";
-				$("#salary_code_error").text(salary_code_error);
-				$('#salary_code').removeClass('is-invalid');
+				$("#update_salary_code_error").text(salary_code_error);
+				$('#update_salary_code').removeClass('is-invalid');
+
+				salary_code = $('#update_salary_code').val();
 			}
 
 			if(department_name_error == "" && salary_code_error == "") {
 
+				var form = $('#updateDepartmentForm');
+				var formData = false;
+
+				if (window.FormData) {
+					formData = new FormData(form[0]);
+				}
+
 				$.ajax({
 					method: 'POST',
 		       		url: '../controllers/controller.department.php',
-		       		data: {
-		       			department_id: id,
-		       			department_name: department_name,
-		       			salary_code: salary_code,
-		       			update_department_name: 1
-		       		},
-		       		dataType: 'json',
+		       		data: formData ? formData : form.serialize(),
+					cache: false,
+					contentType: false,
+					processData: false,
+					dataType: 'json',
 		       		success: function(response) {
 		       			$('#update-loader').addClass('loader');
 				        $('#update-dimmer-content').addClass('dimmer-content');
@@ -314,9 +370,37 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 		});
 
 		 function validateDepartment(name) {
-	    	var re = /^[A-Za-z\s]*$/;
+	    	var re = /^([A-Za-z]+\s)*[A-Za-z]+$/;
 	    	return re.test(name);
 	    }
 
 	});
 });
+
+function checkAll(obj) {
+	var checkboxes = $('input[name="salary_code[]"]');
+	
+	if (obj.checked) {
+		for (var i=0; i<checkboxes.length; i++) {
+			checkboxes[i].checked = true;
+		}
+	} else {
+		for (var i=0; i<checkboxes.length; i++) {
+			checkboxes[i].checked = false;
+		}
+	}
+}
+
+function updateCheckAll(obj) {
+	var checkboxes = $('input[name="update_salary_code[]"]');
+	
+	if (obj.checked) {
+		for (var i=0; i<checkboxes.length; i++) {
+			checkboxes[i].checked = true;
+		}
+	} else {
+		for (var i=0; i<checkboxes.length; i++) {
+			checkboxes[i].checked = false;
+		}
+	}
+}

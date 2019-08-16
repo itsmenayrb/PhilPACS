@@ -325,13 +325,15 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 		$('.updatePositionBtnModal').on('click', function(e) {
 			e.preventDefault();
 
-			var id = $(this).data('id');
-			var name = $(this).data('name');
+			var id = $(this).data('positionid');
+			var position_name = $(this).data('position');
+			var salary_code = $(this).data('salarycode');
+			var department_name = $(this).data('department');
 			var salary = $(this).data('salary');
 			var formattedAmount = 0;
 
 			$('#hiddenPositionID').val(id);
-			$('#update_position_name').val(name);
+			$('#update_position_name').val(position_name);
 
 			salary = parseFloat(salary.replace(/,/g, ''));
 			formattedAmount = numberWithCommas(salary);
@@ -339,6 +341,32 @@ require(['sweetalert', 'datepicker', 'jquery'], function(Swal, datepicker, $) {
 			$('#hiddenUpdateSalary').val(amount);
 			$('#update_amount').val(formattedAmount);
 
+			$.ajax({
+				type: 'post',
+				url: '../controllers/controller.position.php',
+				data: {
+					department_name: department_name,
+					populate_selected_department: 1
+				},
+				dataType: 'html',
+				success: function(response) {
+					$('#update_department_name').html(response);
+				}
+			});
+
+			$.ajax({
+				type: 'post',
+				url: '../controllers/controller.position.php',
+				data: {
+					salary_code: salary_code,
+					department_name: department_name,
+					populate_selected_salary_code: 1
+				},
+				dataType: 'html',
+				success: function(response) {
+					$('#update_salary_code').html(response);
+				}
+			});
 
 		});
 

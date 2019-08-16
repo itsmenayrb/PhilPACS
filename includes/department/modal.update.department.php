@@ -18,37 +18,32 @@
                 <div id="update-dimmer-content">
                   <form class="m-t-40" id="updateDepartmentForm" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
 
-                      <input type="hidden" value="" id="hiddenDepartmentName" />
+                      <input type="hidden" value="" id="hiddenDepartmentName" name="hiddenDepartmentName" />
+                      <div class="form-label" for="update_salary_code">Salary Code<span class="text-danger">*</span></div>
+                      <small><span id="update_salary_code_error" class="text-danger"></span></small>
+                      <table class="table table-sm card-table" id="updateDepartmentSalaryCodeTable">
+                        <thead>
+                          <tr>
+                            <th class="w-1">
+                                <input type="checkbox" onchange="updateCheckAll(this)" name="checkAll[]" />
+                            </th>
+                            <th>Salary Code</th>
+                            <th>Basic Salary</th>
+                          </tr>
+                        </thead>
+                        <tbody>
 
-                      <div class="alert alert-success">
-                        <i class="fe fe-info"></i> Press and hold <kbd>ctrl</kbd> or <kbd>shift</kbd> key to select multiple salary code.  
-                      </div>
+                        </tbody>
+                      </table>
 
                       <div class="form-group">
-                        <label class="form-label" for="update_salary_code">Salary Code<span class="text-danger">*</span></label>
-                        <select class="form-control" name="update_salary_code[]" id="update_salary_code" multiple>
-                             <?php
-                              $status = 1;
-                              $stmt = $config->runQuery("SELECT * FROM salarycodetbl WHERE status=:status ORDER BY salaryCode");
-                              $stmt->execute(array(":status" => $status));
-                              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                ?>
-                                <option value="<?=$row['salaryCodeID'];?>"><?=$row['salaryCode'];?></option>
-                                <?php
-                              }
-                             ?>
-                        </select>
-                         <span id="salary_code_error" class="invalid-feedback"></span>
-                      </div>
-                      
-                      <div class="form-group">
-                           <label class="form-label" for="update_department_name">Department Name<span class="text-danger">*</span></label>
-                           <input type="text" class="required form-control" id="update_department_name_input" placeholder="Department Name" autofocus="true" required/>
+                           <label class="form-label" for="update_department_name_input">Department Name<span class="text-danger">*</span></label>
+                           <input type="text" class="required form-control" name="update_department_name" id="update_department_name_input" placeholder="Department Name" autofocus="true" required/>
                            <span id="update_department_name_error" class="invalid-feedback"></span>
                       </div>
                       
                       <div class="text-right">
-                          <button type="submit" class="btn btn-success" id="updateDepartmentBtn">Update</button>
+                          <button type="submit" class="btn btn-success" name="updateDepartmentBtn" id="updateDepartmentBtn">Update</button>
                       </div>
                   </form>
                 </div>

@@ -174,4 +174,54 @@ class Position extends Config {
 
 	}
 
+	//populate
+	public function populateSelectedDepartment($department_name) {
+
+		$status = 1;
+		try {
+			$stmt = $this->conn->runQuery("SELECT departmenttbl.departmentName AS departmentName, departmenttbl.departmentID
+										   FROM departmenttbl
+										   INNER JOIN positiontbl ON departmenttbl.departmentName=positiontbl.departmentName
+										   WHERE departmenttbl.status=:status GROUP BY departmenttbl.departmentName");
+			$stmt->execute(array(":status" => $status));
+			?>
+			<option value="">Select a department.</option>
+			<?php
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				?>
+				<option value="<?=$row['departmentName'];?>" <?php if ($row['departmentName'] == $department_name) : ?> selected <?php endif ?> ><?=$row['departmentName'];?></option>
+				<?php
+			}
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}
+
+	public function populateSelectedSalaryCode($salary_code, $department_name) {
+
+		$status = 1;
+		try {
+			$stmt = $this->conn->runQuery("SELECT salaryCodeID
+											 FROM departmenttbl WHERE departmentName=:departmentName");
+			$stmt->execute(array(":departmentName" => $department_name));
+			?>
+			<option value=""> Select a salary code.</option>
+			<?php
+			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$salaryCodeID = $row['salaryCodeID'];
+				$populate = $this->conn->runQuery("SELECT * FROM salarycodetbl WHERE salaryCodeID=:salaryCodeID");
+				$populate->execute(array(":salaryCodeID" => $salaryCodeID));
+				while ($result = $populate->fetch(PDO::FETCH_ASSOC)) {
+					?>
+					<option value="<?=$result['salaryCodeID'];?>" <?php if ($result['salaryCode'] == $salary_code) : ?> selected <?php endif ?>><?=$result['salaryCode'];?></option>
+					<?php
+				}
+			}
+		} catch (PDOException $e) {
+			echo "Connection Error: " . $e->getMessage();
+		}
+
+	}	
+
 }

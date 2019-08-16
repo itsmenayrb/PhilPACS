@@ -11,8 +11,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/logo/Logo.png" />
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
     <title>Human Resources :: Position</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext"> -->
     <?php include '../includes/plugins.php'; ?>
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css" />
     
@@ -95,7 +95,7 @@
                                               <td><?=$status;?></td>
                                               <td class="text-center">
                                                 <?php if ($status == 'Active') { ?>
-                                                  <button type="button" data-toggle="modal" data-target="#updatePositionModal" class="btn btn-info updatePositionBtnModal" data-id="<?=$position_id;?>" data-name="<?=$position_name;?>" data-salary="<?=$basicSalary;?>">
+                                                  <button type="button" data-toggle="modal" data-target="#updatePositionModal" class="btn btn-info updatePositionBtnModal" data-positionid="<?=$position_id;?>" data-position="<?=$position_name;?>" data-salary="<?=$basicSalary;?>" data-salarycode="<?=$code;?>" data-department="<?=$department_name;?>">
                                                       <i class="fe fe-edit-2"></i>
                                                   </button>
                                                   <button type="button" class="btn btn-danger archivePositionBtn" data-id="<?=$position_id;?>" data-name="<?=$position_name;?>">

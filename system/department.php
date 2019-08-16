@@ -83,13 +83,15 @@
                                               <td>
                                                 <ul>
                                                   <?php
-                                                    $loop = $config->runQuery("SELECT salarycodetbl.salaryCode AS salaryCodes
+                                                    $salaryCodeIDs = [];
+                                                    $loop = $config->runQuery("SELECT salarycodetbl.salaryCode AS salaryCodes, salarycodetbl.salaryCodeID AS salaryCodeIDs
                                                                               FROM departmenttbl
                                                                               INNER JOIN salarycodetbl ON departmenttbl.salaryCodeID=salarycodetbl.salaryCodeID
                                                                               WHERE departmenttbl.departmentName=:departmentName
                                                                               ORDER BY salarycodetbl.salaryCode");
                                                     $loop->execute(array(":departmentName" => $department_name));
                                                     while ($result = $loop->fetch(PDO::FETCH_ASSOC)) {
+                                                      $salaryCodeIDs[] = $result['salaryCodeIDs'];
                                                       ?>
                                                       <li><?=$result['salaryCodes'];?></li>
                                                       <?php
@@ -100,7 +102,7 @@
                                               <td><?=$status;?></td>
                                               <td class="text-center">
                                                 <?php if ($status == 'Active') { ?>
-                                                  <button type="button" data-toggle="modal" data-target="#updateDepartmentModal" class="btn btn-info updateDepartmentBtnModal" data-id="<?=$department_id;?>" data-name="<?=$department_name;?>">
+                                                  <button type="button" data-toggle="modal" data-target="#updateDepartmentModal" class="btn btn-info updateDepartmentBtnModal" data-id="<?=$department_id;?>" data-salaryid="<?php for ($i=0; $i<count($salaryCodeIDs); $i++) { echo $salaryCodeIDs[$i]; } ?>" data-name="<?=$department_name;?>">
                                                       <i class="fe fe-edit-2"></i>
                                                   </button>
                                                   <button type="button" class="btn btn-danger archiveDepartmentBtn" data-id="<?=$department_id;?>" data-name="<?=$department_name;?>">

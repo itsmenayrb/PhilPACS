@@ -25,7 +25,7 @@ if (isset($_POST['department_name']) && !isset($_POST['update_department_name'])
 
 	}
 
-	if (checkDepartment($department_name)) {
+	if (checkDepartment($department_name) == false) {
 
 		echo json_encode(array("error_department_name" => "Invalid Department Name."));
 
@@ -76,11 +76,11 @@ if (isset($_POST['archive_department'])) {
 /**
  * If updating of department has been set
  */
-if (isset($_POST['update_department_name']) && $_POST['update_department_name'] == 1) {
+if (isset($_POST['update_department_name'])) {
 
-	$department_id = $config->checkInput($_POST['department_id']);
-	$department_name = $config->checkInput($_POST['department_name']);
-	$salary_code = $_POST['salary_code'];
+	$department_id = $config->checkInput($_POST['hiddenDepartmentName']);
+	$department_name = $config->checkInput($_POST['update_department_name']);
+	$salary_code = $_POST['update_salary_code'];
 
 	if (empty($department_name)) {
 
@@ -123,9 +123,19 @@ if (isset($_POST['restore_department'])) {
 
 }
 
+if (isset($_POST['populate_checked_salary_code'])) {
+	$salary_code = $config->checkInput($_POST['salary_code']);
+	$populate_checked_salary_code = new Department();
+	// $salary_codes = str_split($salary_code);
+	// for ($i=0; $i<count($salary_codes); $i++) {
+		$populate_checked_salary_code->populate_checked_salary_code($salary_code);
+	// }
+}
+
 function checkDepartment($name) {
 	if(preg_match("/^[a-zA-z\s]+$/", $name)) {
 		return true;
+	} else {
+		return false;
 	}
-	return false;
 }

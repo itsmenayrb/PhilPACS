@@ -37,11 +37,11 @@ if (isset($_POST['add_position_name'])) {
 	// }
 	// 
 
-	if (checkPosition($department_name)) {
+	if (checkPosition($department_name) == false) {
 		echo json_encode(array("error_department" => "Invalid Department Name."));
 	}
 
-	if (checkPosition($position_name)) {
+	if (checkPosition($position_name) == false) {
 		echo json_encode(array("error_position" => "Invalid Position Name."));
 	}
 	
@@ -114,6 +114,13 @@ if (isset($_POST['update_position_name'])) {
 	// 	echo json_encode(array("error_amount" => "Invalid amount."));
 
 	// }
+	if (checkPosition($department_name) == false) {
+		echo json_encode(array("error_department" => "Invalid Department Name."));
+	}
+
+	if (checkPosition($position_name) == false) {
+		echo json_encode(array("error_position" => "Invalid Position Name."));
+	}
 
 	if (empty($code)) {
 		echo json_encode(array("error_code" => "Position Code is required."));
@@ -157,6 +164,22 @@ if (isset($_POST['displaySalaryCode'])) {
 	$department_name = $config->checkInput($_POST['department_name']);
 	$displaySalaryCode = new Position();
 	$displaySalaryCode->displaySalaryCode($department_name);
+}
+
+if (isset($_POST['populate_selected_department'])) {
+
+	$department_name = $config->checkInput($_POST['department_name']);
+
+	$populate_selected_department = new Position();
+	$populate_selected_department->populateSelectedDepartment($department_name);
+}
+
+if (isset($_POST['populate_selected_salary_code'])) {
+	
+	$salary_code = $config->checkInput($_POST['salary_code']);
+	$department_name = $config->checkInput($_POST['department_name']);
+	$populate_selected_salary_code = new Position();
+	$populate_selected_salary_code->populateSelectedSalaryCode($salary_code, $department_name);
 }
 
 function checkPosition($name) {

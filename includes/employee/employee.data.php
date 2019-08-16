@@ -20,7 +20,7 @@
                         zipcode
                       ) AS address,
 
-                      CONCAT (positiontbl.code, employeetbl.employeeID) AS employeeID, positiontbl.positionName, positiontbl.basicSalary, departmenttbl.departmentName,
+                      CONCAT (salarycodetbl.salaryCode, employeetbl.employeeID) AS employeeID, positiontbl.positionName, salarycodetbl.basicSalary, departmenttbl.departmentName,
                       bankaccounttbl.bankAccountNumber, benefitnumberstbl.sssNumber, benefitnumberstbl.philhealthNumber, benefitnumberstbl.pagibigNumber, benefitnumberstbl.taxIdentificationNumber
 
                        FROM personaldetailstbl
@@ -29,7 +29,8 @@
                        INNER JOIN bankaccounttbl ON benefitnumberstbl.benefitID = bankaccounttbl.bankAccountID
                        INNER JOIN employeetbl ON bankaccounttbl.bankAccountID  = employeetbl.employeeID
                        INNER JOIN positiontbl ON employeetbl.positionID = positiontbl.positionID
-                       INNER JOIN departmenttbl ON positiontbl.departmentID = departmenttbl.departmentID
+                       INNER JOIN departmenttbl ON positiontbl.departmentName = departmenttbl.departmentName
+                       INNER JOIN salarycodetbl ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
                        WHERE personaldetailstbl.personalID = :personalID LIMIT 1
                      ");
   $stmt->execute(array(":personalID" => $id));

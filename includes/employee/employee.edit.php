@@ -4,7 +4,7 @@
                       personaldetailstbl.personalID, personaldetailstbl.firstName, personaldetailstbl.middleName, personaldetailstbl.lastName,
                       personaldetailstbl.contactNumber, personaldetailstbl.email, personaldetailstbl.birthday, personaldetailstbl.age, personaldetailstbl.photo,
                       employeetbl.dateHired, employeetbl.jobStatus, employeetbl.positionID,
-                      positiontbl.positionName, positiontbl.basicSalary, departmenttbl.departmentID, departmenttbl.departmentName,
+                      positiontbl.positionName, salarycodetbl.basicSalary, departmenttbl.departmentID, departmenttbl.departmentName,
                       bankaccounttbl.bankAccountNumber, benefitnumberstbl.sssNumber, benefitnumberstbl.philhealthNumber, benefitnumberstbl.pagibigNumber, benefitnumberstbl.taxIdentificationNumber,
                       addresstbl.houseNumber, addresstbl.block, addresstbl.lot, addresstbl.street, addresstbl.subdivision, addresstbl.barangay, addresstbl.city, addresstbl.province, addresstbl.country, addresstbl.zipcode
                       
@@ -14,7 +14,8 @@
                        INNER JOIN bankaccounttbl ON benefitnumberstbl.benefitID = bankaccounttbl.bankAccountID
                        INNER JOIN employeetbl ON bankaccounttbl.bankAccountID  = employeetbl.employeeID
                        INNER JOIN positiontbl ON employeetbl.positionID = positiontbl.positionID
-                       INNER JOIN departmenttbl ON positiontbl.departmentID = departmenttbl.departmentID
+                       INNER JOIN departmenttbl ON positiontbl.departmentName = departmenttbl.departmentName
+                       INNER JOIN salarycodetbl ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
                        WHERE personaldetailstbl.personalID = :personalID LIMIT 1");
   $stmt->execute(array(":personalID" => $id));
   $row = $stmt->fetch(PDO::FETCH_ASSOC);

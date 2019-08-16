@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearForm();">
           <span aria-hidden="true"><i class="fe fe-times"></i></span>
         </button>
-         <h6 class="form-text text-muted"><span class="text-danger">*</span> required fields.</h6>
+         <h6 class="form-text text-muted float-right mr-2"><span class="text-danger">*</span> required fields.</h6>
         <div class="card text-white bg-lime mb-1">
           <div class="card-body p-3">
              <h6 class="card-title"><i class="fe fe-layers"></i> Add Department</h6>
@@ -17,26 +17,43 @@
                 <div id="loader"></div>
                 <div id="dimmer-content">
                   <form class="m-t-40" id="addDepartmentForm" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="post">
-                      <div class="alert alert-success">
+                      <!-- <div class="alert alert-success">
                         <i class="fe fe-info"></i> Press and hold <kbd>ctrl</kbd> or <kbd>shift</kbd> key to select multiple salary code.  
-                      </div>
+                      </div> -->
 
-                      <div class="form-group">
-                        <label class="form-label" for="salary_code">Salary Code<span class="text-danger">*</span></label>
-                        <select class="form-control" name="salary_code[]" id="salary_code" multiple>
-                             <?php
+                      <div class="form-label" for="salary_code">Salary Code<span class="text-danger">*</span></div>
+                      <small><span id="salary_code_error" class="text-danger"></span></small>
+                      <table class="table table-sm card-table">
+                        <thead>
+                          <tr>
+                            <th class="w-1">
+                                <input type="checkbox" onchange="checkAll(this)" name="checkAll[]" />
+                            </th>
+                            <th>Salary Code</th>
+                            <th>Basic Salary</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                               $status = 1;
                               $stmt = $config->runQuery("SELECT * FROM salarycodetbl WHERE status=:status ORDER BY salaryCode");
                               $stmt->execute(array(":status" => $status));
                               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                 ?>
-                                <option value="<?=$row['salaryCodeID'];?>"><?=$row['salaryCode'];?></option>
+                                  <tr>
+                                    <td class="w-1">
+                                        <input type="checkbox" name="salary_code[]" id="salary_code" value="<?=$row['salaryCodeID'];?>">
+                                    </td>
+                                    <td><span class="form-label"><?=$row['salaryCode'];?></span></td>
+                                    <td><?=number_format($row['basicSalary'], 2);?></td>
+                                  </tr>
                                 <?php
                               }
                              ?>
-                        </select>
-                         <span id="salary_code_error" class="invalid-feedback"></span>
-                      </div>
+                          
+                        </tbody>
+                      </table>
+
                       <div class="form-group">
                            <label class="form-label" for="department_name">Department Name<span class="text-danger">*</span></label>
                            <input type="text" class="required form-control" name="department_name" id="department_name" placeholder="Department Name" autofocus="true" required/>
