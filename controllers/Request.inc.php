@@ -32,14 +32,14 @@
           <div class="col-md-6 col-xs-12">
               <div class="form-group">
                    <label class="form-control-label" for="DataFrom">Date From<span class="text-danger">*</span></label>
-                   <input type="text" class="mydate required form-control" id="date_from" placeholder="dd/mm/yyyy"  required/>
+                   <input type="date" class="mydate required form-control" id="date_from" placeholder="dd/mm/yyyy"  required/>
                      <span id="date_from_error"></span>
               </div>
           </div>
           <div class="col-md-6 col-xs-12">
               <div class="form-group">
                    <label class="form-control-label" for="DataTo">Date To<span class="text-danger">*</span></label>
-                   <input type="text" class="mydate required form-control" id="date_to" placeholder="dd/mm/yyyy" required/>
+                   <input type="date" class="mydate required form-control" id="date_to" placeholder="dd/mm/yyyy" required/>
                    <span id="date_to_error"></span>
               </div>
           </div>
