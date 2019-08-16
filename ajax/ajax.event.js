@@ -14,7 +14,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	    		right: 'month, agendaWeek, agendaDay'
 	    	},
 		    events: '../models/event/load.php',
-		    eventColor: 'green',
+		    eventColor: "#7BD235",
 		    selectable: true,
 		    selectHelper: true,
 		    selectConstraint: {
