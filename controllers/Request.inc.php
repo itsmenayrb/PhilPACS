@@ -10,10 +10,10 @@
         $request->readForm($requestID);
     }
 
-    if ($_POST['requesttype'] == 'Absent Request') {
+    if ($_POST['requesttype'] == 'Absence Request') {
       ?>
           <div class="row">
-          <div class="col-md-6 col-xs-12">
+          <div class="col-md-12 col-xs-12">
             <div class="form-group">
                  <label class="form-control-label" for="TypeRequest">Type of Request<span class="text-danger" required>*</span></label>
                  <select class="required form-control" id="type_request">
@@ -28,21 +28,29 @@
 
             </div>
           </div>
-          <div class="col-md-3 col-xs-12">
+
+          <div class="col-md-6 col-xs-12">
               <div class="form-group">
                    <label class="form-control-label" for="DataFrom">Date From<span class="text-danger">*</span></label>
-                   <input type="date" class="required form-control" id="date_from" placeholder="dd/mm/yyyy"  required/>
+                   <input type="text" class="mydate required form-control" id="date_from" placeholder="dd/mm/yyyy"  required/>
                      <span id="date_from_error"></span>
               </div>
           </div>
-          <div class="col-md-3 col-xs-12">
+          <div class="col-md-6 col-xs-12">
               <div class="form-group">
                    <label class="form-control-label" for="DataTo">Date To<span class="text-danger">*</span></label>
-                   <input type="date" class="required form-control" id="date_to" placeholder="dd/mm/yyyy" required/>
+                   <input type="text" class="mydate required form-control" id="date_to" placeholder="dd/mm/yyyy" required/>
                    <span id="date_to_error"></span>
               </div>
           </div>
         </div>
+        <script type="text/javascript">
+        var date = new Date();
+        date.setDate(date.getDate());
+        $('#date_from').datepicker({
+        startDate: date
+        });
+        </script>
       <?php
     }
     if ($_POST['requesttype'] == 'OverTime Request') {

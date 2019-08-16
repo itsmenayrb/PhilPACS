@@ -34,19 +34,16 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 	    			trigger: "hover",
 	    			placement: 'top',
 	    			container: "body"
-
 	    		});
-
 	    		if (event.allDay === 'true') {
 	    			event.allDay = true;
 	    		} else {
 	    			event.allDay = false;
 	    		}
-
 	    	},
 
 		    select: function(start, end, allDay) {
-			
+
      			var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
 			    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
@@ -156,7 +153,7 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 
 			    $('#editEventBtn').on('click', function(e) {
 	     			e.preventDefault();
-	     			
+
 	     			var edit_title_error= "";
 
 	     			var edit_title = $('#edit_title').val();
@@ -250,5 +247,5 @@ require(['sweetalert', 'fullcalendar', 'jquery'], function(Swal, fullcalendar, $
 
 	}); // document ready
 
-	
+
 }); // require

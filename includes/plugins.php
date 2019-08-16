@@ -7,7 +7,7 @@
 
 <link href="../assets/plugins/timepicker/jquery.timepicker.min.css" rel="stylesheet" />
 <link href="../assets/plugins/sweetalert/sweetalert.min.css" rel="stylesheet" />
-
+<link href="../assets/css/datepicker.css" rel="stylesheet" />
 <link href="../assets/plugins/sweetalert/sweetalert.min.css" rel="stylesheet" />
 <link href="../assets/plugins/dropzone/dropzone.css" rel="stylesheet" />
 <link href="../assets/plugins/animate/animate.min.css" rel="stylesheet" />
@@ -29,6 +29,7 @@
 <script src="../assets/plugins/fullcalendar/plugin.js"></script>
 <script src="../assets/plugins/datetimepicker/plugin.js"></script>
 <script src="../assets/plugins/notification/plugin.js"></script>
+<script src="../assets/js/bootstrap-datepicker.js"></script>
 <script>
   requirejs.config({
       baseUrl: '.'

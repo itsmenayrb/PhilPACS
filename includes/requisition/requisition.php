@@ -18,6 +18,7 @@
                                             <th>Date Request</th>
                                             <th>From</th>
                                             <th>To</th>
+                                            <th>Status</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -84,7 +85,7 @@
                                                   <td><?=$DateRequest;?></td>
                                                   <td><?=$DateFrom;?></td>
                                                   <td><?=$DateTo;?></td>
-
+                                                  <td><?=$status;?></td>
                                               </tr>
                                               <?php
                                             }
@@ -94,56 +95,6 @@
                                     </div>
                                     </div>
                                   </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="ApprovedList" role="tabpanel">
-                                <div class="p-3">
-                                  <div class="panel-body">
-                                    <div class="box-body table-responsive">
-                                        <table id="example3" class="table table-bordered table-striped datatable">
-                                            <thead>
-                                                <tr>
-                                                  <th class="w-1"></th>
-                                                  <th>Request type</th>
-                                                  <th>Last Name</th>
-                                                  <th>Request</th>
-                                                  <th>Date Request</th>
-                                                  <th>Reason</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                              $requestt->viewApprovedForm();
-                                          ?>
-                                        </table>
-                                        </div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="DeclinedList" role="tabpanel">
-                                <div class="p-3">
-                                  <div class="panel-body">
-                                    <div class="box-body table-responsive">
-                                        <table id="example3" class="table table-bordered table-striped datatable">
-                                            <thead>
-                                                <tr>
-                                                  <th class="w-1"></th>
-                                                  <th>Request type</th>
-                                                  <th>Last Name</th>
-                                                  <th>Request</th>
-                                                  <th>Date Request</th>
-                                                  \<th>Reason</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                              $requestt->viewDeclinedForm();
-                                          ?>
-                                        </table>
-
-                                        </div>
-
-                                </div>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 <!-- Modal of Requisition Absent Form -->
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="addAbsentModal" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-xl" role="document" style="overflow-y: initial !important; width: 100%">
+  <div class="modal-dialog modal-xl" role="document" style="overflow-y: initial !important; width: 45%">
     <div class="modal-content">
       <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
         <button class="close" type="button" data-dismiss="modal" aria-label='Close' onclick="clearForm();">
@@ -38,7 +38,7 @@
                                                              <label class="form-control-label" for="RequestType">Request Type<span class="text-danger" required>*</span></label>
                                                              <select class="required form-control" id="request_type" onChange="getRequest(this.value);">
                                                                     <option value="" selected>Request type</option>
-                                                                   <option value="Absent Request">Absent Request</option>
+                                                                   <option value="Absence Request">Absence Request</option>
                                                                    <option value="OverTime Request">OverTime Request</option>
                                                               </select>
                                                              <span id="request_type_error"></span>
