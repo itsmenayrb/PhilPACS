@@ -71,11 +71,11 @@
                                             $stmt = $config->runQuery("SELECT personaldetailstbl.personalID,
                                                                         CONCAT (personaldetailstbl.firstName, ' ', personaldetailstbl.lastName) AS fullname,
                                                                           personaldetailstbl.photo AS profilePicture,
-                                                                        CONCAT (positiontbl.code, employeetbl.employeeID) AS employeeNumber,
+                                                                        CONCAT (salarycodetbl.salaryCode, employeetbl.employeeID) AS employeeNumber,
                                                                         IF (employeetbl.jobStatus = 1, 'Regular', 'Non-Regular') AS jobStatus,
                                                                           employeetbl.dateHired,
                                                                           positiontbl.positionName,
-                                                                          positiontbl.basicSalary,
+                                                                          salarycodetbl.basicSalary,
                                                                           departmenttbl.departmentName
                                                                        FROM personaldetailstbl
                                                                        INNER JOIN employeetbl
@@ -83,8 +83,10 @@
                                                                        INNER JOIN positiontbl
                                                                        ON employeetbl.positionID = positiontbl.positionID
                                                                        INNER JOIN departmenttbl
-                                                                       ON positiontbl.departmentID = departmenttbl.departmentID
-                                                                       WHERE personaldetailstbl.status=:status");
+                                                                       ON positiontbl.departmentName = departmenttbl.departmentName
+                                                                       INNER JOIN salarycodetbl
+                                                                       ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
+                                                                       WHERE personaldetailstbl.status=:status GROUP BY personaldetailstbl.firstName, personaldetailstbl.lastName");
                                             $stmt->execute(array(":status" => $status));
                                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                               $personalID = $row['personalID'];
