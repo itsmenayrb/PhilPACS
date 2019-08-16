@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.4.3 (64 bit)
-MySQL - 10.1.37-MariaDB : Database - philpacs
+MySQL - 10.3.15-MariaDB : Database - philpacs
 *********************************************************************
 */
 
@@ -12,6 +12,8 @@ MySQL - 10.1.37-MariaDB : Database - philpacs
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`philpacs` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `philpacs`;
 
 /*Table structure for table `accountstbl` */
@@ -254,6 +256,24 @@ insert  into `departmenttbl`(`departmentID`,`salaryCodeID`,`departmentName`,`sta
 (11,2,'Operations',1),
 (12,2,'Administration 2',1);
 
+/*Table structure for table `documentstbl` */
+
+DROP TABLE IF EXISTS `documentstbl`;
+
+CREATE TABLE `documentstbl` (
+  `documentID` int(11) NOT NULL AUTO_INCREMENT,
+  `documentName` varchar(100) DEFAULT NULL,
+  `documentSize` int(100) DEFAULT NULL,
+  `downloadsList` varchar(100) DEFAULT NULL,
+  KEY `documentID` (`documentID`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+
+/*Data for the table `documentstbl` */
+
+insert  into `documentstbl`(`documentID`,`documentName`,`documentSize`,`downloadsList`) values 
+(40,'MOA_1.1.docx',20564,'0'),
+(41,'Lokal.docx',13391,'0');
+
 /*Table structure for table `employeetbl` */
 
 DROP TABLE IF EXISTS `employeetbl`;
@@ -432,33 +452,19 @@ CREATE TABLE `requestformtbl` (
   `firstName` varchar(50) DEFAULT NULL,
   `lastName` varchar(50) DEFAULT NULL,
   `Request` varchar(100) DEFAULT NULL,
-  `DateFrom` date DEFAULT NULL,
-  `DateTo` date DEFAULT NULL,
-  `Reason` longtext,
+  `DateFrom` datetime DEFAULT NULL,
+  `DateTo` datetime DEFAULT NULL,
+  `Reason` longtext DEFAULT NULL,
   `DateRequest` datetime DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`requestID`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `requestformtbl` */
 
 insert  into `requestformtbl`(`requestID`,`RequestType`,`firstName`,`lastName`,`Request`,`DateFrom`,`DateTo`,`Reason`,`DateRequest`,`status`) values 
-(42,NULL,NULL,NULL,'','0000-00-00','0000-00-00','','2019-08-03 01:33:30','declined'),
-(43,'OverTime Request','Eddie','Madrona','None','2019-08-09','2019-08-13','we rj rweporejl ','2019-08-03 01:54:54','declined'),
-(44,'Absent Request','Bryan','Balaga','','2019-08-08','2019-08-15','asdwefweij lj kdf','2019-08-03 02:11:17','approved'),
-(45,'Absent Request','Jayvie','Malaluan','','2019-08-14','2019-08-19','zxcsdcewf','2019-08-03 02:30:18','approved'),
-(46,'Absent Request','Jayvie','Malaluan','','2019-08-13','2019-08-16','sdvger sdfer','2019-08-03 02:34:31','approved'),
-(47,'Absent Request','Jayvie','Malaluan','','2019-08-13','2019-08-16','sdvger sdfer','2019-08-03 02:38:14','declined'),
-(48,'Absent Request','Eddie','Madrona','','2019-08-07','2019-08-14','zcsdfsd','2019-08-03 02:38:40','declined'),
-(49,'Absent Request','Eddie','Madrona','','2019-08-08','2019-08-20','zvsdffer  er','2019-08-03 02:40:04','approved'),
-(50,'Absent Request','akdjhakjsdhakdh','askjdhakjsdh','','2019-08-14','2019-08-06','sdvsf','2019-08-03 02:42:15','declined'),
-(51,'Absent Request','Eddie','Madrona',NULL,'2019-08-14','2019-08-20','vsvrgw sdvdffd','2019-08-03 02:44:52','declined'),
-(52,'Absent Request','Eddie','Madrona','','2019-08-06','2019-08-15','vedfer ger','2019-08-03 02:48:28','approved'),
-(53,'Absent Request','Eddie','Madrona','Bereavement','2019-08-08','2019-08-21','dvergererdgsdf','2019-08-03 02:53:21','approved'),
-(54,'Absent Request','Eddie','Madrona','Vacation','2019-08-20','2019-08-22','xcvdfvdf','2019-08-03 03:14:08','approved'),
-(55,'Absent Request','Eddie','Madrona','Vacation','2019-08-20','2019-08-22','xcvdfvdf','2019-08-03 03:14:56','declined'),
-(56,'Absent Request','akdjhakjsdhakdh','askjdhakjsdh','Vacation','2019-08-14','2019-08-21','xdvdvss','2019-08-03 04:41:26','approved'),
-(57,'Absent Request','Eddie','Madrona','Time Off Without Pay','2019-08-05','2019-08-07','zdcsdflwje epowj we','2019-08-03 05:02:55','approved');
+(1,'OverTime Request','Eddie','Madrona','None','2019-08-16 17:00:00','2019-08-16 17:00:00','asdsfsef','2019-08-16 05:27:45','approved'),
+(2,'OverTime Request',NULL,'','None','2019-08-16 17:00:00','2019-08-16 21:00:00','cadcfsdfsdfsd','2019-08-16 08:16:13','pending');
 
 /*Table structure for table `salarycodetbl` */
 
@@ -467,7 +473,7 @@ DROP TABLE IF EXISTS `salarycodetbl`;
 CREATE TABLE `salarycodetbl` (
   `salaryCodeID` int(11) NOT NULL AUTO_INCREMENT,
   `salaryCode` varchar(1) NOT NULL,
-  `description` mediumtext,
+  `description` mediumtext DEFAULT NULL,
   `basicSalary` double(10,2) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`salaryCodeID`)
