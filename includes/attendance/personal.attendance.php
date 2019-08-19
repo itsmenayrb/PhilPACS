@@ -4,20 +4,33 @@
   $firstName = $config->checkInput($_GET['fname']);
   $lastName = $config->checkInput($_GET['lname']);
 
-  $stmt = $config->runQuery("SELECT *,
-                             CASE WHEN status = 0
-                                   THEN 'Unprocessed'
-                                   WHEN status = 1
-                                   THEN 'Processed'
-                                   ELSE 'Pending'
-                              END AS status
+  $stmt = $config->runQuery("SELECT attendancetbl.firstName, attendancetbl.lastName,
+                                attendancetbl.Edate AS Edate,
+                                CASE WHEN attendancetbl.status = 0
+                                     THEN 'Unprocessed'
+                                     WHEN attendancetbl.status = 1
+                                     THEN 'Processed'
+                                     ELSE 'Pending'
+                                END AS status,
+                                attendancetbl.EMTimein, attendancetbl.EMTimeout, attendancetbl.EATimein, attendancetbl.EATimeout, 
+                                CONCAT (salarycodetbl.salaryCode, employeetbl.employeeID) AS employeeID,
+                                positiontbl.positionName,
+                                benefitnumberstbl.taxIdentificationNumber AS tax
                               FROM attendancetbl
-                             WHERE firstName=:firstName AND lastName=:lastName AND hashedFile=:hashedFile
+                              INNER JOIN personaldetailstbl ON attendancetbl.lastName = personaldetailstbl.lastName
+                              INNER JOIN employeetbl ON personaldetailstbl.personalID = employeetbl.employeeID
+                              INNER JOIN benefitnumberstbl ON employeetbl.employeeID = benefitnumberstbl.benefitID
+                              INNER JOIN positiontbl ON employeetbl.positionID = positiontbl.positionID
+                              INNER JOIN salarycodetbl ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
+                             WHERE attendancetbl.firstName=:firstName AND attendancetbl.lastName=:lastName AND attendancetbl.hashedFile=:hashedFile
                              ORDER BY Edate");
 
   $stmt->execute(array(":firstName" => $firstName, ":lastName" => $lastName, ":hashedFile" => $hashedFile));
   $update = $stmt->fetch(PDO::FETCH_ASSOC);
   $status = $update['status'];
+  $employeeID = $update['employeeID'];
+  $position = $update['positionName'];
+  $tax = $update['tax'];
 ?>
 <div class="dimmer active">
   <div id="loader"></div>
@@ -56,11 +69,11 @@
             <div class="row">
               <div class="col-md-8">
                 <p class="mb-0 font-weight-bold"><?=$firstName;?> <?=$lastName;?></p>
-                <span>TIN#:</span> 
+                <span>TIN#: <strong class="font-weight-bold"><?=$tax;?></strong></span> 
               </div>
               <div class="col-md-4">
-                <span>Employee#:</span><br/>
-                <span>Position:</span>
+                <span>Employee#: <strong class="font-weight-bold"><?=$employeeID;?></strong></span><br/>
+                <span>Position: <strong class="font-weight-bold"><?=$position;?></strong></span>
               </div>
             </div>
 
@@ -73,7 +86,7 @@
                       <table class='table table-sm card-table table-vcenter table-hover table-bordered table-hover text-nowrap datatable' id="personalAttendanceTable" style="width: 100%;">
                           <thead>
                               <tr>
-                                <th class="bg-warning text-center text-white" colspan="7"><?=$firstName;?> <?=$lastName;?></th>
+                                <th class="bg-warning text-center text-white font-weight-bold" colspan="7"><?=$firstName;?> <?=$lastName;?></th>
                                 <th class="text-center">Total</th>
                               </tr>
                               <tr>

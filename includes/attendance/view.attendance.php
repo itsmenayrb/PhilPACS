@@ -12,21 +12,16 @@
   }
 
   $hashedFile = $config->checkInput($_GET['id']);
+
   $stmt = $config->runQuery("SELECT *, MIN(Edate) AS datePeriodFrom,
-                              MAX(Edate) AS datePeriodTo,
-                              SUM(totalMinutes) AS totalMinutes,
-                              CASE WHEN status = 0
-                                   THEN 'Unprocessed'
-                                   WHEN status = 1
-                                   THEN 'Processed'
-                                   ELSE 'Pending'
-                              END AS status
-                            FROM attendancetbl WHERE hashedFile=:hashedFile GROUP BY lastName");
+                              MAX(Edate) AS datePeriodTo
+                            FROM attendancetbl WHERE hashedFile=:hashedFile");
   $stmt->execute(array(":hashedFile" => $hashedFile));
+
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   $datePeriodFrom = strtotime($row['datePeriodFrom']);
   $datePeriodTo = strtotime($row['datePeriodTo']);
-  $status = $row['status'];
+  // $status = $row['status'];
 ?>
 <div class="dimmer active">
   <div id="loader"></div>
@@ -57,11 +52,24 @@
               </thead>
               <tbody>
                 <?php
-                  while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  $status = "";
+                  $display = $config->runQuery("SELECT attendancetbl.firstName, attendancetbl.lastName,
+                                                  SUM(attendancetbl.totalMinutes) AS totalMinutes,
+                                                  CONCAT (salarycodetbl.salaryCode, employeetbl.employeeID) AS employeeID
+                                                FROM attendancetbl
+                                                INNER JOIN personaldetailstbl ON attendancetbl.lastName = personaldetailstbl.lastName
+                                                INNER JOIN employeetbl ON personaldetailstbl.personalID = employeetbl.employeeID
+                                                INNER JOIN positiontbl ON employeetbl.positionID = positiontbl.positionID
+                                                INNER JOIN salarycodetbl ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
+                                                WHERE hashedFile=:hashedFile GROUP BY attendancetbl.firstName, attendancetbl.lastName ORDER BY attendancetbl.lastName");
+
+                  $display->execute(array(":hashedFile" => $hashedFile));
+                
+                  while ($result = $display->fetch(PDO::FETCH_ASSOC)) {
                     $fullName = $result['lastName'] . ", " . $result['firstName'];
                     ?>
                     <tr class="personal-attendance-link" data-href="./attendance.php?id=<?=$row['hashedFile'];?>&fname=<?=$result['firstName'];?>&lname=<?=$result['lastName'];?>" style="cursor: pointer;">
-                      <td></td>
+                      <td><?=$result['employeeID'];?></td>
                       <td><?=$fullName;?></td>
                       <td><?=convertToHoursAndMins($result['totalMinutes'], '%02d hours and %02d minute/s');?></td>
                     </tr>
