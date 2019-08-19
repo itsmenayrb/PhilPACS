@@ -4,33 +4,20 @@
   $firstName = $config->checkInput($_GET['fname']);
   $lastName = $config->checkInput($_GET['lname']);
 
-  $stmt = $config->runQuery("SELECT attendancetbl.firstName, attendancetbl.lastName,
-                                attendancetbl.Edate AS Edate,
-                                CASE WHEN attendancetbl.status = 0
-                                     THEN 'Unprocessed'
-                                     WHEN attendancetbl.status = 1
-                                     THEN 'Processed'
-                                     ELSE 'Pending'
-                                END AS status,
-                                attendancetbl.EMTimein, attendancetbl.EMTimeout, attendancetbl.EATimein, attendancetbl.EATimeout, 
-                                CONCAT (salarycodetbl.salaryCode, employeetbl.employeeID) AS employeeID,
-                                positiontbl.positionName,
-                                benefitnumberstbl.taxIdentificationNumber AS tax
+  $stmt = $config->runQuery("SELECT *,
+                             CASE WHEN status = 0
+                                   THEN 'Unprocessed'
+                                   WHEN status = 1
+                                   THEN 'Processed'
+                                   ELSE 'Pending'
+                              END AS status
                               FROM attendancetbl
-                              INNER JOIN personaldetailstbl ON attendancetbl.lastName = personaldetailstbl.lastName
-                              INNER JOIN employeetbl ON personaldetailstbl.personalID = employeetbl.employeeID
-                              INNER JOIN benefitnumberstbl ON employeetbl.employeeID = benefitnumberstbl.benefitID
-                              INNER JOIN positiontbl ON employeetbl.positionID = positiontbl.positionID
-                              INNER JOIN salarycodetbl ON positiontbl.salaryCode = salarycodetbl.salaryCodeID
-                             WHERE attendancetbl.firstName=:firstName AND attendancetbl.lastName=:lastName AND attendancetbl.hashedFile=:hashedFile
+                             WHERE firstName=:firstName AND lastName=:lastName AND hashedFile=:hashedFile
                              ORDER BY Edate");
 
   $stmt->execute(array(":firstName" => $firstName, ":lastName" => $lastName, ":hashedFile" => $hashedFile));
   $update = $stmt->fetch(PDO::FETCH_ASSOC);
   $status = $update['status'];
-  $employeeID = $update['employeeID'];
-  $position = $update['positionName'];
-  $tax = $update['tax'];
 ?>
 <div class="dimmer active">
   <div id="loader"></div>
@@ -39,8 +26,8 @@
     <div class="row mb-4">
       <div class="col-md-12">
         <a class="btn btn-secondary btn-lg mb-4" href="./attendance.php?id=<?=$hashedFile;?>">Back</a>
-        <a class="ml-2 float-right btn btn-secondary" data-toggle="tooltip" title="Print" href="javascript:void(0)">
-          <i class="fe fe-printer"></i> Print  
+        <a class="ml-2 float-right btn btn-secondary download-PDF" data-toggle="tooltip" title="Print" data-pdfid="<?=$hashedFile;?>" data-firstname="<?=$firstName;?>" data-lastname="<?=$lastName;?>">
+          <i class="fe fe-printer"></i> Print
         </a>
         <?php if ($status != 'Processed') : ?>
           <span class="float-right" data-toggle="tooltip" title="Update Attendance Record">
@@ -56,6 +43,7 @@
 
     <div class="row">
       <div class="col-md-12">
+        <div id="myDiv">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -69,11 +57,11 @@
             <div class="row">
               <div class="col-md-8">
                 <p class="mb-0 font-weight-bold"><?=$firstName;?> <?=$lastName;?></p>
-                <span>TIN#: <strong class="font-weight-bold"><?=$tax;?></strong></span> 
+                <span>TIN#:</span>
               </div>
               <div class="col-md-4">
-                <span>Employee#: <strong class="font-weight-bold"><?=$employeeID;?></strong></span><br/>
-                <span>Position: <strong class="font-weight-bold"><?=$position;?></strong></span>
+                <span>Employee#:</span><br/>
+                <span>Position:</span>
               </div>
             </div>
 
@@ -86,7 +74,7 @@
                       <table class='table table-sm card-table table-vcenter table-hover table-bordered table-hover text-nowrap datatable' id="personalAttendanceTable" style="width: 100%;">
                           <thead>
                               <tr>
-                                <th class="bg-warning text-center text-white font-weight-bold" colspan="7"><?=$firstName;?> <?=$lastName;?></th>
+                                <th class="bg-warning text-center text-white" colspan="7"><?=$firstName;?> <?=$lastName;?></th>
                                 <th class="text-center">Total</th>
                               </tr>
                               <tr>
@@ -178,11 +166,37 @@
                 </form>
               </div>
             </div>
-          </div> <!-- /card-body -->
+          </div>
+          <script type="text/javascript">
+            require(['datatables', 'jquery'], function(datatable, $) {
+
+              $('.download-PDF').on('click', function(e) {
+                e.preventDefault();
+
+                var pdfID = $(this).data('pdfid');
+                var lastname = $(this).data('lastname');
+                var firstname = $(this).data('firstname');
+
+                $.ajax({
+                type: 'post',
+                url:'../FPDF/index.php',
+                data:
+                {
+                    pdfID: pdfID,
+                    lastname: lastname,
+                    firstname: firstname,
+                    printFiles: 1
+                  },
+                  dataType: 'json'
+                });
+              });
+            });
+          </script> <!-- /card-body -->
           <div class="card-footer">
             <?php if ($status != 'Processed') : ?>
               <button class="btn btn-green disabled float-right" name="saveChangesAttendanceBtn" id="saveChangesAttendanceBtn" type="submit" disabled="disabled">Save Changes</button>
             <?php endif ?>
+          </div>
           </div>
         </div> <!-- /card -->
       </div> <!-- /col -->

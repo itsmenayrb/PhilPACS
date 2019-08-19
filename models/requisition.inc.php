@@ -24,6 +24,7 @@
        }
        $DateFrom = date("$DateFrom");
        $DateTo = date("$DateTo");
+
        $sql = "SELECT firstName, lastName FROM personaldetailstbl WHERE lastName = '$lastName'";
        $result = $this->conn->runQuery($sql);
        $numRows = $result->execute();

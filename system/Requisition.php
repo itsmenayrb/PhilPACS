@@ -51,30 +51,27 @@
                               </div>
                               <!-- /Requisition -->
 
-                              <div class="clearfix"></div>
-
+                  <div class="clearfix"></div>
+                    <div class="dimmer active">
+                        <div id="loader"></div>
+                          <div id='archive-loader'></div>
+                            <div id='archive-dimmer-content'>
                               <div class="row row-cards">
-
                                 <div class="col-lg-12">
                                   <div class="card">
-                                    <div class="dimmer active">
-                                      <div id='archive-loader'></div>
-                                      <div id='archive-dimmer-content'>
+
                                     <div class="table-responsive">
                                       <?php include '../includes/Requisition/requisition.php'; ?>
                                     </div>
-
-
                               <!-- /row row-cards -->
-                              <?php include '../includes/Requisition/modal.view.requisition.php'; ?>
-                              <?php include '../includes/Requisition/modal.requisition.php'; ?>
+
                               <!-- datatable of requisition/ ajax to display -->
                             </div>
                           </div>
                         </div>
                         <!-- /lg-8 -->
                       </div>
-                          </div>
+                    </div>
                           <!-- modal for request form and display approved and declined -->
 
                           <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="viewModal" data-backdrop="static" data-keyboard="false">
@@ -106,6 +103,8 @@
                     <?php include '../includes/footer.php'; ?>
                   </div>
                 </div>
+                <?php include '../includes/Requisition/modal.view.requisition.php'; ?>
+                <?php include '../includes/Requisition/modal.requisition.php'; ?>
 
                 <script type="text/javascript" src="../ajax/ajax.requestFrom.js"></script>
                 <script type="text/javascript">

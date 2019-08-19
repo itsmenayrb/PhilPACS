@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.4.3 (64 bit)
-MySQL - 10.1.37-MariaDB : Database - philpacs
+MySQL - 10.3.15-MariaDB : Database - philpacs
 *********************************************************************
 */
 
@@ -12,6 +12,8 @@ MySQL - 10.1.37-MariaDB : Database - philpacs
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`philpacs` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `philpacs`;
 
 /*Table structure for table `accountstbl` */
@@ -53,13 +55,14 @@ CREATE TABLE `addresstbl` (
   `country` varchar(50) NOT NULL DEFAULT 'Philippines',
   `zipcode` int(4) DEFAULT NULL,
   PRIMARY KEY (`addressID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `addresstbl` */
 
 insert  into `addresstbl`(`addressID`,`houseNumber`,`block`,`lot`,`street`,`subdivision`,`barangay`,`city`,`province`,`country`,`zipcode`) values 
-(1,'House #l','','Lot l','l St. St.','l','l','l','l','Philippines',3123),
-(2,'House #l','Block l','Lot l','l St.','l','l','l','l','l',1232);
+(1,'House #l','','Lot l','l St. St. ','l','l','l','l','Philippines',3123),
+(2,'House #l','Block l','Lot l','l St.','l','l','l','l','l',1232),
+(3,'House #1','Block 12','Lot 12','asdfawefw ','sdfa','asdf','wfas','sdfa','Philippines',4108);
 
 /*Table structure for table `attendancetbl` */
 
@@ -83,26 +86,26 @@ CREATE TABLE `attendancetbl` (
 /*Data for the table `attendancetbl` */
 
 insert  into `attendancetbl`(`attendanceID`,`firstName`,`lastName`,`Edate`,`EMTimein`,`EMTimeout`,`EATimein`,`EATimeout`,`totalMinutes`,`status`,`hashedFile`) values 
-(1,'Bryan','Balaga','2019-06-25','07:39:20','12:05:16','01:00:48','05:04:35',509.71,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(2,'Bryan','Balaga','2019-06-25','08:06:05','12:06:11','01:01:20','05:07:10',485.93,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(3,'Bryan','Balaga','2019-06-26','07:25:07','12:36:36','01:06:23','05:03:47',548.88,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(4,'Bryan','Balaga','2019-06-26','07:29:51','12:37:43','01:09:18','05:04:53',543.45,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(5,'Bryan','Balaga','2019-06-29','07:53:38','12:56:31','01:07:19','05:38:19',573.88,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(6,'Bryan','Balaga','2019-06-29','08:13:17','12:02:16','01:12:46','05:38:29',494.7,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(7,'Bryan','Balaga','2019-06-30','06:47:10','12:31:38','01:03:35','07:48:39',749.54,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(8,'Eddie','Madrona','2019-06-30','08:10:51','12:31:46','01:03:26','05:57:37',555.1,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(9,'Eddie','Madrona','2019-07-01','07:43:34','12:03:33','01:47:14','05:28:37',481.36,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(10,'Eddie','Madrona','2019-07-01','08:13:38','12:03:40','01:32:17','05:26:26',464.18,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(11,'Eddie','Madrona','2019-07-02','07:39:25','12:34:52','01:04:42','05:11:50',542.58,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(12,'Eddie','Madrona','2019-07-02','08:00:20','12:35:16','01:07:43','05:13:31',520.73,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(13,'Eddie','Madrona','2019-07-03','07:43:42','12:22:37','01:05:01','05:09:15',523.15,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(14,'Eddie','Madrona','2019-07-03','08:05:23','12:08:47','01:05:55','05:09:45',487.23,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(15,'Eddie','Madrona','2019-07-04','07:45:45','12:04:06','01:03:46','05:02:41',497.27,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(16,'Eddie','Madrona','2019-07-04','08:02:11','12:04:10','01:05:08','05:05:10',482.01,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(17,'Bryan','Balaga','2019-07-05','08:02:35','12:00:53','01:09:01','05:04:58',474.25,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(18,'Eddie','Madrona','2019-07-05','08:03:10','12:01:18','01:09:09','05:05:09',474.13,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(19,'Bryan','Balaga','2019-07-08','07:39:14','12:01:15','01:06:06','05:09:14',505.15,0,'c96f945ad913d9cefb2c7f7cc24353be'),
-(20,'Eddie','Madrona','2019-07-08','07:48:00','12:00:43','01:10:05','05:08:11',490.82,0,'c96f945ad913d9cefb2c7f7cc24353be');
+(1,'Bryan','Balaga','2019-06-25','07:39:20','12:05:16','01:00:48','05:04:35',509.71,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(2,'Bryan','Balaga','2019-06-25','08:06:05','12:06:11','01:01:20','05:07:10',485.93,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(3,'Bryan','Balaga','2019-06-26','07:25:07','12:36:36','01:06:23','05:03:47',548.88,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(4,'Bryan','Balaga','2019-06-26','07:29:51','12:37:43','01:09:18','05:04:53',543.45,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(5,'Bryan','Balaga','2019-06-29','07:53:38','12:56:31','01:07:19','05:38:19',573.88,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(6,'Bryan','Balaga','2019-06-29','08:13:17','12:02:16','01:12:46','05:38:29',494.7,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(7,'Bryan','Balaga','2019-06-30','06:47:10','12:31:38','01:03:35','07:48:39',749.54,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(8,'Eddie','Madrona','2019-06-30','08:10:51','12:31:46','01:03:26','05:57:37',555.1,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(9,'Eddie','Madrona','2019-07-01','07:43:34','12:03:33','01:47:14','05:28:37',481.36,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(10,'Eddie','Madrona','2019-07-01','08:13:38','12:03:40','01:32:17','05:26:26',464.18,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(11,'Eddie','Madrona','2019-07-02','07:39:25','12:34:52','01:04:42','05:11:50',542.58,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(12,'Eddie','Madrona','2019-07-02','08:00:20','12:35:16','01:07:43','05:13:31',520.73,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(13,'Eddie','Madrona','2019-07-03','07:43:42','12:22:37','01:05:01','05:09:15',523.15,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(14,'Eddie','Madrona','2019-07-03','08:05:23','12:08:47','01:05:55','05:09:45',487.23,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(15,'Eddie','Madrona','2019-07-04','07:45:45','12:04:06','01:03:46','05:02:41',497.27,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(16,'Eddie','Madrona','2019-07-04','08:02:11','12:04:10','01:05:08','05:05:10',482.01,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(17,'Bryan','Balaga','2019-07-05','08:02:35','12:00:53','01:09:01','05:04:58',474.25,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(18,'Eddie','Madrona','2019-07-05','08:03:10','12:01:18','01:09:09','05:05:09',474.13,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(19,'Bryan','Balaga','2019-07-08','07:39:14','12:01:15','01:06:06','05:09:14',505.15,1,'c96f945ad913d9cefb2c7f7cc24353be'),
+(20,'Eddie','Madrona','2019-07-08','07:48:00','12:00:43','01:10:05','05:08:11',490.82,1,'c96f945ad913d9cefb2c7f7cc24353be');
 
 /*Table structure for table `bankaccounttbl` */
 
@@ -112,13 +115,14 @@ CREATE TABLE `bankaccounttbl` (
   `bankAccountID` int(11) NOT NULL AUTO_INCREMENT,
   `bankAccountNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`bankAccountID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `bankaccounttbl` */
 
 insert  into `bankaccounttbl`(`bankAccountID`,`bankAccountNumber`) values 
 (1,''),
-(2,'');
+(2,''),
+(3,'');
 
 /*Table structure for table `benefitnumberstbl` */
 
@@ -131,13 +135,14 @@ CREATE TABLE `benefitnumberstbl` (
   `pagibigNumber` varchar(50) NOT NULL,
   `taxIdentificationNumber` varchar(50) NOT NULL,
   PRIMARY KEY (`benefitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `benefitnumberstbl` */
 
 insert  into `benefitnumberstbl`(`benefitID`,`sssNumber`,`philhealthNumber`,`pagibigNumber`,`taxIdentificationNumber`) values 
 (1,'','','',''),
-(2,'','','','');
+(2,'','','',''),
+(3,'','','','');
 
 /*Table structure for table `departmenttbl` */
 
@@ -149,20 +154,38 @@ CREATE TABLE `departmenttbl` (
   `departmentName` varchar(50) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`departmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `departmenttbl` */
 
 insert  into `departmenttbl`(`departmentID`,`salaryCodeID`,`departmentName`,`status`) values 
-(4,1,'Administration',1),
-(5,3,'Administration',1),
 (6,3,'Maintenance',1),
 (7,2,'Human Resources',1),
 (8,4,'IT',1),
 (9,2,'IT',1),
 (10,4,'Operations',1),
 (11,2,'Operations',1),
-(12,2,'Administration 2',1);
+(12,2,'Administration 2',1),
+(13,4,'Administration',1),
+(14,1,'Administration',1),
+(15,3,'Administration',1);
+
+/*Table structure for table `documentstbl` */
+
+DROP TABLE IF EXISTS `documentstbl`;
+
+CREATE TABLE `documentstbl` (
+  `documentID` int(11) NOT NULL AUTO_INCREMENT,
+  `documentName` varchar(100) DEFAULT NULL,
+  `documentSize` int(100) DEFAULT NULL,
+  `downloadsList` varchar(100) DEFAULT NULL,
+  KEY `documentID` (`documentID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `documentstbl` */
+
+insert  into `documentstbl`(`documentID`,`documentName`,`documentSize`,`downloadsList`) values 
+(1,'RL.docx',35751,'1');
 
 /*Table structure for table `employeetbl` */
 
@@ -174,13 +197,14 @@ CREATE TABLE `employeetbl` (
   `jobStatus` tinyint(1) NOT NULL,
   `dateHired` date NOT NULL,
   PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employeetbl` */
 
 insert  into `employeetbl`(`employeeID`,`positionID`,`jobStatus`,`dateHired`) values 
 (0001,2,0,'2019-08-14'),
-(0002,3,0,'2019-08-06');
+(0002,3,0,'2019-08-06'),
+(0003,2,1,'2019-08-14');
 
 /*Table structure for table `eventstbl` */
 
@@ -194,7 +218,7 @@ CREATE TABLE `eventstbl` (
   `endDate` datetime NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`eventID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `eventstbl` */
 
@@ -203,12 +227,15 @@ insert  into `eventstbl`(`eventID`,`title`,`description`,`startDate`,`endDate`,`
 (2,'asdlkasjdlakjsd','','2019-08-16 00:00:00','2019-08-17 00:00:00',1),
 (3,'asdlkasjdlakjsd','','2019-08-27 00:00:00','2019-08-28 00:00:00',1),
 (4,'asdlkasjdlakjsd','','2019-08-29 00:00:00','2019-08-30 00:00:00',1),
-(5,'Eddie','','2019-08-19 00:00:00','2019-08-24 00:00:00',1),
+(5,'Eddie','','2019-08-19 00:00:00','2019-08-24 00:00:00',0),
 (6,'Eddie','','2019-08-17 00:00:00','2019-08-18 00:00:00',1),
 (7,'asdlkasjdlakjsd','','2019-08-15 00:00:00','2019-08-16 00:00:00',1),
 (8,'Birthday','Birthday','2019-08-28 00:00:00','2019-08-29 00:00:00',1),
-(9,'asdlkasjdlakjsd','','2019-08-22 00:00:00','2019-08-23 00:00:00',1),
-(10,'Binyag ni eddie','','2019-08-31 00:00:00','2019-09-01 00:00:00',0);
+(9,'asdlkasjdlakjsd','xc zczx','2019-08-22 00:00:00','2019-08-23 00:00:00',1),
+(10,'Binyag ni eddie','','2019-08-31 00:00:00','2019-09-01 00:00:00',0),
+(11,'','','2019-08-24 00:00:00','2019-08-25 00:00:00',0),
+(12,'','','2019-08-24 00:00:00','2019-08-25 00:00:00',0),
+(13,'asdasd','dasd','2019-09-06 00:00:00','2019-09-07 00:00:00',1);
 
 /*Table structure for table `leavecreditstbl` */
 
@@ -277,13 +304,14 @@ CREATE TABLE `personaldetailstbl` (
   `photo` varchar(255) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`personalID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `personaldetailstbl` */
 
 insert  into `personaldetailstbl`(`personalID`,`firstName`,`middleName`,`lastName`,`contactNumber`,`email`,`gender`,`birthday`,`age`,`photo`,`status`) values 
 (1,'Bryan','','Balaga','0923-948-2918','bryan.balaga@gmail.com',1,'2001-08-02',18,'../uploads/825887bry.jpg',1),
-(2,'Eddie','','Madrona','0938-273-2738','ed@gmail.com',1,'2001-07-30',18,'../uploads/680744eddie.jpg',1);
+(2,'Eddie','','Madrona','0938-273-2738','ed@gmail.com',1,'2001-07-30',18,'../uploads/680744eddie.jpg',1),
+(3,'ekweuwejk','weew','eiwejre','0945-502-3884','eddiemadrona30@gmail.com',1,'1995-11-21',23,'',1);
 
 /*Table structure for table `philhealthmatrixtbl` */
 
@@ -342,33 +370,23 @@ CREATE TABLE `requestformtbl` (
   `firstName` varchar(50) DEFAULT NULL,
   `lastName` varchar(50) DEFAULT NULL,
   `Request` varchar(100) DEFAULT NULL,
-  `DateFrom` date DEFAULT NULL,
-  `DateTo` date DEFAULT NULL,
-  `Reason` longtext,
+  `DateFrom` datetime DEFAULT NULL,
+  `DateTo` datetime DEFAULT NULL,
+  `Reason` longtext DEFAULT NULL,
   `DateRequest` datetime DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`requestID`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `requestformtbl` */
 
 insert  into `requestformtbl`(`requestID`,`RequestType`,`firstName`,`lastName`,`Request`,`DateFrom`,`DateTo`,`Reason`,`DateRequest`,`status`) values 
-(42,NULL,NULL,NULL,'','0000-00-00','0000-00-00','','2019-08-03 01:33:30','declined'),
-(43,'OverTime Request','Eddie','Madrona','None','2019-08-09','2019-08-13','we rj rweporejl ','2019-08-03 01:54:54','declined'),
-(44,'Absent Request','Bryan','Balaga','','2019-08-08','2019-08-15','asdwefweij lj kdf','2019-08-03 02:11:17','approved'),
-(45,'Absent Request','Jayvie','Malaluan','','2019-08-14','2019-08-19','zxcsdcewf','2019-08-03 02:30:18','approved'),
-(46,'Absent Request','Jayvie','Malaluan','','2019-08-13','2019-08-16','sdvger sdfer','2019-08-03 02:34:31','approved'),
-(47,'Absent Request','Jayvie','Malaluan','','2019-08-13','2019-08-16','sdvger sdfer','2019-08-03 02:38:14','declined'),
-(48,'Absent Request','Eddie','Madrona','','2019-08-07','2019-08-14','zcsdfsd','2019-08-03 02:38:40','declined'),
-(49,'Absent Request','Eddie','Madrona','','2019-08-08','2019-08-20','zvsdffer  er','2019-08-03 02:40:04','approved'),
-(50,'Absent Request','akdjhakjsdhakdh','askjdhakjsdh','','2019-08-14','2019-08-06','sdvsf','2019-08-03 02:42:15','declined'),
-(51,'Absent Request','Eddie','Madrona',NULL,'2019-08-14','2019-08-20','vsvrgw sdvdffd','2019-08-03 02:44:52','declined'),
-(52,'Absent Request','Eddie','Madrona','','2019-08-06','2019-08-15','vedfer ger','2019-08-03 02:48:28','approved'),
-(53,'Absent Request','Eddie','Madrona','Bereavement','2019-08-08','2019-08-21','dvergererdgsdf','2019-08-03 02:53:21','approved'),
-(54,'Absent Request','Eddie','Madrona','Vacation','2019-08-20','2019-08-22','xcvdfvdf','2019-08-03 03:14:08','approved'),
-(55,'Absent Request','Eddie','Madrona','Vacation','2019-08-20','2019-08-22','xcvdfvdf','2019-08-03 03:14:56','declined'),
-(56,'Absent Request','akdjhakjsdhakdh','askjdhakjsdh','Vacation','2019-08-14','2019-08-21','xdvdvss','2019-08-03 04:41:26','approved'),
-(57,'Absent Request','Eddie','Madrona','Time Off Without Pay','2019-08-05','2019-08-07','zdcsdflwje epowj we','2019-08-03 05:02:55','approved');
+(1,'OverTime Request','Eddie','Madrona','None','2019-08-18 17:00:00','2019-08-18 23:00:00','asdsadasd\nasd','2019-08-18 13:21:35','declined'),
+(2,'Absence Request','Eddie','Madrona','Maternity/Paternity','2019-08-29 00:00:00','2019-08-30 00:00:00','sdcsdfsd','2019-08-18 13:28:37','approved'),
+(3,'OverTime Request','Eddie','Madrona','None','2019-08-18 17:00:00','2019-08-18 22:00:00','asdasd','2019-08-18 13:30:37','approved'),
+(4,'OverTime Request','Eddie','Madrona','None','2019-08-18 17:00:00','2019-08-18 23:00:00','sdfsdfsdf','2019-08-18 13:32:06','declined'),
+(5,'OverTime Request','Eddie','Madrona','None','2019-08-19 17:30:00','2019-08-19 23:30:00','as edfsd','2019-08-19 10:30:59','approved'),
+(6,'Absence Request','Eddie','Madrona','Time Off Without Pay','2019-08-22 00:00:00','2019-08-30 00:00:00','sdfeqeqw','2019-08-19 10:31:29','declined');
 
 /*Table structure for table `salarycodetbl` */
 
@@ -377,7 +395,7 @@ DROP TABLE IF EXISTS `salarycodetbl`;
 CREATE TABLE `salarycodetbl` (
   `salaryCodeID` int(11) NOT NULL AUTO_INCREMENT,
   `salaryCode` varchar(1) NOT NULL,
-  `description` mediumtext,
+  `description` mediumtext DEFAULT NULL,
   `basicSalary` double(10,2) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`salaryCodeID`)

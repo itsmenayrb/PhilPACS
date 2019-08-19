@@ -1,8 +1,10 @@
 <!-- Modal of Requisition Absent Form -->
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="addAbsentModal" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-xl" role="document" style="overflow-y: initial !important; width: 45%">
+  <center>
+  <div class="modal-dialog modal-xl" role="document" style="overflow-y: initial !important; width: 50%">
     <div class="modal-content">
-      <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+
+      <div class="modal-body" style="max-height: calc(100vh - 100px); overflow-y: auto; align: center">
         <button class="close" type="button" data-dismiss="modal" aria-label='Close' onclick="clearForm();">
             <span aria-hidden="true"><i class="fe fe-times"></i></span>
         </button>
@@ -82,13 +84,31 @@
                                                           }
 
                                                   </script>
+                                                  <script>
+                                                          function getReq(val) {
+                                                            $.ajax({
+                                                            type: "POST",
+                                                            url: "Request.inc.php",
+                                                              data:'request='+val,
+                                                            success: function(response){
+                                                              $("#req-list").html(response);
+                                                            }
+                                                            });
+                                                          }
+
+                                                  </script>
+                                                  <div class="col-md-12 col-xs-12">
+                                                      <div class="form-group" id="req-list">
+
+                                                      </div>
+                                                  </div>
                                                         <div id="request-list">
                                                       </div>
                                                       <div class="row">
                                                         <div class="col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                            <label class="form-control-label" for="DataFrom">Reason<span class="text-danger">*</span></label>
-                                                           <input type="text" class="required form-control" id="reasontype" style="height: 70px;font-size: 12px" required/>
+                                                           <textarea type="text" class="required form-control" id="reasontype" style="height: 70px;font-size: 12px" required/></textarea
                                                              <span id="reason_error"></span>
                                                       </div>
                                                     </div>
@@ -104,7 +124,9 @@
                 </div>
             </div> <!-- /card -->
         </div>
+
       </div>
+        </center>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

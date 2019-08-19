@@ -43,7 +43,7 @@
                   <a href="#" class="dropdown-item text-center">
                     No notification at this time.
                   </a>
-                  <?php 
+                  <?php
                 }
               }
             ?>
@@ -98,7 +98,7 @@
   <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
     <div class="container">
       <div class="row text-md-right text-sm-center align-items-center">
-        <div class="col-md-3 ml-auto col-xs-12 col-sm-12 align-self-center">
+        <div class="col-md-2 ml-auto col-xs-12 col-sm-12 align-self-center">
           <h6 class="text-muted form-text" id="clockbox"></h6>
           <script type="text/javascript">
             var tday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -147,6 +147,7 @@
                 <a href="./employee.php" class="dropdown-item ">Employee Management</a>
                 <a href="./attendance.php" class="dropdown-item ">Attendance Management</a>
                 <a href="./Requisition.php" class="dropdown-item ">Requisition Management</a>
+                <a href="./Document.php" class="dropdown-item ">Document Management</a>
                 <a href="./event.php" class="dropdown-item ">Event Management</a>
                 <a href="javascript:void(0)" class="dropdown-item" data-toggle="dropdown">Contribution Management</a>
                   <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -177,7 +178,7 @@
                 <a href="./salary.code.php" class="dropdown-item ">Salary Code</a>
               </div>
             </li>
-            
+
           </ul>
         </div>
       </div>

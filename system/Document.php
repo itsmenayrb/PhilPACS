@@ -9,7 +9,7 @@
     <?php include '../includes/meta.php'; ?>
 
     <!-- Generated: 2019-04-04 16:55:45 +0200 -->
-    <title>Human Resources :: Attendance Management</title>
+    <title>Human Resources :: Documents Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
@@ -30,7 +30,7 @@
 
                   <div class="page-header">
                     <h1 class="page-title">
-                      Attendance Management
+                      Documents Management
                     </h1>
 
                   </div>
@@ -50,7 +50,7 @@
                                   </div>
                                   <div class="desc">or</div>
                                   <div class="browse">
-                                    Click here to Import
+                                    Click here to Import Files
                                   </div>
                                 </div>
                                 <form method="post" enctype="multipart/form-data" action="<?=htmlspecialchars($_SERVER['REQUEST_URI']);?>" id="uploadDocumentForm">
@@ -95,7 +95,8 @@
                                               <td><?=$documentSize;?></td>
                                               <td><?=$downloadList;?></td>
                                               <td><a class="btn btn-info" href="./Document.php?file_id=<?=$row['documentID'];?>"><i class="fe fe-download"></i></a>
-                                              <a class="btn btn-lime" data-href="./Document.php?id=<?=$row['documentID'];?>"><i class="fe fe-eye"></i></a></td>
+                                              <a class="btn btn-lime" href="https://docs.google.com/viewer?url=http://localhost:8080/PhilPACS/Document/<?=$downloadName;?>"><i class="fe fe-eye"></i></a></td>
+
                                             </tr>
                                           <?php
                                         }

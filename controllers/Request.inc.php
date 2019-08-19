@@ -10,25 +10,26 @@
         $request->readForm($requestID);
     }
 
+
     if ($_POST['requesttype'] == 'Absence Request') {
+
       ?>
           <div class="row">
           <div class="col-md-12 col-xs-12">
             <div class="form-group">
                  <label class="form-control-label" for="TypeRequest">Type of Request<span class="text-danger" required>*</span></label>
-                 <select class="required form-control" id="type_request">
+                 <select class="required form-control" id="type_request" onChange="getReq(this.value);">
                    <option value="" selected>Request</option>
                    <option value="Sick">Sick</option>
                    <option value="Vacation">Vacation</option>
                    <option value="Bereavement">Bereavement</option>
                    <option value="Time Off Without Pay">Time Off Without Pay</option>
                    <option value="Maternity/Paternity">Maternity/Paternity</option>
-                   </select>
+                   <option value="Others">Others.</option>
+                 </select>
                  <span id="type_request_error"></span>
-
             </div>
           </div>
-
           <div class="col-md-6 col-xs-12">
               <div class="form-group">
                    <label class="form-control-label" for="DataFrom">Date From<span class="text-danger">*</span></label>
@@ -44,19 +45,12 @@
               </div>
           </div>
         </div>
-        <script type="text/javascript">
-        var date = new Date();
-        date.setDate(date.getDate());
-        $('#date_from').datepicker({
-        startDate: date
-        });
-        </script>
       <?php
     }
     if ($_POST['requesttype'] == 'OverTime Request') {
       ?>
       <div class="row">
-        <div class="col-md-6 col-xs-12">
+        <div class="col-md-12 col-xs-12">
           <div class="form-group">
             <small class="form-text text-muted">Type of Request(For Absentsence only)</small>
           <select class="required form-control" id="type_request" disabled>
@@ -65,7 +59,7 @@
                <span id="type_request_error"></span>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
               <div class="form-group">
                   <small class="form-text text-muted">Start Time</small>
                   <div class='input-icon'>
@@ -77,7 +71,7 @@
                   <span id="date_from_error"></span>
               </div>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-6">
               <div class="form-group">
                   <small class="form-text text-muted">End Time</small>
                   <div class="input-icon">

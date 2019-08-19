@@ -45,7 +45,7 @@
                                               $Reason = $row['Reason'];
                                               $status = $row['status'];
 
-                                              if ($RequestType == 'Absent Request') {
+                                              if ($RequestType == 'Absence Request') {
                                                 $DateFrom =  date('Y-m-d', strtotime($row['DateFrom']));
                                                 $DateTo =  date('Y-m-d', strtotime($row['DateTo']));
 
@@ -53,7 +53,6 @@
                                               else {
                                                 $DateFrom =  date('h:i A', strtotime($row['DateFrom']));
                                                 $DateTo =  date('h:i A', strtotime($row['DateTo']));
-
                                               }
                                               if ($status == 'approved') {
                                                 ?>

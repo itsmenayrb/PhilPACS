@@ -64,7 +64,7 @@ require(['datatables', 'jquery', 'sweetalert'], function(datatable, $, Swal) {
 				$("#type_request_error").text(type_request_error);
 				$('#type_request').addClass('is-invalid');
 			} else {
-				last_name_error = "";
+				type_request_error = "";
 				$("#type_request_error").text(type_request_error);
 				$('#type_request').removeClass('is-invalid');
 			}
@@ -159,10 +159,9 @@ require(['datatables', 'jquery', 'sweetalert'], function(datatable, $, Swal) {
 								  }
 								});
 		       				}
-		       			});
+		       			}, 200);
 		       		}
 				});
-
 			return false;
 			}
 
@@ -204,7 +203,7 @@ require(['datatables', 'jquery', 'sweetalert'], function(datatable, $, Swal) {
                 }
               });
                 }
-              },100);
+              },200);
             }
        });
       });
@@ -245,7 +244,7 @@ require(['datatables', 'jquery', 'sweetalert'], function(datatable, $, Swal) {
                   }
                 });
                   }
-                },100);
+                },200);
               }
          });
         });

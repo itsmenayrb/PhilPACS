@@ -1,6 +1,7 @@
 <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="viewRequestModal" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg mw-100 w-75" role="document" >
-      <center>
+    <center>
+    <div class="modal-dialog modal-lg mw-100 w-75" role="document" style="margin-right: -50px; margin-left: -50px">
+
       <div class="modal-content" style="width: 65%!important">
         <div class="modal-header">
           <h4 class="modal-title" id="">View Form</h4>
@@ -75,7 +76,7 @@
 
                                                   </div>
                                                   <input type='text' name='requestID' id='requestID' hidden='true'/>
-                                                  <div class='text-right'>
+                                                  <div class='text-center'>
                                                   <button class='btn btn-success' type='submit' id="approved">Approved</button>
                                                   <button class='btn btn-danger' type='submit' id="declined">Declined</button>
                                                   </div>
@@ -88,13 +89,14 @@
                             </div>
                             </div>
                     </div><!-- /.modal-content -->
-                  </div> <!-- /.modal-dialog -->
+                  </div>
+                </center> <!-- /.modal-dialog -->
               </div>
 
 
               <div class="modal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" id="viewapproved" data-backdrop="static" data-keyboard="false">
+                  <center>
                   <div class="modal-dialog modal-lg mw-100 w-75" role="document" >
-                    <center>
                     <div class="modal-content" style="width: 65%!important">
                       <div class="modal-header">
                         <h4 class="modal-title" id="">Request From</h4>
@@ -175,5 +177,6 @@
                                           </div>
                                           </div>
                                   </div><!-- /.modal-content -->
-                                </div> <!-- /.modal-dialog -->
+                                </div>
+                              </center> <!-- /.modal-dialog -->
                             </div>
